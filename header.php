@@ -78,7 +78,7 @@ include "connect.php";
         </div>
         <ul>
             <li>
-                <a href="login2.php"><i></i>Inloggen</a>
+                <a href="login.php"><i></i>Inloggen</a>
             </li>
             <li>
                 <a href="winkelmandje.php"><i></i>Winkelmandje</a>
