@@ -540,19 +540,92 @@ ul#ul-class-categorie-price li {
     background-color: #2868c7;
     transition: background-color 0.2s;
 }
-.overzicht{
+-.overzicht{}
+.overzicht-wrapper {
     width: 100%;
+    < < < < < < < HEAD
 }
+
 .notificationError {
     margin-left: 15px;
     padding: 0 15px;
     background-color: #ffffff;
     width: 400px;
 }
+
 .notificationError h2 {
     font-size: 22px;
     color: #ff0000;
 }
+
 .notificationError p {
     color: #000000;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.product-overzicht {
+    width: 75%;
+    float: left;
+}
+
+.prijs-overzicht {
+    width: 25%;
+    float: left;
+    padding: 36px;
+    background-color: #F3F3F3;
+    border-radius: 4px;
+}
+
+.prijs-overzicht h2 {
+    color: #000000;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.prijs-overzicht table {
+    width: 100%;
+}
+
+.prijs-overzicht p {
+    color: #9F9F9F;
+    font-size: 14px;
+    margin-top: -6px;
+    margin-bottom: 24px;
+}
+
+.prijs-overzicht td {
+    color: #656565;
+    font-size: 16px;
+    padding: 6px 0;
+}
+
+.td-geld {
+    color: #212121 !important;
+    font-weight: 700;
+}
+
+.td-gratis-verz {
+    color: #06D630 !important;
+    font-weight: 700;
+}
+
+.table-rechts {
+    text-align: right;
+}
+
+.bestelling-btn {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    background-color: #06D630;
+    padding: 13px 28px;
+    font-size: 15px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.betalen-hr {
+    border-top: 2px dashed #D6D6D6;
 }

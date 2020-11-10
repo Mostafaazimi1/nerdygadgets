@@ -19,6 +19,7 @@ session_start();
     </style>
     <meta charset="ISO-8859-1">
     <title>NerdyGadgets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Public/CSS/Style.css" type="text/css">
     <link rel="stylesheet" href="Public/CSS/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="Public/CSS/nha3fuq.css">
@@ -100,6 +101,19 @@ session_start();
                 </li>
             </ul>
         </div>
+        <ul>
+            <li>
+                <a href="login.php"><i></i>Inloggen</a>
+            </li>
+            <li>
+                <a href="winkelmandje.php"><i></i>Winkelmandje</a>
+            </li>
+        </ul>
+        <ul id="ul-class-navigation">
+            <li>
+                <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
+            </li>
+        </ul>
     </div>
     <div class="row" id="Content">
         <div class="col-12">
