@@ -1,4 +1,5 @@
-<?php include __DIR__ . "/header.php"; ?>
+<?php session_start();
+include __DIR__ . "/header.php"; ?>
 <div class="winkelmandje">
     <h1>Winkelmandje</h1>
     <div class="overzicht">
