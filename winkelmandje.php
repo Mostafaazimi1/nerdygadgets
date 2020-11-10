@@ -2,7 +2,7 @@
 include __DIR__ . "/header.php"; ?>
 <div class="winkelmandje">
     <h1>Winkelmandje</h1>
-    <div class="overzicht">
+    <div class="overzicht-wrapper">
         <div class="product-overzicht">
             <table>
                 <tr>
@@ -24,7 +24,26 @@ include __DIR__ . "/header.php"; ?>
             </table>
         </div>
         <div class="prijs-overzicht">
-        
+            <h2>Prijs overizcht</h2>
+            <table>
+                <tr>
+                    <td>Subtotaal</td>
+                    <td class="td-geld table-rechts">€1066,-</td>
+                </tr>
+                <tr>
+                    <td>Verzendkosten</td>
+                    <td class="td-gratis-verz table-rechts">Gratis</td>
+                </tr>
+            </table>
+            <hr class="betalen-hr">
+            <table>
+                <tr>
+                    <td>Totaalprijs</td>
+                    <td class="td-geld table-rechts">€1066,-</td>
+                </tr>
+            </table>
+            <p>Inclusief btw</p>
+            <button class="bestelling-btn">Bestelling afronden</button>
         </div>
     </div>
 

@@ -226,13 +226,13 @@ if (isset($amount)) {
                     <div id="StockItemFrameRight">
                         <div class="CenterPriceLeftChild">
                             <p class="StockItemPriceText"><?php print sprintf("€ %0.2f", $row["SellPrice"]); ?></p>
-                            <h6>Inclusief BTW </h6>
+                            <p>Inclusief BTW </p>
                         </div>
                     </div>
-                    <h1 class="StockItemID">Artikelnummer: <?php print $row["StockItemID"]; ?></h1>
-                    <p class="StockItemName"><?php print $row["StockItemName"]; ?></p>
+                    <p class="StockItemID">Artikelnummer: <?php print $row["StockItemID"]; ?></p>
+                    <h3 class="StockItemName"><?php print $row["StockItemName"]; ?></h3>
                     <p class="StockItemComments"><?php print $row["MarketingComments"]; ?></p>
-                    <h4 class="ItemQuantity"><?php print $row["QuantityOnHand"]; ?></h4>
+                    <p class="ItemQuantity"><?php print $row["QuantityOnHand"]; ?></p>
                 </div>
             </a>
         <?php } ?>

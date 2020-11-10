@@ -19,6 +19,7 @@ include "connect.php";
     </style>
     <meta charset="ISO-8859-1">
     <title>NerdyGadgets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Public/CSS/Style.css" type="text/css">
     <link rel="stylesheet" href="Public/CSS/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="Public/CSS/nha3fuq.css">
@@ -78,6 +79,9 @@ include "connect.php";
         <ul>
             <li>
                 <a href="login2.php"><i></i>Inloggen</a>
+            </li>
+            <li>
+                <a href="winkelmandje.php"><i></i>Winkelmandje</a>
             </li>
         </ul>
         <ul id="ul-class-navigation">
