@@ -61,6 +61,23 @@ table tr th,
 table tr td {
     padding: 10px;
 }
+#logintext {
+    display: inline-block;
+    right: 200px;
+    position: absolute;
+}
+ul#ul-class-login {
+    list-style: none;
+    line-height: 200px;
+}
+ul#ul-class-login li{
+    color: white;
+    display: inline;
+    font-family: pt-sans, sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    text-decoration-color: currentcolor;
+}
 ul#ul-class-navigation {
     right: 10px;
     line-height: 200px;
@@ -241,7 +258,7 @@ ul#ul-class-navigation li {
     height: 90px;
     margin: 55px 55px 55px 10%;
 }
-ul#ul-class li {
+ul#ul-class-categorie li {
     display: inline;
     color: white;
     margin-right: 1em;
@@ -249,7 +266,7 @@ ul#ul-class li {
     text-decoration: none;
     line-height: 200px;
 }
-ul#ul-class-price li {
+ul#ul-class-categorie-price li {
     display: inline;
 }
 .TextPrice {
@@ -525,4 +542,17 @@ ul#ul-class-price li {
 }
 .overzicht{
     width: 100%;
+}
+.notificationError {
+    margin-left: 15px;
+    padding: 0 15px;
+    background-color: #ffffff;
+    width: 400px;
+}
+.notificationError h2 {
+    font-size: 22px;
+    color: #ff0000;
+}
+.notificationError p {
+    color: #000000;
 }
