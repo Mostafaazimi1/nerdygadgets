@@ -46,6 +46,4 @@ include __DIR__ . "/header.php"; ?>
             <button class="bestelling-btn">Bestelling afronden</button>
         </div>
     </div>
-
-
 </div>

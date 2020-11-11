@@ -579,6 +579,11 @@ ul#ul-class-price li {
     font-size: 15px;
     text-align: center;
     color: #FFFFFF;
+    transition: 0.2s;
+}
+.bestelling-btn:hover{
+    background-color: #1BCC3F;
+
 }
 .betalen-hr{
     border-top: 2px dashed #D6D6D6;
