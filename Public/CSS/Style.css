@@ -63,14 +63,31 @@ table tr td {
 }
 #logintext {
     display: inline-block;
-    right: 200px;
+    right: 400px;
     position: absolute;
 }
 ul#ul-class-login {
     list-style: none;
     line-height: 200px;
 }
-ul#ul-class-login li{
+ul#ul-class-login li {
+    color: white;
+    display: inline;
+    font-family: pt-sans, sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    text-decoration-color: currentcolor;
+}
+#winkelmandjehead {
+    display: inline-block;
+    right: 200px;
+    position: absolute;
+}
+ul#ul-class-winkelmandjehead {
+    list-style: none;
+    line-height: 200px;
+}
+ul#ul-class-winkelmandjehead li {
     color: white;
     display: inline;
     font-family: pt-sans, sans-serif;

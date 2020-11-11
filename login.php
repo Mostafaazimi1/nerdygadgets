@@ -10,7 +10,6 @@ if(isset($_SESSION["login"])) {
         // staat de code er zo in dat het altijd werkt wanneer je iets in email en wachtwoord zet
         // je wordt met alle soort combinaties ingelogt
         if(TRUE) {
-            session_start();
             $_SESSION['login'] = TRUE;
             $_SESSION['messageCount'] = 1;
             header("Location: ./index.php");
