@@ -61,6 +61,23 @@ table tr th,
 table tr td {
     padding: 10px;
 }
+#logintext {
+    display: inline-block;
+    right: 200px;
+    position: absolute;
+}
+ul#ul-class-login {
+    list-style: none;
+    line-height: 200px;
+}
+ul#ul-class-login li{
+    color: white;
+    display: inline;
+    font-family: pt-sans, sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    text-decoration-color: currentcolor;
+}
 ul#ul-class-navigation {
     right: 10px;
     line-height: 200px;
@@ -241,7 +258,7 @@ ul#ul-class-navigation li {
     height: 90px;
     margin: 55px 55px 55px 10%;
 }
-ul#ul-class li {
+ul#ul-class-categorie li {
     display: inline;
     color: white;
     margin-right: 1em;
@@ -249,7 +266,7 @@ ul#ul-class li {
     text-decoration: none;
     line-height: 200px;
 }
-ul#ul-class-price li {
+ul#ul-class-categorie-price li {
     display: inline;
 }
 .TextPrice {
@@ -523,53 +540,79 @@ ul#ul-class-price li {
     background-color: #2868c7;
     transition: background-color 0.2s;
 }
-.overzicht-wrapper{
+.overzicht-wrapper {
     width: 100%;
+}
+
+.notificationError {
+    margin-left: 15px;
+    padding: 0 15px;
+    background-color: #ffffff;
+    width: 400px;
+}
+
+.notificationError h2 {
+    font-size: 22px;
+    color: #ff0000;
+}
+
+.notificationError p {
+    color: #000000;
     overflow: hidden;
     font-family: 'Open Sans', sans-serif;
 }
-.product-overzicht{
+
+.product-overzicht {
     width: 75%;
-    float:left;
+    float: left;
 }
-.prijs-overzicht{
+
+.prijs-overzicht {
     width: 25%;
-    float:left;
+    float: left;
     padding: 36px;
     background-color: #F3F3F3;
     border-radius: 4px;
 }
-.prijs-overzicht h2{
+
+.prijs-overzicht h2 {
     color: #000000;
     font-weight: bold;
     font-size: 20px;
 }
-.prijs-overzicht table{
+
+.prijs-overzicht table {
     width: 100%;
 }
-.prijs-overzicht p{
+
+.prijs-overzicht p {
     color: #9F9F9F;
     font-size: 14px;
     margin-top: -6px;
     margin-bottom: 24px;
 }
-.prijs-overzicht td{
+
+.prijs-overzicht td {
     color: #656565;
     font-size: 16px;
     padding: 6px 0;
 }
-.td-geld{
-    color: #212121!important;
+
+.td-geld {
+    color: #212121 !important;
     font-weight: 700;
 }
-.td-gratis-verz{
-    color: #06D630!important;
+
+.td-gratis-verz {
+    color: #06D630 !important;
     font-weight: 700;
 }
-.table-rechts{
+
+.table-rechts {
     text-align: right;
 }
-.bestelling-btn{
+
+.bestelling-btn {
     display: block;
     width: 100%;
     border: none;
@@ -585,6 +628,7 @@ ul#ul-class-price li {
     background-color: #1BCC3F;
 
 }
-.betalen-hr{
+
+.betalen-hr {
     border-top: 2px dashed #D6D6D6;
 }
