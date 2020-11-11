@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 include __DIR__ . "/header.php"; ?>
 <div class="winkelmandje">
     <h1>Winkelmandje</h1>

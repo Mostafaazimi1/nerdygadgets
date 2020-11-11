@@ -159,7 +159,7 @@ if (isset($amount)) {
     $AmountOfPages = ceil($amount["count(*)"] / $ProductsOnPage);
 }
 ?>
-<div id="FilterFrame"><h2 class="FilterText"><i class="fas fa-filter"></i> Filteren </h2>
+<div id="FilterFrame"><h4 class="FilterText">Filteren</h4>
     <form>
         <div id="FilterOptions">
             <h4 class="FilterTopMargin"><i class="fas fa-search"></i> Zoeken</h4>

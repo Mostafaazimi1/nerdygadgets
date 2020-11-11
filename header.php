@@ -43,7 +43,7 @@ session_start();
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 </head>
 <body>
-<div class="Background">
+<div class="centerContainer">
     <div class="row" id="Header">
         <div class="col-2">
             <a href="./" id="LogoA">
