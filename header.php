@@ -1,6 +1,6 @@
 <?php
-session_start();
 include "connect.php";
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en" style="background-color: rgb(35, 35, 47);">
@@ -19,6 +19,7 @@ include "connect.php";
     </style>
     <meta charset="ISO-8859-1">
     <title>NerdyGadgets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Public/CSS/Style.css" type="text/css">
     <link rel="stylesheet" href="Public/CSS/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="Public/CSS/nha3fuq.css">
@@ -39,15 +40,18 @@ include "connect.php";
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="Public/Favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 </head>
 <body>
 <div class="Background">
     <div class="row" id="Header">
-        <div class="col-2"><a href="./" id="LogoA">
+        <div class="col-2">
+            <a href="./" id="LogoA">
                 <div id="LogoImage"></div>
-            </a></div>
+            </a>
+        </div>
         <div class="col-8" id="CategoriesBar">
-            <ul id="ul-class">
+            <ul id="ul-class-categorie">
                 <?php
                 $Query = "
                 SELECT StockGroupID, StockGroupName, ImagePath
@@ -75,9 +79,34 @@ include "connect.php";
                 </li>
             </ul>
         </div>
+        <div id="logintext">
+            <ul id="ul-class-login">
+                <li>
+                    <?php
+                    if(isset($_SESSION['login'])) {
+                        if($_SESSION['login']) {
+                            print('<a href="logout.php" class="HrefDecoration">Uitloggen</a>');
+                        }
+                    } else {
+                        print('<a href="login.php" class="HrefDecoration">Inloggen</a>');
+                    }
+                    ?>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul id="ul-class-navigation">
+                <li>
+                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
+                </li>
+            </ul>
+        </div>
         <ul>
             <li>
-                <a href="login2.php"><i></i>Inloggen</a>
+                <a href="login.php"><i></i>Inloggen</a>
+            </li>
+            <li>
+                <a href="winkelmandje.php"><i></i>Winkelmandje</a>
             </li>
         </ul>
         <ul id="ul-class-navigation">
@@ -89,5 +118,3 @@ include "connect.php";
     <div class="row" id="Content">
         <div class="col-12">
             <div id="SubContent">
-
-

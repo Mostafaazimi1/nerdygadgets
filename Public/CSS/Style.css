@@ -61,6 +61,23 @@ table tr th,
 table tr td {
     padding: 10px;
 }
+#logintext {
+    display: inline-block;
+    right: 200px;
+    position: absolute;
+}
+ul#ul-class-login {
+    list-style: none;
+    line-height: 200px;
+}
+ul#ul-class-login li{
+    color: white;
+    display: inline;
+    font-family: pt-sans, sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    text-decoration-color: currentcolor;
+}
 ul#ul-class-navigation {
     right: 10px;
     line-height: 200px;
@@ -241,7 +258,7 @@ ul#ul-class-navigation li {
     height: 90px;
     margin: 55px 55px 55px 10%;
 }
-ul#ul-class li {
+ul#ul-class-categorie li {
     display: inline;
     color: white;
     margin-right: 1em;
@@ -249,7 +266,7 @@ ul#ul-class li {
     text-decoration: none;
     line-height: 200px;
 }
-ul#ul-class-price li {
+ul#ul-class-categorie-price li {
     display: inline;
 }
 .TextPrice {
@@ -473,6 +490,140 @@ ul#ul-class-price li {
     border: 1px rgb(98, 158, 255) solid;
     color: #fff;
 }
-.overzicht{
+.login {
+    width: 400px;
+    background-color: #ffffff;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+    margin: 100px auto;
+}
+.login h1 {
+    text-align: center;
+    color: #5b6574;
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}
+.login form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+.login form label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #3274d6;
+    color: #ffffff;
+}
+.login form input[type="password"], .login form input[type="email"] {
+    width: 310px;
+    height: 50px;
+    border: 1px solid #dee0e4;
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+.login form input[type="submit"] {
     width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #3274d6;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+.login form input[type="submit"]:hover {
+    background-color: #2868c7;
+    transition: background-color 0.2s;
+}
+.overzicht-wrapper {
+    width: 100%;
+}
+
+.notificationError {
+    margin-left: 15px;
+    padding: 0 15px;
+    background-color: #ffffff;
+    width: 400px;
+}
+
+.notificationError h2 {
+    font-size: 22px;
+    color: #ff0000;
+}
+
+.notificationError p {
+    color: #000000;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.product-overzicht {
+    width: 75%;
+    float: left;
+}
+
+.prijs-overzicht {
+    width: 25%;
+    float: left;
+    padding: 36px;
+    background-color: #F3F3F3;
+    border-radius: 4px;
+}
+
+.prijs-overzicht h2 {
+    color: #000000;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.prijs-overzicht table {
+    width: 100%;
+}
+
+.prijs-overzicht p {
+    color: #9F9F9F;
+    font-size: 14px;
+    margin-top: -6px;
+    margin-bottom: 24px;
+}
+
+.prijs-overzicht td {
+    color: #656565;
+    font-size: 16px;
+    padding: 6px 0;
+}
+
+.td-geld {
+    color: #212121 !important;
+    font-weight: 700;
+}
+
+.td-gratis-verz {
+    color: #06D630 !important;
+    font-weight: 700;
+}
+
+.table-rechts {
+    text-align: right;
+}
+
+.bestelling-btn {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    background-color: #06D630;
+    padding: 13px 28px;
+    font-size: 15px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.betalen-hr {
+    border-top: 2px dashed #D6D6D6;
 }
