@@ -45,8 +45,8 @@ if ($R) {
 }
 
 //code
-if(isset($_POST["action"]))
-{
+if(isset($_POST["action"])) {
+
     $productID = $_POST["addcart"];
     $aantal = $_POST["aantal"];
 
@@ -54,7 +54,8 @@ if(isset($_POST["action"]))
     $winkelwagen[$productID] = $aantal;
 
     $quantity = 0;
-    $quantityNow = $quantity+$aantal;
+    $quantityNow = $quantity + $aantal;
+}
 
 ?>
 <div id="CenteredContent">
