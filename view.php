@@ -43,6 +43,19 @@ $R = mysqli_fetch_all($R, MYSQLI_ASSOC);
 if ($R) {
     $Images = $R;
 }
+
+//code
+if(isset($_POST["action"]))
+{
+    $productID = $_POST["addcart"];
+    $aantal = $_POST["aantal"];
+
+    $winkelwagen = array();
+    $winkelwagen[$productID] = $aantal;
+
+    $quantity = 0;
+    $quantityNow = $quantity+$aantal;
+
 ?>
 <div id="CenteredContent">
     <?php
@@ -110,6 +123,7 @@ if ($R) {
             ?>
 
 
+
             <h1 class="StockItemID">Artikelnummer: <?php print $Result["StockItemID"]; ?></h1>
             <h2 class="StockItemNameViewSize StockItemName">
                 <?php print $Result['StockItemName']; ?>
@@ -120,8 +134,10 @@ if ($R) {
                     <div class="CenterPriceLeftChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <h6> Inclusief BTW </h6>
-                        <form action="add.php" method="post">
-                            <button type="submit" name="addcart" value="<?php print $product['StockItemID']?>">Add To Cart</button>
+                        <form action="view.php" method="post">
+                            <input type="hidden" name="action" value="submit" />
+                            Aantal <input type="text" name="aantal" value="1"><br>
+                            <button type="submit" name="addcart" value="<?php print $Result['StockItemID']?>">Add To Cart</button>
                         </form>
                     </div>
                 </div>
