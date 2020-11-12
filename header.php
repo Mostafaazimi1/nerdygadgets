@@ -3,7 +3,7 @@ include "connect.php";
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="en" style="background-color: rgb(35, 35, 47);">
+<html lang="en" style="">
 <head>
     <script src="Public/JS/fontawesome.js" crossorigin="anonymous"></script>
     <script src="Public/JS/jquery.min.js"></script>
@@ -45,12 +45,36 @@ session_start();
 <body>
 <div class="centerContainer">
     <div class="row" id="Header">
-        <div class="col-2">
-            <a href="./" id="LogoA">
-                <div id="LogoImage"></div>
+        <div class="logoDiv">
+            <a href="./">
+                <img id="LogoImage" src="Public/ProductIMGHighRes/NerdyGadgets-Logo.png">
             </a>
         </div>
-        <div class="col-8" id="CategoriesBar">
+
+        <div class="menuDiv">
+            <ul id="ul-class-winkelmandjehead">
+                <li>
+                    <a href="winkelmandje.php" class="HrefDecoration"><i class="fas fa-shopping-cart" style="color:#676EFF;"></i> Winkelmandje</a>
+                </li>
+                <li>
+                    <?php
+                    if(isset($_SESSION['login'])) {
+                        if($_SESSION['login']) {
+                            print('<a href="logout.php" class="HrefDecoration">Uitloggen</a>');
+                        }
+                    } else {
+                        print('<a href="login.php" class="HrefDecoration">Inloggen</a>');
+                    }
+                    ?>
+                </li>
+                <li>
+                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" id="HeaderCategorie">
+        <div id="CategoriesBar">
             <ul id="ul-class-categorie">
                 <?php
                 $Query = "
@@ -69,42 +93,13 @@ session_start();
                     ?>
                     <li>
                         <a href="browse.php?category_id=<?php print $HeaderStockGroup['StockGroupID']; ?>"
-                           class="HrefDecoration"><?php print $HeaderStockGroup['StockGroupName']; ?></a>
+                           class="HrefDecorationCategorie"><?php print $HeaderStockGroup['StockGroupName']; ?></a>
                     </li>
                     <?php
                 }
                 ?>
                 <li>
-                    <a href="categories.php" class="HrefDecoration">Alle categorieën</a>
-                </li>
-            </ul>
-        </div>
-        <div id="logintext">
-            <ul id="ul-class-login">
-                <li>
-                    <?php
-                    if(isset($_SESSION['login'])) {
-                        if($_SESSION['login']) {
-                            print('<a href="logout.php" class="HrefDecoration">Uitloggen</a>');
-                        }
-                    } else {
-                        print('<a href="login.php" class="HrefDecoration">Inloggen</a>');
-                    }
-                    ?>
-                </li>
-            </ul>
-        </div>
-        <div id="winkelmandjehead">
-            <ul id="ul-class-winkelmandjehead">
-                <li>
-                    <a href="winkelmandje.php" class="HrefDecoration"><i class="fas fa-shopping-cart" style="color:#676EFF;"></i> Winkelmandje</a>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <ul id="ul-class-navigation">
-                <li>
-                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
+                    <a href="categories.php" class="HrefDecorationCategorie">Hele assortiment</a>
                 </li>
             </ul>
         </div>
