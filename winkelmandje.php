@@ -11,7 +11,7 @@ $winkelwagen = array(
     ),
     array(
         'id' => 123,
-        'aantal' => 3
+        'aantal' => 6
     ),
     array(
         'id' => 1,
@@ -79,13 +79,16 @@ $products = loadProducts($winkelwagen, $Connection);
                 </tr>
 
                 <?php
+                $allTotal = 0;
                 foreach ($products as $product) {
+                    $total = $product['price'] * $product['aantal'];
+                    $allTotal += $total;
                     echo "<tr>";
                     echo "<td><img src='Public/StockItemIMG/" . $product['img'] . "' style='max-width: 30px'></td>";
                     echo "<td><p>" . $product['name'] . "</p></td>";
                     echo "<td><p>€" . $product['price'] . "</p></td>";
                     echo "<td><p>" . $product['aantal'] . "</p></td>";
-                    echo "<td><p>€790</p></td>";
+                    echo "<td><p>€" . $total . "</p></td>";
                     echo "<td>X</td>";
                     echo "</tr>";
                 }
@@ -99,18 +102,28 @@ $products = loadProducts($winkelwagen, $Connection);
             <table>
                 <tr>
                     <td>Subtotaal</td>
-                    <td class="td-geld table-rechts">€1066,-</td>
+                    <td class="td-geld table-rechts">€<?php echo $allTotal; ?>,-</td>
                 </tr>
                 <tr>
                     <td>Verzendkosten</td>
-                    <td class="td-gratis-verz table-rechts">Gratis</td>
+                    <td class="td-gratis-verz table-rechts">
+                        <?php if($allTotal < 25){
+                            echo "€6,25";
+                        }else{
+                            echo 'Gratis';
+                        } ?>
+                        </td>
                 </tr>
             </table>
             <hr class="betalen-hr">
             <table>
                 <tr>
                     <td>Totaalprijs</td>
-                    <td class="td-geld table-rechts">€1066,-</td>
+                    <td class="td-geld table-rechts"> <?php if($allTotal < 25){
+                            echo "€" . ($allTotal + 6.25);
+                        }else{
+                            echo "€" . $allTotal . ",-";
+                        } ?></td>
                 </tr>
             </table>
             <p>Inclusief btw</p>
