@@ -3,10 +3,7 @@ body {
     color: #000000 !important;
     background-color: #FFFFFF !important;
     text-align: center;
-}
-@font-face {
-    font-family: MmrText;
-    src: url(/Public/fonts/mmrtext.ttf);
+    font-family: 'Open Sans', sans-serif;
 }
 select {
     margin: 50px;
@@ -103,7 +100,7 @@ ul#ul-class-navigation li {
 }
 #Content {
     width: 100%;
-    margin: 0!important;
+    margin-top: 40px!important;
 }
 #SubContent{
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -115,43 +112,65 @@ ul#ul-class-navigation li {
     background-color: #F3F3F3;
     float: left;
     top: 216px;
-    border: 1px solid #fff;
+    border-radius: 4px;
+    padding: 20px;
+}
+.FilterOptions p{
+    font-size: 16px;
+    font-weight: 700;
 }
 #ResultsArea.Browse  {
     width: 75%;
     float: left;
     position: sticky;
+    padding-left: 40px;
+}
+.productFrameLinks{
+    width: 80%;
+    float: left;
+}
+.productFrameRechts{
+    width: 20%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 8px;
+}
+#StockItemFrameRight{
+    text-align: right;
 }
 #ProductFrame {
     width: 100%;
-    height: 250px;
-    margin-top: 15px;
-    position: relative;
-    padding: 1px;
-    border-bottom: 1px solid #000000;
+    margin-bottom: 12px;
+    padding: 8px;
+    border: 1px solid #D6D6D6;
+    border-radius: 4px;
 }
 .ImgFrame {
-    width: 230px;
-    height: 230px;
-    background-color: rgb(36, 41, 143);
-    float: left;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-right: 10px
+    width: 150px;
+    height: 150px;
 }
-.ImgFrame img {
-    width: 230px;
-    height: 230px;
+.productFrameLinksImage{
+    width: 30%;
 }
-#StockItemFrameRight {
-    float: right;
-    text-align: right;
-    margin-right: 10px;
-    margin-top: 10px;
-    position: absolute;
-    bottom: 10px;
-    right: 0;
-    top: 0;
+.productFrameLinksInfo{
+    width: 70%;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.StockItemPriceText{
+    font-size: 20px;
+    color: #2680F6;
+    margin: 0;
+    font-weight: bold;
+}
+.StockItemBTW{
+    font-size: 14px;
+    color: #949494;
+    margin: 0;
 }
 .ItemName {
     position: relative;
@@ -161,13 +180,6 @@ ul#ul-class-navigation li {
     font-size: 18px;
     text-transform: uppercase;
     font-weight: bold;
-}
-.ItemQuantity {
-    position: absolute;
-    left: 250px;
-    bottom: 2.5px;
-    color: #000000;
-    font-size: 15px;
 }
 #VideoFrame {
     width: 100%;
@@ -200,7 +212,15 @@ ul#ul-class-navigation li {
     right: 0;
     height: 300px;
 }
-
+.StockItemName{
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+.StockItemID, .ItemQuantity{
+    font-size: 14px;
+    color: #949494;
+}
 .StockItemNameViewSize {
     font-size: 35px !important;
 }
@@ -209,12 +229,6 @@ ul#ul-class-navigation li {
     height: 100%;
     right: 0;
     width: 200px;
-}
-.CenterPriceLeftChild {
-    position: relative;
-    top: 40%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
 }
 #StockItemDescription {
     background-color: rgba(35, 40, 47, 0.8);
@@ -382,38 +396,6 @@ ul#ul-class-categorie-price li {
     color: #ccc;
     opacity: 0.9;
 }
-.StockItemPriceText {
-    font-family: vortice-concept, sans-serif;
-    color: #676EFF;
-    font-size: 22px;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 25px;
-}
-.StockItemPriceText:hover {
-    text-decoration: none;
-}
-.StockItemID {
-    font-family: vortice-concept, sans-serif;
-    color: #676EFF;
-    font-size: 10px;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 15px;
-}
-.StockItemName {
-    font-family: pt-sans, sans-serif;
-    color: #000000;
-    font-size: 20px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-.StockItemComments {
-    font-family: pt-sans, sans-serif;
-    color: #000000;
-    font-size: 14px;
-    font-weight: bold;
-}
 #CenteredContent {
     margin: 0 auto;
     width: 70%;
@@ -451,7 +433,14 @@ ul#ul-class-categorie-price li {
     width: 1400px;
 }
 .FilterTopMargin {
-    margin-top: 20px;
+    margin-top: 24px;
+    margin-bottom: 6px;
+}
+#products_on_page, select, input{
+    background-color: #FFFFFF;
+    border: 1px solid #D6D6D6;
+    border-radius: 4px;
+    padding: 13px 10px;
 }
 #ProductFrame h6 {
     color: #FFFFFF;
@@ -645,4 +634,10 @@ ul#ul-class-categorie-price li {
 #ul-class-winkelmandjehead{
     margin-bottom: 0;
     padding-left: 0;
+}
+#geenMargin{
+    Margin: 0!important;
+}
+#geenPadding{
+    Margin: 0!important;
 }

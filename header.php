@@ -105,5 +105,5 @@ session_start();
         </div>
     </div>
     <div class="row" id="Content">
-        <div class="col-12">
+        <div class="col-12" id="geenMargin">
             <div id="SubContent">
