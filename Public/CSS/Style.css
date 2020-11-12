@@ -1,11 +1,7 @@
-html {
-    background-color: rgb(35, 35, 47) !important;
-}
-
 body {
     overflow-x:hidden;
-    color: #FFF !important;
-    background-color: rgb(35, 35, 47) !important;
+    color: #000000 !important;
+    background-color: #FFFFFF !important;
     text-align: center;
 }
 @font-face {
@@ -64,7 +60,6 @@ table tr td {
 }
 #logintext {
     display: inline-block;
-    right: 400px;
     position: absolute;
 }
 ul#ul-class-login {
@@ -78,15 +73,6 @@ ul#ul-class-login li {
     font-size: 20px;
     text-decoration: none;
     text-decoration-color: currentcolor;
-}
-#winkelmandjehead {
-    display: inline-block;
-    right: 200px;
-    position: absolute;
-}
-ul#ul-class-winkelmandjehead {
-    list-style: none;
-    line-height: 200px;
 }
 ul#ul-class-winkelmandjehead li {
     color: white;
@@ -110,17 +96,14 @@ ul#ul-class-navigation li {
     text-decoration-color: currentcolor;
 }
 #Header {
-    position: fixed;
-    top:0;
-    background-color: rgb(35, 35, 47);
-    height: 200px;
-    z-index: 1;
+    height: 100px;
+    z-index: 999;
     width: 100%;
-    border-bottom: 1px solid rgb(36, 41, 143);
+    padding: 26px 0;
 }
 #Content {
-    margin-top: 200px;
     width: 100%;
+    margin: 0!important;
 }
 #SubContent{
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -145,7 +128,7 @@ ul#ul-class-navigation li {
     margin-top: 15px;
     position: relative;
     padding: 1px;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #000000;
 }
 .ImgFrame {
     width: 230px;
@@ -174,7 +157,7 @@ ul#ul-class-navigation li {
     position: relative;
     top: 10px;
     font-family: pt-sans, sans-serif;
-    color: #fff;
+    color: #000000;
     font-size: 18px;
     text-transform: uppercase;
     font-weight: bold;
@@ -183,7 +166,7 @@ ul#ul-class-navigation li {
     position: absolute;
     left: 250px;
     bottom: 2.5px;
-    color: white;
+    color: #000000;
     font-size: 15px;
 }
 #VideoFrame {
@@ -265,24 +248,15 @@ ul#ul-class-navigation li {
     text-align: left;
     margin: 0px auto;
 }
-#LogoA {
-    height: 200px;
-    width: 100%;
-    position: absolute;
-}
 #LogoImage {
-    background-image: url("../ProductIMGHighRes/NerdyGadgetsLogo.png");
-    width: 250px;
-    height: 90px;
-    margin: 55px 55px 55px 10%;
+    max-width: 200px;
 }
 ul#ul-class-categorie li {
     display: inline;
     color: white;
     margin-right: 1em;
-    font-size: 18px;
+    font-size: 15px;
     text-decoration: none;
-    line-height: 200px;
 }
 ul#ul-class-categorie-price li {
     display: inline;
@@ -296,15 +270,12 @@ ul#ul-class-categorie-price li {
     -ms-user-select: none;
     user-select: none;
 }
-.HrefDecoration {
-    color: #ffffff;
-}
 .HrefDecoration:hover, .HrefDecoration:active {
     text-decoration: none;
     color: #ccc;
 }
 .TextMain {
-    color: #fff;
+    color: #000000;
     font-family: vortice-concept, sans-serif;
     font-size: 50px;
     text-transform: uppercase;
@@ -432,14 +403,14 @@ ul#ul-class-categorie-price li {
 }
 .StockItemName {
     font-family: pt-sans, sans-serif;
-    color: #fff;
+    color: #000000;
     font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
 }
 .StockItemComments {
     font-family: pt-sans, sans-serif;
-    color: #fff;
+    color: #000000;
     font-size: 14px;
     font-weight: bold;
 }
@@ -484,10 +455,6 @@ ul#ul-class-categorie-price li {
 }
 #ProductFrame h6 {
     color: white;
-}
-#CategoriesBar {
-    position: absolute;
-    left: 280px;
 }
 #PageSelector {
     text-align: center;
@@ -651,4 +618,31 @@ ul#ul-class-categorie-price li {
 }
 .product-overzicht table{
     width: 100%;
+}
+.menuDiv {
+    width: 50%;
+    text-align: right;
+}
+.menuDiv li {
+    display: inline;
+    list-style: none;
+}
+.LogoDiv{
+    width: 50%!important;
+}
+
+#HeaderCategorie{
+    background-color: #313638!important;
+    padding: 18px 0;
+}
+.HrefDecorationCategorie{
+    color: #FFFFFF!important;
+}
+#ul-class-categorie{
+    margin-bottom: 0;
+    padding-left: 0;
+}
+#ul-class-winkelmandjehead{
+    margin-bottom: 0;
+    padding-left: 0;
 }
