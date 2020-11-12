@@ -12,7 +12,7 @@ if(isset($_SESSION["login"])) {
         if(TRUE) {
             $_SESSION['login'] = TRUE;
             $_SESSION['messageCount'] = 1;
-            header("Location: ./index.php");
+            header("Location: ./");
             //header("Location: index.php?message=success");
             exit();
         }

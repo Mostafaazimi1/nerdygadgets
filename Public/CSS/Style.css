@@ -72,7 +72,7 @@ ul#ul-class-login {
     line-height: 200px;
 }
 ul#ul-class-login li {
-    color: white;
+    color: #FFFFFF;
     display: inline;
     font-family: pt-sans, sans-serif;
     font-size: 20px;
@@ -89,7 +89,7 @@ ul#ul-class-winkelmandjehead {
     line-height: 200px;
 }
 ul#ul-class-winkelmandjehead li {
-    color: white;
+    color: #FFFFFF;
     display: inline;
     font-family: pt-sans, sans-serif;
     font-size: 20px;
@@ -102,7 +102,7 @@ ul#ul-class-navigation {
     position: absolute;
 }
 ul#ul-class-navigation li {
-    color: white;
+    color: #FFFFFF;
     display: inline;
     font-family: pt-sans, sans-serif;
     font-size: 20px;
@@ -183,7 +183,7 @@ ul#ul-class-navigation li {
     position: absolute;
     left: 250px;
     bottom: 2.5px;
-    color: white;
+    color: #FFFFFF;
     font-size: 15px;
 }
 #VideoFrame {
@@ -278,7 +278,7 @@ ul#ul-class-navigation li {
 }
 ul#ul-class-categorie li {
     display: inline;
-    color: white;
+    color: #FFFFFF;
     margin-right: 1em;
     font-size: 18px;
     text-decoration: none;
@@ -351,7 +351,7 @@ ul#ul-class-categorie-price li {
     float: left;
     margin-left: 1.5%;
     font-family: vortice-concept, sans-serif;
-    color: white;
+    color: #FFFFFF;
     font-size: 25px;
     text-transform: uppercase;
     font-weight: bold;
@@ -405,7 +405,7 @@ ul#ul-class-categorie-price li {
 }
 #Wrap a {
     text-decoration: none;
-    color: white;
+    color: #FFFFFF;
 }
 #Wrap a:hover {
     color: #ccc;
@@ -483,7 +483,7 @@ ul#ul-class-categorie-price li {
     margin-top: 20px;
 }
 #ProductFrame h6 {
-    color: white;
+    color: #FFFFFF;
 }
 #CategoriesBar {
     position: absolute;
