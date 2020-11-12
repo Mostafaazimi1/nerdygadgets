@@ -51,9 +51,9 @@ session_start();
             </a>
         </div>
         <div class="menuDiv">
-            <ul id="ul-class-winkelmandjehead">
+            <ul id="ul-class-topBar">
                 <li>
-                    <a href="winkelmandje.php" class="HrefDecoration"><i class="fas fa-shopping-cart" style="color:#676EFF;"></i> Winkelmandje</a>
+                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
                 </li>
                 <li>
                     <?php
@@ -67,11 +67,11 @@ session_start();
                     ?>
                 </li>
                 <li>
-                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
+                    <a href="winkelmandje.php" class="HrefDecoration"><i class="fas fa-shopping-cart" style="color:#676EFF;"></i> Winkelmandje</a>
                 </li>
             </ul>
         </div>
-    </div>
+    </div class="row">
     <div class="row" id="HeaderCategorie">
         <div id="CategoriesBar">
             <ul id="ul-class-categorie">

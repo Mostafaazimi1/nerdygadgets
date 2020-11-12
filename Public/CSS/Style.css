@@ -71,13 +71,18 @@ ul#ul-class-login li {
     text-decoration: none;
     text-decoration-color: currentcolor;
 }
-ul#ul-class-winkelmandjehead li {
+#ul-class-topBar {
+    margin-bottom: 0;
+    padding-left: 0;
+}
+ul#ul-class-topBar li {
     color: #FFFFFF;
     display: inline;
     font-family: pt-sans, sans-serif;
     font-size: 20px;
     text-decoration: none;
     text-decoration-color: currentcolor;
+    margin-right: 2em;
 }
 ul#ul-class-navigation {
     right: 10px;
@@ -129,7 +134,7 @@ ul#ul-class-navigation li {
     width: 80%;
     float: left;
 }
-.productFrameRechts{
+.productFrameRechts {
     width: 20%;
     height: auto;
     display: flex;
@@ -259,6 +264,13 @@ ul#ul-class-navigation li {
 }
 #LogoImage {
     max-width: 200px;
+}
+#CategoriesBar {
+    margin-left: 7%;
+    margin-right: auto;
+}
+#ul-class-categorie{
+    /*margin-bottom: 0px;*/
 }
 ul#ul-class-categorie li {
     display: inline;
@@ -604,15 +616,21 @@ ul#ul-class-categorie-price li {
     width: 100%;
 }
 .menuDiv {
-    width: 50%;
+    width: 80%;
     text-align: right;
+    /*padding-left: 30%;*/
 }
 .menuDiv li {
     display: inline;
     list-style: none;
+    /*padding-left: 20px;*/
 }
 .LogoDiv{
-    width: 50%!important;
+    /*width: 50%!important;*/
+}
+#Header.row{
+    margin: auto;
+    padding-left: 8%;
 }
 
 #HeaderCategorie{
@@ -621,14 +639,6 @@ ul#ul-class-categorie-price li {
 }
 .HrefDecorationCategorie{
     color: #FFFFFF!important;
-}
-#ul-class-categorie{
-    margin-bottom: 0;
-    padding-left: 0;
-}
-#ul-class-winkelmandjehead{
-    margin-bottom: 0;
-    padding-left: 0;
 }
 #geenMargin{
     Margin: 0!important;
