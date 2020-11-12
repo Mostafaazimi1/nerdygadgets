@@ -50,7 +50,6 @@ session_start();
                 <img id="LogoImage" src="Public/ProductIMGHighRes/NerdyGadgets-Logo.png">
             </a>
         </div>
-
         <div class="menuDiv">
             <ul id="ul-class-winkelmandjehead">
                 <li>
@@ -84,7 +83,8 @@ session_start();
                                         SELECT StockGroupID 
                                         FROM stockitemstockgroups
                                         ) AND ImagePath IS NOT NULL
-                ORDER BY StockGroupID ASC";
+                ORDER BY StockGroupID ASC;
+                ";
                 $Statement = mysqli_prepare($Connection, $Query);
                 mysqli_stmt_execute($Statement);
                 $HeaderStockGroups = mysqli_stmt_get_result($Statement);
