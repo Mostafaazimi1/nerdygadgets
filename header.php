@@ -1,6 +1,9 @@
 <?php
 include "connect.php";
 session_start();
+if (!isset($_SESSION['winkelwagen'])) {
+    $_SESSION['winkelwagen'] = array();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" style="">
@@ -53,12 +56,13 @@ session_start();
         <div class="menuDiv">
             <ul id="ul-class-topBar">
                 <li>
-                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
+                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i>
+                        Zoeken</a>
                 </li>
                 <li>
                     <?php
-                    if(isset($_SESSION['login'])) {
-                        if($_SESSION['login']) {
+                    if (isset($_SESSION['login'])) {
+                        if ($_SESSION['login']) {
                             print('<a href="logout.php" class="HrefDecoration">Uitloggen</a>');
                         }
                     } else {
@@ -67,7 +71,8 @@ session_start();
                     ?>
                 </li>
                 <li>
-                    <a href="winkelmandje.php" class="HrefDecoration"><i class="fas fa-shopping-cart" style="color:#676EFF;"></i> Winkelmandje</a>
+                    <a href="winkelmandje.php" class="HrefDecoration"><i class="fas fa-shopping-cart"
+                                                                         style="color:#676EFF;"></i> Winkelmandje</a>
                 </li>
             </ul>
         </div>

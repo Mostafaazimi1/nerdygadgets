@@ -11,7 +11,7 @@ $winkelwagen = array(
     ),
     array(
         'id' => 123,
-        'aantal' => 6
+        'aantal' => 23
     ),
     array(
         'id' => 1,
@@ -19,8 +19,15 @@ $winkelwagen = array(
     ),
 );
 
+if (isset($_SESSION['winkelwagen'])) {
+    $winkelwagen = $_SESSION['winkelwagen'];
+}
+
 function loadProducts($winkelwagen, $conn)
 {
+    if (count($winkelwagen) == 0) {
+        return array();
+    }
     $selectIds = array();
 
     foreach ($winkelwagen as $item) {
@@ -29,7 +36,7 @@ function loadProducts($winkelwagen, $conn)
 
     $sql = "SELECT s.StockItemName name, s.UnitPrice, s.StockItemID, si.ImagePath
             FROM stockitems s
-            JOIN stockitemimages si on s.StockItemID = si.StockItemID";
+            LEFT JOIN stockitemimages si on s.StockItemID = si.StockItemID";
 
     $where = " WHERE";
 
@@ -51,6 +58,7 @@ function loadProducts($winkelwagen, $conn)
                     $newWinkelWagen[$key]['name'] = $row['name'];
                     $newWinkelWagen[$key]['img'] = $row['ImagePath'];
                     $newWinkelWagen[$key]['price'] = $row['UnitPrice'];
+                    break;
                 }
             }
         }
@@ -107,21 +115,21 @@ $products = loadProducts($winkelwagen, $Connection);
                 <tr>
                     <td>Verzendkosten</td>
                     <td class="td-gratis-verz table-rechts">
-                        <?php if($allTotal < 25){
+                        <?php if ($allTotal < 25) {
                             echo "€6,25";
-                        }else{
+                        } else {
                             echo 'Gratis';
                         } ?>
-                        </td>
+                    </td>
                 </tr>
             </table>
             <hr class="betalen-hr">
             <table>
                 <tr>
                     <td>Totaalprijs</td>
-                    <td class="td-geld table-rechts"> <?php if($allTotal < 25){
+                    <td class="td-geld table-rechts"> <?php if ($allTotal < 25) {
                             echo "€" . ($allTotal + 6.25);
-                        }else{
+                        } else {
                             echo "€" . $allTotal . ",-";
                         } ?></td>
                 </tr>
