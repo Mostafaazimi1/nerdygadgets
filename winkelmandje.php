@@ -1,17 +1,9 @@
 <?php
-include __DIR__ . "/header.php";
+include 'header.php';
 
 $winkelwagen = $_SESSION['winkelwagen'];
 
-if (isset($_GET['delete'])) {
-    $winkelwagen = deleteProduct($winkelwagen, (int)$_GET['delete']);
-    $products = loadProducts($winkelwagen, $Connection);
-} else {
-    $products = loadProducts($winkelwagen, $Connection);
-}
-
-
-
+$products = loadProducts($winkelwagen, $Connection);
 ?>
 
 

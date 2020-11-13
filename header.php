@@ -7,6 +7,11 @@ if (!isset($_SESSION['winkelwagen'])) {
 }
 $winkelwagen = $_SESSION['winkelwagen'];
 
+if (isset($_GET['delete'])) {
+    $winkelwagen = deleteProduct($winkelwagen, (int)$_GET['delete']);
+    header("Refresh:0; url=winkelmandje.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" style="">
