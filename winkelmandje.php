@@ -1,73 +1,16 @@
 <?php
 include __DIR__ . "/header.php";
-$winkelwagen = array(
-    array(
-        'id' => 1,
-        'aantal' => 3
-    ),
-    array(
-        'id' => 6,
-        'aantal' => 2
-    ),
-    array(
-        'id' => 123,
-        'aantal' => 23
-    ),
-    array(
-        'id' => 1,
-        'aantal' => 3
-    ),
-);
 
-if (isset($_SESSION['winkelwagen'])) {
-    $winkelwagen = $_SESSION['winkelwagen'];
+$winkelwagen = $_SESSION['winkelwagen'];
+
+if (isset($_GET['delete'])) {
+    $winkelwagen = deleteProduct($winkelwagen, (int)$_GET['delete']);
+    $products = loadProducts($winkelwagen, $Connection);
+} else {
+    $products = loadProducts($winkelwagen, $Connection);
 }
 
-function loadProducts($winkelwagen, $conn)
-{
-    if (count($winkelwagen) == 0) {
-        return array();
-    }
-    $selectIds = array();
 
-    foreach ($winkelwagen as $item) {
-        array_push($selectIds, $item['id']);
-    }
-
-    $sql = "SELECT s.StockItemName name, s.UnitPrice, s.StockItemID, si.ImagePath
-            FROM stockitems s
-            LEFT JOIN stockitemimages si on s.StockItemID = si.StockItemID";
-
-    $where = " WHERE";
-
-    foreach ($selectIds as $selectId) {
-        $where .= " s.StockItemID = " . $selectId . " OR";
-    }
-
-    $where = substr($where, 0, -3);
-    $sql = $sql . $where;
-
-
-    $result = mysqli_query($conn, $sql);
-    $newWinkelWagen = $winkelwagen;
-
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            foreach ($newWinkelWagen as $key => $winkelwagenItem) {
-                if ($winkelwagenItem['id'] == $row['StockItemID']) {
-                    $newWinkelWagen[$key]['name'] = $row['name'];
-                    $newWinkelWagen[$key]['img'] = $row['ImagePath'];
-                    $newWinkelWagen[$key]['price'] = $row['UnitPrice'];
-                    break;
-                }
-            }
-        }
-    }
-
-    return $newWinkelWagen;
-}
-
-$products = loadProducts($winkelwagen, $Connection);
 
 ?>
 
@@ -97,7 +40,7 @@ $products = loadProducts($winkelwagen, $Connection);
                     echo "<td><p>€" . $product['price'] . "</p></td>";
                     echo "<td><p>" . $product['aantal'] . "</p></td>";
                     echo "<td><p>€" . $total . "</p></td>";
-                    echo "<td>X</td>";
+                    echo "<td><a href='winkelmandje.php?delete=" . $product['id'] . "'>X</a></td>";
                     echo "</tr>";
                 }
                 ?>

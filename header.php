@@ -1,9 +1,12 @@
 <?php
 include "connect.php";
+include "functions.php";
 session_start();
 if (!isset($_SESSION['winkelwagen'])) {
     $_SESSION['winkelwagen'] = array();
 }
+$winkelwagen = $_SESSION['winkelwagen'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en" style="">
@@ -72,7 +75,7 @@ if (!isset($_SESSION['winkelwagen'])) {
                 </li>
                 <li>
                     <a href="winkelmandje.php" class="HrefDecoration"><i class="fas fa-shopping-cart"
-                                                                         style="color:#676EFF;"></i> Winkelmandje</a>
+                                                                         style="color:#676EFF;"></i> Winkelmandje (<?php echo getCount($winkelwagen);?>)</a>
                 </li>
             </ul>
         </div>
