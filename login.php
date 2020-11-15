@@ -12,8 +12,7 @@ if(isset($_SESSION["login"])) {
         if(TRUE) {
             $_SESSION['login'] = TRUE;
             $_SESSION['messageCount'] = 1;
-            header("Location: ./");
-            //header("Location: index.php?message=success");
+            print('<meta http-equiv = "refresh" content = "0; url = ./" />');
             exit();
         }
         if(FALSE) {
