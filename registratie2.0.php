@@ -1,6 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"]) {
+    print("aaa");
     $CustomerName = $_POST["CustomerName"];
     $password = md5($_POST["password"]); //wachtwoord wordt als hash beveiligd
     $email = $_POST["email"];
@@ -9,6 +10,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
     $postcode = $_POST["PostalAddressLine1"];
     $adres = $_POST["DeliveryAddressLine2"];
 //eerste 4 gegevens in table poeple
+//    $Connection;
     $conn = new mysqli("localhost", "root", "", "nerdygadgets");
     if ($conn->connect_error) {
         echo "$conn->connect_error";
@@ -50,7 +52,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
 <div class="body-content">
     <div class="module">
         <h1>Maak een account</h1>
-        <form class="form" action="registratie2.0.php" method="post" enctype="multipart/form-data" autocomplete="off">
+        <form action="registratie2.0.php" method="post" enctype="multipart/form-data">
             <div class="alert alert-error"></div>
             <input type="text" placeholder="Gebruikersnaam" name="CustomerName" required><br>
             <input type="password" placeholder="Wachtwoord" name="password" autocomplete="new-password" required><br>
