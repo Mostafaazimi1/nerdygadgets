@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . "/header.php";
+//poep
 if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"]) {
     print("aaa");
     $CustomerName = $_POST["CustomerName"];
