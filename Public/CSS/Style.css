@@ -236,7 +236,6 @@ ul#ul-class-navigation li {
     width: 200px;
 }
 #StockItemDescription {
-    background-color: rgba(35, 40, 47, 0.8);
     width: 49%;
     float: left;
     padding: 10px;
@@ -246,7 +245,6 @@ ul#ul-class-navigation li {
     font-size: 20px;
 }
 #StockItemSpecifications {
-    background-color: rgba(35, 40, 47, 0.8);
     width: 49%;
     float: left;
     padding: 10px;

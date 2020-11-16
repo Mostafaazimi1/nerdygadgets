@@ -127,7 +127,7 @@ if ($R) {
                         <form action="add.php" method="post">
                             <input type="hidden" name="action" value="submit" />
                             Aantal <input type="text" name="aantal" value="1"><br>
-                            <button type="submit" name="addcart" value="<?php print $Result['StockItemID']?>">Add To Cart</button>
+                            <button class="bestelling-btn" type="submit" name="addcart" value="<?php print $Result['StockItemID']?>">Toevoegen aan winkelwagen</button>
                         </form>
                     </div>
                 </div>
