@@ -1,5 +1,5 @@
 <?php
 include __DIR__ . "/header.php";
 session_destroy();
-header("Location: ./");
+print('<meta http-equiv = "refresh" content = "0; url = ./" />');
 ?>
