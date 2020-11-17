@@ -1,17 +1,9 @@
 <?php
-include __DIR__ . "/header.php";
+include 'header.php';
 
 $winkelwagen = $_SESSION['winkelwagen'];
 
-if (isset($_GET['delete'])) {
-    $winkelwagen = deleteProduct($winkelwagen, (int)$_GET['delete']);
-    $products = loadProducts($winkelwagen, $Connection);
-} else {
-    $products = loadProducts($winkelwagen, $Connection);
-}
-
-
-
+$products = loadProducts($winkelwagen, $Connection);
 ?>
 
 
@@ -39,7 +31,7 @@ if (isset($_GET['delete'])) {
                     echo "<td><p>" . $product['name'] . "</p></td>";
                     echo "<td><p>€" . $product['price'] . "</p></td>";
                     echo "<td><p>" . $product['aantal'] . "</p></td>";
-                    echo "<td><p>€" . $total . "</p></td>";
+                    echo "<td><p>€" . number_format($total, 2) . "</p></td>";
                     echo "<td><a href='winkelmandje.php?delete=" . $product['id'] . "'>X</a></td>";
                     echo "</tr>";
                 }
@@ -78,7 +70,9 @@ if (isset($_GET['delete'])) {
                 </tr>
             </table>
             <p>Inclusief btw</p>
-            <button class="bestelling-btn">Bestelling afronden</button>
+            <form action="Afrekenen.php" method="post">
+                <input type="submit" value="Bestelling afronden">
+            </form>
         </div>
     </div>
 </div>

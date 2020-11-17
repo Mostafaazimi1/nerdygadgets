@@ -2,10 +2,7 @@
 include "connect.php";
 include "functions.php";
 session_start();
-if (!isset($_SESSION['winkelwagen'])) {
-    $_SESSION['winkelwagen'] = array();
-}
-$winkelwagen = $_SESSION['winkelwagen'];
+include "losseFunctions.php";
 
 ?>
 <!DOCTYPE html>
