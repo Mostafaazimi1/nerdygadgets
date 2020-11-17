@@ -486,12 +486,10 @@ ul#ul-class-categorie-price li {
     background-color: #3274d6;
     color: #ffffff;
 }
-.login form input[type="password"], .login form input[type="email"] {
+.login form input[type="password"], .login form input[type="email"], .login form input[type="password"], .login form input[type="text"], .login form input[type="tel"] {
     width: 310px;
     height: 50px;
     border: 1px solid #dee0e4;
-    margin-bottom: 20px;
-    padding: 0 15px;
 }
 .login form input[type="submit"] {
     width: 100%;
@@ -507,6 +505,9 @@ ul#ul-class-categorie-price li {
 .login form input[type="submit"]:hover {
     background-color: #2868c7;
     transition: background-color 0.2s;
+}
+.loginAddress {
+    width: 155px!important;
 }
 .overzicht-wrapper {
     width: 100%;
