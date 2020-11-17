@@ -119,7 +119,7 @@ if ($R) {
                     <div class="PrijsEnAfrekenenChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <p> Inclusief BTW </p>
-                        <div class="VoorraadText"><?php print $Result['QuantityOnHand']; ?></div>
+                        <div class="VoorraadText"><?php if (isset($Result['QuantityOnHand']) >= 1000){ echo "?> <p class="voorraad">Ruime voorraad</p>");} else { print ($Result['QuantityOnHand']); }?></div><br>
                         <form action="add.php" method="post">
                             <input type="hidden" name="action" value="submit" />
                             Aantal<br><input type="text" name="aantal" value="1" style="margin-bottom: 12px;">
