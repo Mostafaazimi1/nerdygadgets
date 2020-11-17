@@ -40,7 +40,7 @@ function loadProducts($winkelwagen, $conn)
         array_push($selectIds, $item['id']);
     }
 
-    $sql = "SELECT s.StockItemName name, s.UnitPrice, s.StockItemID, si.ImagePath
+    $sql = "SELECT s.StockItemName name, s.UnitPrice, (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, s.StockItemID, si.ImagePath
             FROM stockitems s
             LEFT JOIN stockitemimages si on s.StockItemID = si.StockItemID";
 
@@ -63,7 +63,7 @@ function loadProducts($winkelwagen, $conn)
                 if ($winkelwagenItem['id'] == $row['StockItemID']) {
                     $newWinkelWagen[$key]['name'] = $row['name'];
                     $newWinkelWagen[$key]['img'] = $row['ImagePath'];
-                    $newWinkelWagen[$key]['price'] = $row['UnitPrice'];
+                    $newWinkelWagen[$key]['price'] = number_format(round($row['SellPrice'], 2), 2);
                     break;
                 }
             }

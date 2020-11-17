@@ -31,7 +31,7 @@ $products = loadProducts($winkelwagen, $Connection);
                     echo "<td><p>" . $product['name'] . "</p></td>";
                     echo "<td><p>€" . $product['price'] . "</p></td>";
                     echo "<td><p>" . $product['aantal'] . "</p></td>";
-                    echo "<td><p>€" . $total . "</p></td>";
+                    echo "<td><p>€" . number_format($total, 2) . "</p></td>";
                     echo "<td><a href='winkelmandje.php?delete=" . $product['id'] . "'>X</a></td>";
                     echo "</tr>";
                 }
