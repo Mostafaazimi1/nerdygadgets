@@ -6,46 +6,60 @@ if(isset($_SESSION["login"])) {
     print('<a href="./">Ga terug naar de homepagina..</a>');
 } else {
     if(isset($_POST["email"]) && isset($_POST["password"])) {
-        //maak functie die controleerd of de gegevens in de database staan. als deze
-        // erin staan, ga naar if(TRUE). wanneer het onjuist is, ga naar if(FALSE) op dit moment
-        // staat de code er zo in dat het altijd werkt wanneer je iets in email en wachtwoord zet
-        // je wordt met alle soort combinaties ingelogt
-
-//        $email = $_POST["email"];
-        //hier moet het ww nog gehashed worden
-//        $password = $_POST["password"];
-//        print($email." ".$password);
-//        print("<br>a<br>");
-
-        $sql = "SELECT LogonName,HashedPassword FROM people";
+        //wanneer email en ww gevult zijn wordt dit uitgevoerd
+        $sql = "SELECT FullName, PreferredName, IsPermittedToLogon, LogonName, HashedPassword, PhoneNumber, EmailAddress FROM people";
         $result = $Connection->query($sql);
-//        print_r($result->fetch_assoc());print("<br>");
-//        print_r($result->fetch_assoc());print("<br>");
         if ($result->num_rows > 0) {
             // output data of each row
             $passFound = FALSE;
-            $i001 = 0;
             while($row = $result->fetch_assoc()) {
                 if(($row["LogonName"] != "NO LOGON") && ($row["LogonName"] == strtolower($_POST["email"])) && ($_POST["password"] == $row["HashedPassword"])) {
-                    $passFound = TRUE;
-                    continue;
+                    if($row["IsPermittedToLogon"] == 0) {
+                        // als de gebruiker mag niet mag inloggen, krijgt hij hievan een melding
+                        unset($passFound);
+                        $email = 'value="' . $_POST["email"] . '"';
+                        $password = 'value="' . $_POST["password"] . '"';
+                        print('<div class="notificationError">');
+                        print('<h2>We wijzen je graag op het volgende:</h2><br>');
+                        print('<p>Uw account is uitgeschakeld door de systeembeheerder.</p>');
+                        print('</div>');
+                        //registratiemelding geven
+                    } else {
+                        // De gegevens komen overeen, de gebruiker mag en wordt ingelogd
+                        // Array met de gegevens van de klant, geplaatst in $_SESSION['login'] = $loginData;
+                        $passFound = TRUE;
+                        $loginData = array(
+                            "FullName" => $row["FullName"],
+                            "PreferredName" => $row["PreferredName"],
+                            "IsPermittedToLogon" => $row["IsPermittedToLogon"],
+                            "LogonName" => $row["LogonName"],
+                            "PhoneNumber" => $row["PhoneNumber"],
+                            "EmailAddress" => $row["EmailAddress"],
+                        );
+                        $_SESSION['login'] = $loginData;
+                        $_SESSION['messageCount'] = 1;
+                        continue;
+                    }
                 }
             }
-            if($passFound) {
-                $_SESSION['login'] = TRUE;
-                $_SESSION['messageCount'] = 1;
-                print('<meta http-equiv = "refresh" content = "0; url = ./" />');
-                exit();
-            } else {
-                print('<div class="notificationError">');
-                print('<h2>We wijzen je graag op het volgende:</h2><br>');
-                print('<p>De combinatie van e-mailadres en wachtwoord is niet geldig.</p>');
-                print('</div>');
-                $email = 'value="' . $_POST["email"] . '"';
-                $password = 'value="' . $_POST["password"] . '"';
-                //registratiemelding geven
+            if(isset($passFound)){
+                // Wachtwoord is gevonden, gebruiker wordt geredirect naar home
+                if($passFound) {
+                    print('<meta http-equiv = "refresh" content = "0; url = ./" />');
+                    exit();
+                } else {
+                    // Wachtwoord is niet gevonden, gebruiker moet opnieuw invoeren
+                    print('<div class="notificationError">');
+                    print('<h2>We wijzen je graag op het volgende:</h2><br>');
+                    print('<p>De combinatie van e-mailadres en wachtwoord is niet geldig.</p>');
+                    print('</div>');
+                    $email = 'value="' . $_POST["email"] . '"';
+                    $password = 'value="' . $_POST["password"] . '"';
+                    //registratiemelding geven
+                }
             }
         } else {
+            // De database is leeg, dus er staan geen accounts in
             print('<div class="notificationError">');
             print('<h2>We wijzen je graag op het volgende:</h2><br>');
             print('<p>De combinatie van e-mailadres en wachtwoord is niet geldig.</p>');
@@ -55,6 +69,7 @@ if(isset($_SESSION["login"])) {
             //registratie melding geven
         }
     } else {
+        // Extra zekering, beide velden moeten gevuld zijn. Dit wordt ook op html afgedwongen.
         $email = 'placeholder="E-mailadres*"';
         $password = 'placeholder="Wachtwoord*"';
     }
