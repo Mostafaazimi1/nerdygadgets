@@ -9,7 +9,7 @@ $afrekenGegevens = $_SESSION['AfrekenGegevens'];
 if (isset($_SESSION["AfrekenGegevens"])) {
     ?>
     <div class="overzicht">
-        <h1>Bestelgegevens</h1>
+        <h1>Overzicht</h1>
         <div class="overzicht-wrapper">
             <div class="product-overzicht">
                 <table>
@@ -79,6 +79,7 @@ if (isset($_SESSION["AfrekenGegevens"])) {
                         echo "<tr>";
                         echo "<td><p>" . $product['name'] . "</p></td>";
                         echo "<td><p>€" . $product['price'] . "</p></td>";
+                        echo "<td><p>x" . $product['aantal'] . "</p></td>";
                         echo "</tr>";
 
                     }
