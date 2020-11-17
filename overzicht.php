@@ -7,7 +7,6 @@ $afrekenGegevens = $_SESSION['AfrekenGegevens'];
 ?>
 <?php
 if (isset($_SESSION["AfrekenGegevens"])) {
-    print_r($afrekenGegevens);
     ?>
     <div class="overzicht">
         <h1>Bestelgegevens</h1>
