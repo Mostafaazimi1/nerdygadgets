@@ -2,15 +2,7 @@
 include "connect.php";
 include "functions.php";
 session_start();
-if (!isset($_SESSION['winkelwagen'])) {
-    $_SESSION['winkelwagen'] = array();
-}
-$winkelwagen = $_SESSION['winkelwagen'];
-
-if (isset($_GET['delete'])) {
-    $winkelwagen = deleteProduct($winkelwagen, (int)$_GET['delete']);
-    header("Refresh:0; url=winkelmandje.php");
-}
+include "losseFunctions.php";
 
 ?>
 <!DOCTYPE html>

@@ -1,6 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"]) {
+    print("aaa");
     $CustomerName = $_POST["CustomerName"];
     $password = md5($_POST["password"]); //wachtwoord wordt als hash beveiligd
     $email = $_POST["email"];
@@ -8,33 +9,18 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
     $plaats = $_POST["PostalAddressLine2"];
     $postcode = $_POST["PostalAddressLine1"];
     $adres = $_POST["DeliveryAddressLine2"];
-//eerste 4 gegevens in table poeple
-    $conn = new mysqli("localhost", "root", "", "nerdygadgets");
-    if ($conn->connect_error) {
-        echo "$conn->connect_error";
-        die("Connection Failed : " . $conn->connect_error);
+
+    if ($Connection->connect_error) {
+        echo "$Connection->connect_error";
+        die("Connection Failed : " . $Connection->connect_error);
     } else {
-        $stmt = $conn->prepare("insert into klant(LogonName, HashedPassword, EmailAddress, PhoneNumber) values(?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $CustomerName, $password, $email, $PhoneNumber);
+        $stmt = $Connection->prepare("INSERT INTO klant (LogonName, HashedPassword, EmailAddress, PhoneNumber, PostalAddressLine2, PostalAddressLine1, DeliveryAddressLine2) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $CustomerName, $password, $email, $PhoneNumber, $plaats, $postcode, $adres);
         $execval = $stmt->execute();
         echo $execval;
         echo "Registration successfully...";
         $stmt->close();
-        $conn->close();
-    }
-//laatste 3 gegevens in table customer
-    $conn = new mysqli("localhost", "root", "", "nerdygadgets");
-    if ($conn->connect_error) {
-        echo "$conn->connect_error";
-        die("Connection Failed : " . $conn->connect_error);
-    } else {
-        $stmt = $conn->prepare("insert into customers(PostalAddressLine2, PostalAddressLine1, DeliveryAddressLine2) values(?, ?, ?)");
-        $stmt->bind_param("sss", $plaats, $postcode, $adres);
-        $execval = $stmt->execute();
-        echo $execval;
-        echo "Registration successfully...";
-        $stmt->close();
-        $conn->close();
+        $Connection->close();
     }
 }
 ?>
@@ -46,7 +32,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
 </head>
 <body>
 <link href="http://localhost/nerdygadgets/" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="Style.css" type="text/css">
+<link rel="stylesheet" type="text/css">
 <div class="body-content">
     <div class="module">
         <h1>Maak een account</h1>
@@ -54,7 +40,8 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
             <div class="alert alert-error"></div>
             <input type="text" placeholder="Gebruikersnaam" name="CustomerName" required><br>
             <input type="password" placeholder="Wachtwoord" name="password" autocomplete="new-password" required><br>
-            <input type="password" placeholder="Bevestig wachtwoord" name="confirmpassword" autocomplete="new-password" required><br>
+            <input type="password" placeholder="Bevestig wachtwoord" name="confirmpassword" autocomplete="new-password"
+                   required><br>
             <input type="email" placeholder="E-Mail" name="email" required><br>
             <input type="tel" placeholder="Telefoonnummer" name="PhoneNumber"><br>
             <input type="text" placeholder="Plaats" name="PostalAddressLine2" required><br>
