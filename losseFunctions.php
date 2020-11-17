@@ -11,16 +11,16 @@ header("Refresh:0; url=winkelmandje.php");
 
 if (isset($_POST['Afreken_submit'])) {
 $_SESSION['AfrekenGegevens'] = array(
-'voornaam' => $_POST['Afreken_submit'],
-'tussenvoegsel' => $_POST['Afreken_submit'],
-'achternaam' => $_POST['Afreken_submit'],
-'postcode' => $_POST['Afreken_submit'],
-'huisnummer' => $_POST['Afreken_submit'],
-'toev' => $_POST['Afreken_submit'],
-'straat' => $_POST['Afreken_submit'],
-'plaats' => $_POST['Afreken_submit'],
-'email' => $_POST['Afreken_submit'],
-'telefoonnummer' => $_POST['Afreken_submit']
+'voornaam' => $_POST['voornaam'],
+'tussenv' => $_POST['tussenv'],
+'achternaam' => $_POST['achternaam'],
+'postcode' => $_POST['postcode'],
+'huisnummer' => $_POST['huisnummer'],
+'toev' => $_POST['toev'],
+'straat' => $_POST['straat'],
+'plaats' => $_POST['plaats'],
+'email' => $_POST['email'],
+'telefoonnummer' => $_POST['telefoonnummer']
 );
 
 header("Location: overzicht.php");

@@ -20,7 +20,7 @@ $telefoonnummer = "";
 
 <?php
 if (isset($_SESSION["login"])) {
-    //database gegevens inladen
+
     $voornaam = "jan";
     $tussenvoegsel = "";
     $achternaam = "pieter";
@@ -46,9 +46,11 @@ if (isset($_SESSION["login"])) {
                         <tr>
                             <th>Naam</th>
                         </tr>
+
+
                         <tr>
                             <td><input type="text" id="voornaam" name="voornaam" placeholder="Voornaam"
-                                       value="<?php echo($voornaam); ?> " required></td>
+                                       value="<?php echo($voornaam); ?>" required></td>
                             <td><input type="text" id="tussenv" name="tussenv" placeholder="Tussenv."
                                        value="<?php echo($tussenvoegsel); ?>"></td>
                             <td><input type="text" id="achternaam" name="achternaam" placeholder="Achternaam"
@@ -72,16 +74,16 @@ if (isset($_SESSION["login"])) {
                         </tr>
 
                         <tr>
-                            <td><input type="text" id="straatnaam" name="straatnaam" placeholder="Straat"
+                            <td><input type="text" id="straatnaam" name="straat" placeholder="Straat"
                                        value="<?php echo($straat); ?> " required></td>
-                            <td><input type="text" id="woonplaats" name="woonplaats" placeholder="Plaats"
+                            <td><input type="text" id="woonplaats" name="plaats" placeholder="Plaats"
                                        value="<?php echo($plaats); ?>" required></td>
                         </tr>
                         <tr>
                             <th>E-mailadress</th>
                         </tr>
                         <tr>
-                            <td><input type="text" id="Email" name="Email" placeholder="voorbeeld@voorbeeld.nl"
+                            <td><input type="text" id="Email" name="email" placeholder="voorbeeld@voorbeeld.nl"
                                        value="<?php echo($email); ?>" required></td>
                         </tr>
                         <tr>
@@ -104,8 +106,8 @@ if (isset($_SESSION["login"])) {
                             echo "</tr>";
                             echo "<tr>";
                             echo "<th>";
-                            echo "<td><input type='password' placeholder='Wachtwoord' name='password' autocomplete='new-password' required></td>";
-                            echo "<td><input type='password' placeholder='Bevestig wachtwoord' name='confirmpassword' autocomplete='new-password' required></td>";
+                            echo "<td><input type='password' placeholder='Wachtwoord' name='password' autocomplete='new-password'></td>";
+                            echo "<td><input type='password' placeholder='Bevestig wachtwoord' name='confirmpassword' autocomplete='new-password'></td>";
                             echo "</th>";
                             echo "</tr>";
                             echo "</div>";
