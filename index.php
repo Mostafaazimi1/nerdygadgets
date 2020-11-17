@@ -14,8 +14,8 @@ if(isset($_SESSION['login']) && isset($_SESSION['messageCount'])) {
                 <div class="TextMain">
                     "The Gu" red shirt XML tag t-shirt (Black) M
                 </div>
-                <ul id="ul-class-price">
-
+<!--            <ul id="ul-class-price">-->
+                <ul>
                     <li class="HomePagePrice">€30.95</li>
                 </ul>
 

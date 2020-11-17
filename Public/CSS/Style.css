@@ -304,6 +304,7 @@ ul#ul-class-categorie-price li {
 }
 .HomePagePrice {
     color: #676EFF;
+    list-style: none;
     font-family: vortice-concept, sans-serif;
     font-size: 50px;
     text-transform: uppercase;

@@ -1,7 +1,6 @@
 <?php
 include __DIR__ . "/header.php";
 if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"]) {
-    print("aaa");
     $CustomerName = $_POST["CustomerName"];
     $password = md5($_POST["password"]); //wachtwoord wordt als hash beveiligd
     $email = $_POST["email"];
@@ -10,13 +9,12 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
     $postcode = $_POST["PostalAddressLine1"];
     $adres = $_POST["DeliveryAddressLine2"];
 //eerste 4 gegevens in table poeple
-//    $Connection;
     $conn = new mysqli("localhost", "root", "", "nerdygadgets");
     if ($conn->connect_error) {
         echo "$conn->connect_error";
         die("Connection Failed : " . $conn->connect_error);
     } else {
-        $stmt = $conn->prepare("insert into people(LogonName, HashedPassword, EmailAddress, PhoneNumber) values(?, ?, ?, ?)");
+        $stmt = $conn->prepare("insert into klant(LogonName, HashedPassword, EmailAddress, PhoneNumber) values(?, ?, ?, ?)");
         $stmt->bind_param("ssss", $CustomerName, $password, $email, $PhoneNumber);
         $execval = $stmt->execute();
         echo $execval;
