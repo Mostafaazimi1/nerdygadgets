@@ -9,8 +9,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
     $plaats = $_POST["PostalAddressLine2"];
     $postcode = $_POST["PostalAddressLine1"];
     $adres = $_POST["DeliveryAddressLine2"];
-//    $Connection;
-//    $conn = new mysqli("localhost", "root", "", "nerdygadgets");
+
     if ($Connection->connect_error) {
         echo "$Connection->connect_error";
         die("Connection Failed : " . $Connection->connect_error);
