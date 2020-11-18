@@ -5,6 +5,7 @@ if(isset($_SESSION['login']) && isset($_SESSION['messageCount'])) {
         $_SESSION['messageCount'] = 0;
         print("<h4>U bent successvol ingelogd.</h4>");
     }
+    print_r($_SESSION['login']);
 }
 ?>
 <div class="IndexStyle">
