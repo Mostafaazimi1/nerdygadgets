@@ -38,7 +38,6 @@ if(isset($_SESSION["login"])) {
                         // De gegevens komen overeen, de gebruiker mag en wordt ingelogd
                         // Array met de gegevens van de klant, geplaatst in $_SESSION['login'] = $loginData;
                         $_SESSION['messageCount'] = 1;
-//                        print($row["CustomerNUM"].",,,,");
                         $passFound = TRUE;
                         $loginData = array(
                             "PersonID" => $row["PersonID"],
@@ -49,14 +48,13 @@ if(isset($_SESSION["login"])) {
                             "PhoneNumber" => $row["PhoneNumber"],
                             "EmailAddress" => $row["EmailAddress"],
                         );
-
                         $sql2 = "SELECT CustomerID, CustomerName, DeliveryMethodID, DeliveryCityID,
                                     PostalCityID, PhoneNumber, DeliveryAddressLine2, DeliveryPostalCode,
                                     PostalPostalCode FROM Customers WHERE CustomerID = ".$row["CustomerNUM"].";";
                         $result2 = $Connection->query($sql2);
                         if ($result2->num_rows > 0) {
                             while ($row2 = $result2->fetch_assoc()) {
-                                print($row2["CustomerID"] . $row2["CustomerName"] . "<br>");
+                                // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
                                 $loginData["CustomerID"] = $row2["CustomerID"];
                                 $loginData["CustomerName"] = $row2["CustomerName"];
                                 $loginData["DeliveryMethodID"] = $row2["DeliveryMethodID"];
@@ -69,8 +67,6 @@ if(isset($_SESSION["login"])) {
                                 continue;
                             }
                         }
-
-                        print_r($loginData);
                         $_SESSION['login'] = $loginData;
                         continue;
                     } else {
@@ -78,22 +74,22 @@ if(isset($_SESSION["login"])) {
                     }
                 }
             }
-//            if(isset($passFound)){
-//                // Wachtwoord is gevonden, gebruiker wordt geredirect naar home
-//                if($passFound) {
-//                    print('<meta http-equiv = "refresh" content = "0; url = ./" />');
-//                    exit();
-//                } else {
-//                    // Wachtwoord is niet gevonden, gebruiker moet opnieuw invoeren
-//                    print('<div class="notificationError">');
-//                    print('<h2>We wijzen je graag op het volgende:</h2><br>');
-//                    print('<p>De combinatie van e-mailadres en wachtwoord is niet geldig.</p>');
-//                    print('</div>');
-//                    $email = 'value="' . $_POST["email"] . '"';
-//                    $password = 'value="' . $_POST["password"] . '"';
-//                    //registratiemelding geven
-//                }
-//            }
+            if(isset($passFound)){
+                // Wachtwoord is gevonden, gebruiker wordt geredirect naar home
+                if($passFound) {
+                    print('<meta http-equiv = "refresh" content = "0; url = ./" />');
+                    exit();
+                } else {
+                    // Wachtwoord is niet gevonden, gebruiker moet opnieuw invoeren
+                    print('<div class="notificationError">');
+                    print('<h2>We wijzen je graag op het volgende:</h2><br>');
+                    print('<p>De combinatie van e-mailadres en wachtwoord is niet geldig.</p>');
+                    print('</div>');
+                    $email = 'value="' . $_POST["email"] . '"';
+                    $password = 'value="' . $_POST["password"] . '"';
+                    //registratiemelding geven
+                }
+            }
         } else {
             // De database is leeg, dus er staan geen accounts in
             print('<div class="notificationError">');
