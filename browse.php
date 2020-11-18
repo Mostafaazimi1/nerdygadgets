@@ -213,8 +213,8 @@ if (isset($amount)) {
         foreach ($ReturnableResult as $row) {
             ?>
             <a class="ListItem" href='view.php?id=<?php print $row['StockItemID']; ?>'>
-                <div class="row" id="ProductFrame">
-                    <div class="productFrameLinks row" id="geenPadding">
+                <div class="naastElkaar" id="ProductFrame">
+                    <div class="productFrameLinks naastElkaar" id="geenPadding">
                         <div class="productFrameLinksImage"><?php
                             if (isset($row['ImagePath'])) { ?>
                                 <img class="ImgFrame" src="<?php print "Public/StockItemIMG/" . $row['ImagePath']; ?>">

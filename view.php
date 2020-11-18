@@ -68,8 +68,8 @@ if ($R) {
                     // print Single
                     if (count($Images) == 1) {
                         ?>
-                        <div>
-                            <img style="width: 100%;" src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
+                        <div id="ProductImage">
+                            <img src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
                         </div>
                         <?php
                     } else if (count($Images) >= 2) { ?>

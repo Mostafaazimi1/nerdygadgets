@@ -97,10 +97,9 @@ ul#ul-class-navigation li {
     text-decoration: none;
     text-decoration-color: currentcolor;
 }
-#Header {
-    height: 100px;
-    z-index: 999;
+.HeaderDiv {
     width: 100%;
+    z-index: 999;
     padding: 26px 0;
 }
 #Content {
@@ -251,20 +250,10 @@ ul#ul-class-navigation li {
 #LogoImage {
     max-width: 200px;
 }
-#CategoriesBar {
-    margin-left: 7%;
-    margin-right: auto;
-}
 #ul-class-categorie{
-    /*margin-bottom: 0px;*/
+
 }
-ul#ul-class-categorie li {
-    display: inline;
-    color: #FFFFFF;
-    margin-right: 1em;
-    font-size: 15px;
-    text-decoration: none;
-}
+
 ul#ul-class-categorie-price li {
     display: inline;
 }
@@ -619,7 +608,7 @@ ul#ul-class-categorie-price li {
     /*padding-left: 20px;*/
 }
 .LogoDiv{
-    /*width: 50%!important;*/
+    width: 20%!important;
 }
 #Header.row{
     margin: auto;
@@ -657,4 +646,53 @@ ul#ul-class-categorie-price li {
 }
 .voorraad{
     color: #2BAE49;
+}
+#ProductImage img {
+    max-height: 375px;
+    display: block;
+    margin: auto;
+}
+.naastElkaar{
+    display:-ms-flexbox;
+    display:flex;
+    -ms-flex-wrap:wrap;
+    flex-wrap:wrap;
+}
+
+/* Website max breedte en background */
+.MainDivLayout{
+    padding: 0 20px;
+}
+.DivContainter{
+    max-width: 1200px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+}
+.websiteContent{
+    width: 100%;
+    margin-top: 24px;
+}
+
+/* Menu css */
+.categorieMenu{
+    padding: 18px 0;
+    background-color: #313638!important;
+}
+.categorieMenuDiv{
+    width: 100%;
+}
+#CategoriesBar, ul#ul-class-categorie {
+    margin: 0!important;
+    padding-inline-start: 0;
+}
+ul#ul-class-categorie li {
+    display: inline;
+    color: #FFFFFF;
+    margin-right: 1em;
+    font-size: 15px;
+    text-decoration: none;
 }
