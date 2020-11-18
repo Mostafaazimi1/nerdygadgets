@@ -24,12 +24,31 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
         echo("De wachtwoorden moeten overeenkomen!");
     } else {
         //KOMT ER NOG IN
+        $plaats = $_POST["Plaats"];
         //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
-
+        if ($Connection->connect_error) {
+            echo "$Connection->connect_error";
+            die("Connection Failed : " . $Connection->connect_error);
+        } else {
+            $Plaats = ucfirst($plaats);
+            $sql = "
+                    SELECT CityName
+                    FROM cities
+                    WHERE CityName = ('$plaats') OR ('$Plaats')
+                    LIMIT 1";
+            $result = $Connection->query($sql);
+            $aantalresult = mysqli_num_rows($result);
+            if ($aantalresult > 0) {
+                $DeliveryCityId = $Plaats;
+                echo $DeliveryCityId;
+            }   else {
+                echo ("Sorry, in ".$Plaats." leveren wij niet.");
+            }
+            $Connection->close();
+        }
         $password = md5($_POST["password"]); //wachtwoord wordt als hash beveiligd
         $email = $_POST["email"];
         $PhoneNumber = $_POST["PhoneNumber"];
-        $plaats = $_POST["Plaats"];
         $postcode = $_POST["PostCode"];
         $FirstName = $_POST["FirstName"];
         $LastName = $_POST["LastName"];
@@ -64,7 +83,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
             $Connection->close();
         }
     }
-    // GEGEVENS CUSTOMERID EN DELIVERYCITYID MOETEN UIT CUSTOMERS TABEL NAAR PEOPLE TABEL
+
     // VRAAG VALUE VAN CUSTOMERID UIT CUSTOMERS EN GEEF DEZE EIGEN VARIABELEN -zodat je ze in people tabel kan inserten!
 
 
@@ -78,7 +97,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
                     "insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName
                                             IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson
                                             UserPreferences, PhoneNumber, FaxNumber, EmailAddress, Photo, CustomFields
-                                            OtherLanguages, LastEditedBy, ValidFrom, ValidTo, CustomerId)
+                                            OtherLanguages, LastEditedBy, ValidFrom, ValidTo, CustomerNUM)
                                             values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("sssisibiiissssbssisss", $FullName, $Firstname, $FullName, 1, $email,
                                                 0, $password, 0, 0, 0, "", $PhoneNumber, "", $email, "", "", "", 1, $CurrentDate, "9999-12-31", $CustomerId);
