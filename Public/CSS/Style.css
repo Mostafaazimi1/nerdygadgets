@@ -82,7 +82,7 @@ ul#ul-class-topBar li {
     font-size: 20px;
     text-decoration: none;
     text-decoration-color: currentcolor;
-    margin-right: 2em;
+    margin-left: 2em;
 }
 ul#ul-class-navigation {
     right: 10px;
