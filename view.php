@@ -69,7 +69,7 @@ if ($R) {
                     if (count($Images) == 1) {
                         ?>
                         <div>
-                            <img src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
+                            <img style="width: 100%;" src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
                         </div>
                         <?php
                     } else if (count($Images) >= 2) { ?>
@@ -119,7 +119,7 @@ if ($R) {
                     <div class="PrijsEnAfrekenenChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <p> Inclusief BTW </p>
-                        <div class="VoorraadText"><?php if (isset($Result['QuantityOnHand']) >= 1000){ echo "<p class='voorraad'>Ruime voorraad</p>";
+                        <div class="VoorraadText"><?php if (isset($Result['QuantityOnHand']) >= 1000){ echo "<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Ruime voorraad</p>";
                         }
                         else { print ($Result['QuantityOnHand']); }?></div><br>
                         <form action="add.php" method="post">
