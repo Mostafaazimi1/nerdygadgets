@@ -44,11 +44,8 @@ if ($R) {
     $Images = $R;
 }
 
+// START VAN VIEW HTML
 
-
-?>
-<div id="CenteredContent">
-    <?php
     if ($Result != null) {
         ?>
         <?php
@@ -182,4 +179,3 @@ if ($R) {
     } else {
         ?><h2 id="ProductNotFound">Het opgevraagde product is niet gevonden.</h2><?php
     } ?>
-</div>

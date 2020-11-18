@@ -696,3 +696,8 @@ ul#ul-class-categorie li {
     font-size: 15px;
     text-decoration: none;
 }
+
+/* Winkelwagen CSS */
+.hideTH th{
+    display: none!important;
+}
