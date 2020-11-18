@@ -121,7 +121,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
 <div class="body-content">
     <div class="module">
         <h1>Maak een account</h1>
-        <form action="registratie2.0.php" method="post" enctype="multipart/form-data">
+        <form action="registratie%20nieuw%20tabel.php" method="post" enctype="multipart/form-data">
             <div class="alert alert-error"></div>
             <input type="text" placeholder="Voornaam" name="FirstName" required><br>
             <input type="text" placeholder="Achternaam" name="LastName" required><br>
