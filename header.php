@@ -121,11 +121,6 @@ include "losseFunctions.php";
 
 
 </header>
-<!--<div class="centerContainer">-->
-<!--    <div class="row" id="Content">-->
-<!--        <div class="col-12" id="geenMargin">-->
-<!--            <div id="SubContent">-->
-
 <div class="MainDivLayout">
     <div class="DivContainter">
         <div class="websiteContent">
