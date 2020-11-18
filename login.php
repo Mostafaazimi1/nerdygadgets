@@ -7,15 +7,25 @@ if(isset($_SESSION["login"])) {
 } else {
     if(isset($_POST["email"]) && isset($_POST["password"])) {
         //wanneer email en ww gevult zijn wordt dit uitgevoerd
-        $sql = "SELECT FullName, PreferredName, IsPermittedToLogon, LogonName, HashedPassword, PhoneNumber, EmailAddress FROM people";
+        $sql = "SELECT FullName, PreferredName, IsPermittedToLogon, LogonName, HashedPassword, PhoneNumber, EmailAddress, CustomerNUM FROM people";
         $result = $Connection->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
             $passFound = FALSE;
             while($row = $result->fetch_assoc()) {
                 if(($row["LogonName"] != "NO LOGON") && ($row["LogonName"] == strtolower($_POST["email"])) && ($_POST["password"] == $row["HashedPassword"])) {
-                    if($row["IsPermittedToLogon"] == 0) {
-                        // als de gebruiker mag niet mag inloggen, krijgt hij hievan een melding
+                    if($row["CustomerNUM"] == "") {
+                        // Er is geen customerid gekoppeld, dus de opgeslagen account gegevens zijn incompleet.
+                        // De gebruiker krijgt hievan een melding
+                        unset($passFound);
+                        $email = 'value="' . $_POST["email"] . '"';
+                        $password = 'value="' . $_POST["password"] . '"';
+                        print('<div class="notificationError">');
+                        print('<h2>We wijzen je graag op het volgende:</h2><br>');
+                        print('<p>Uw accountgegevens zijn beschadigd. Neem alstublieft contact op met de systeembeheerder.</p>');
+                        print('</div>');
+                    } elseif(($row["IsPermittedToLogon"] == 0)) {
+                        // De gebruiker mag niet mag inloggen, hij krijgt hievan een melding
                         unset($passFound);
                         $email = 'value="' . $_POST["email"] . '"';
                         $password = 'value="' . $_POST["password"] . '"';

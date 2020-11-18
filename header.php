@@ -56,7 +56,7 @@ include "losseFunctions.php";
         <div class="menuDiv">
             <ul id="ul-class-topBar">
                 <li>
-                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i>
+                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#007bff;"></i>
                         Zoeken</a>
                 </li>
                 <li>
@@ -72,7 +72,7 @@ include "losseFunctions.php";
                 </li>
                 <li>
                     <a href="winkelmandje.php" class="HrefDecoration"><i class="fas fa-shopping-cart"
-                                                                         style="color:#676EFF;"></i> Winkelmandje (<?php echo getCount($winkelwagen);?>)</a>
+                                                                         style="color:#007bff;"></i> Winkelmandje (<?php echo getCount($winkelwagen);?>)</a>
                 </li>
             </ul>
         </div>
