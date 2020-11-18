@@ -29,7 +29,7 @@ a:hover {
 a span {
     display: none;
     position: absolute;
-    color: #676EFF;
+    color: #2680f6;
     background: #676EFF;
     padding: 5px;
 }
@@ -291,7 +291,7 @@ ul#ul-class-categorie-price li {
     margin-left: 10%;
 }
 .HomePagePrice {
-    color: #676EFF;
+    color: #2680f6;
     list-style: none;
     font-family: vortice-concept, sans-serif;
     font-size: 50px;
@@ -649,4 +649,7 @@ ul#ul-class-categorie-price li {
 }
 .productSpecs{
     width: 33.34%;
+}
+.voorraad{
+    color: #2BAE49;
 }
