@@ -97,11 +97,7 @@ ul#ul-class-navigation li {
     text-decoration: none;
     text-decoration-color: currentcolor;
 }
-.HeaderDiv {
-    width: 100%;
-    z-index: 999;
-    padding: 26px 0;
-}
+
 #Content {
     width: 100%;
     margin-top: 40px!important;
@@ -597,19 +593,8 @@ ul#ul-class-categorie-price li {
 .product-overzicht table{
     width: 100%;
 }
-.menuDiv {
-    width: 80%;
-    text-align: right;
-    /*padding-left: 30%;*/
-}
-.menuDiv li {
-    display: inline;
-    list-style: none;
-    /*padding-left: 20px;*/
-}
-.LogoDiv{
-    width: 20%!important;
-}
+
+
 #Header.row{
     margin: auto;
     padding-left: 8%;
@@ -661,7 +646,7 @@ ul#ul-class-categorie-price li {
 
 /* Website max breedte en background */
 .MainDivLayout{
-    padding: 0 20px;
+    padding: 0 20px!important;
 }
 .DivContainter{
     max-width: 1200px;
@@ -679,11 +664,18 @@ ul#ul-class-categorie-price li {
 
 /* Menu css */
 .categorieMenu{
-    padding: 18px 0;
     background-color: #313638!important;
 }
 .categorieMenuDiv{
     width: 100%;
+}
+.HeaderDiv {
+    width: 100%;
+    z-index: 999;
+    padding: 26px 0;
+}
+#CategoriesBar{
+    padding: 18px 0;
 }
 #CategoriesBar, ul#ul-class-categorie {
     margin: 0!important;
@@ -695,6 +687,18 @@ ul#ul-class-categorie li {
     margin-right: 1em;
     font-size: 15px;
     text-decoration: none;
+}
+.logoDiv {
+    width: 20%!important;
+}
+.menuDiv {
+    width: 80%;
+    text-align: right;
+    float: right;
+}
+.menuDiv li {
+    display: inline;
+    list-style: none;
 }
 
 /* Winkelwagen CSS */
