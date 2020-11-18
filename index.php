@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . "/header.php";
 if(isset($_SESSION['login']) && isset($_SESSION['messageCount'])) {
-    if(($_SESSION['login']) && ($_SESSION['messageCount'] == 1)) {
+    if(($_SESSION['messageCount'] == 1)) {
         $_SESSION['messageCount'] = 0;
         print("<h4>U bent successvol ingelogd.</h4>");
     }
