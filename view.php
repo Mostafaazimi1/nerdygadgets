@@ -44,11 +44,8 @@ if ($R) {
     $Images = $R;
 }
 
+// START VAN VIEW HTML
 
-
-?>
-<div id="CenteredContent">
-    <?php
     if ($Result != null) {
         ?>
         <?php
@@ -68,8 +65,8 @@ if ($R) {
                     // print Single
                     if (count($Images) == 1) {
                         ?>
-                        <div>
-                            <img style="width: 100%;" src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
+                        <div id="ProductImage">
+                            <img src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
                         </div>
                         <?php
                     } else if (count($Images) >= 2) { ?>
@@ -182,4 +179,3 @@ if ($R) {
     } else {
         ?><h2 id="ProductNotFound">Het opgevraagde product is niet gevonden.</h2><?php
     } ?>
-</div>

@@ -167,7 +167,6 @@ if (isset($amount)) {
                    value="<?php print (isset($_GET['search_string'])) ? $_GET['search_string'] : ""; ?>"
                    class="form-submit">
             <p class="FilterTopMargin">Aantal producten op pagina</p>
-
             <input type="hidden" name="category_id" id="category_id"
                    value="<?php print (isset($_GET['category_id'])) ? $_GET['category_id'] : ""; ?>">
             <select name="products_on_page" id="products_on_page" onchange="this.form.submit()">>
@@ -184,7 +183,7 @@ if (isset($amount)) {
                 } ?>>75
                 </option>
             </select>
-            <p class="FilterTopMargin">Sorteren</p>
+            <p class="FilterTopMargin">Producten sorteren</p>
             <select name="sort" id="sort" onchange="this.form.submit()">>
                 <option value="price_low_high" <?php if ($_SESSION['sort'] == "price_low_high") {
                     print "selected";
@@ -213,8 +212,8 @@ if (isset($amount)) {
         foreach ($ReturnableResult as $row) {
             ?>
             <a class="ListItem" href='view.php?id=<?php print $row['StockItemID']; ?>'>
-                <div class="row" id="ProductFrame">
-                    <div class="productFrameLinks row" id="geenPadding">
+                <div class="naastElkaar" id="ProductFrame">
+                    <div class="productFrameLinks naastElkaar" id="geenPadding">
                         <div class="productFrameLinksImage"><?php
                             if (isset($row['ImagePath'])) { ?>
                                 <img class="ImgFrame" src="<?php print "Public/StockItemIMG/" . $row['ImagePath']; ?>">
