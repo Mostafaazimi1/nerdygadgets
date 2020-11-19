@@ -7,15 +7,25 @@ if(isset($_SESSION["login"])) {
 } else {
     if(isset($_POST["email"]) && isset($_POST["password"])) {
         //wanneer email en ww gevult zijn wordt dit uitgevoerd
-        $sql = "SELECT FullName, PreferredName, IsPermittedToLogon, LogonName, HashedPassword, PhoneNumber, EmailAddress FROM people";
+        $sql = "SELECT PersonID, FullName, PreferredName, IsPermittedToLogon, LogonName, HashedPassword, PhoneNumber, EmailAddress, CustomerNUM FROM people";
         $result = $Connection->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
             $passFound = FALSE;
             while($row = $result->fetch_assoc()) {
                 if(($row["LogonName"] != "NO LOGON") && ($row["LogonName"] == strtolower($_POST["email"])) && ($_POST["password"] == $row["HashedPassword"])) {
-                    if($row["IsPermittedToLogon"] == 0) {
-                        // als de gebruiker mag niet mag inloggen, krijgt hij hievan een melding
+                    if($row["CustomerNUM"] == "") {
+                        // Er is geen customerid gekoppeld, dus de opgeslagen account gegevens zijn incompleet.
+                        // De gebruiker krijgt hievan een melding
+                        unset($passFound);
+                        $email = 'value="' . $_POST["email"] . '"';
+                        $password = 'value="' . $_POST["password"] . '"';
+                        print('<div class="notificationError">');
+                        print('<h2>We wijzen je graag op het volgende:</h2><br>');
+                        print('<p>Uw accountgegevens zijn beschadigd. Neem alstublieft contact op met de systeembeheerder.</p>');
+                        print('</div>');
+                    } elseif(($row["IsPermittedToLogon"] == 0)) {
+                        // De gebruiker mag niet mag inloggen, hij krijgt hievan een melding
                         unset($passFound);
                         $email = 'value="' . $_POST["email"] . '"';
                         $password = 'value="' . $_POST["password"] . '"';
@@ -24,11 +34,13 @@ if(isset($_SESSION["login"])) {
                         print('<p>Uw account is uitgeschakeld door de systeembeheerder.</p>');
                         print('</div>');
                         //registratiemelding geven
-                    } else {
+                    } elseif ($row["CustomerNUM"] != "") {
                         // De gegevens komen overeen, de gebruiker mag en wordt ingelogd
                         // Array met de gegevens van de klant, geplaatst in $_SESSION['login'] = $loginData;
+                        $_SESSION['messageCount'] = 1;
                         $passFound = TRUE;
                         $loginData = array(
+                            "PersonID" => $row["PersonID"],
                             "FullName" => $row["FullName"],
                             "PreferredName" => $row["PreferredName"],
                             "IsPermittedToLogon" => $row["IsPermittedToLogon"],
@@ -36,9 +48,29 @@ if(isset($_SESSION["login"])) {
                             "PhoneNumber" => $row["PhoneNumber"],
                             "EmailAddress" => $row["EmailAddress"],
                         );
+                        $sql2 = "SELECT CustomerID, CustomerName, DeliveryMethodID, DeliveryCityID,
+                                    PostalCityID, PhoneNumber, DeliveryAddressLine2, DeliveryPostalCode,
+                                    PostalPostalCode FROM Customers WHERE CustomerID = ".$row["CustomerNUM"].";";
+                        $result2 = $Connection->query($sql2);
+                        if ($result2->num_rows > 0) {
+                            while ($row2 = $result2->fetch_assoc()) {
+                                // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
+                                $loginData["CustomerID"] = $row2["CustomerID"];
+                                $loginData["CustomerName"] = $row2["CustomerName"];
+                                $loginData["DeliveryMethodID"] = $row2["DeliveryMethodID"];
+                                $loginData["DeliveryCityID"] = $row2["DeliveryCityID"];
+                                $loginData["PostalCityID"] = $row2["PostalCityID"];
+                                $loginData["PhoneNumber2"] = $row2["PhoneNumber"];
+                                $loginData["DeliveryAddressLine2"] = $row2["DeliveryAddressLine2"];
+                                $loginData["DeliveryPostalCode"] = $row2["DeliveryPostalCode"];
+                                $loginData["PostalPostalCode"] = $row2["PostalPostalCode"];
+                                continue;
+                            }
+                        }
                         $_SESSION['login'] = $loginData;
-                        $_SESSION['messageCount'] = 1;
                         continue;
+                    } else {
+                        print("error! No connection with customer table");
                     }
                 }
             }
@@ -74,18 +106,66 @@ if(isset($_SESSION["login"])) {
         $password = 'placeholder="Wachtwoord*"';
     }
 ?>
-<div class="login">
-    <h1>Inloggen</h1>
-    <form action="login.php" method="post">
-        <label for="email">
-            <i class="fas fa-user"></i>
-        </label>
-        <input type="email" name="email" <?php print($email);?> id="email" required>
-        <label for="password">
-            <i class="fas fa-lock"></i>
-        </label>
-        <input type="password" name="password" <?php print($password);?> required>
-        <input type="submit" name="submitLogin" class="button" value="Inloggen">
-    </form>
+<div class="row">
+    <div class="sublogin">
+        <div class="login" >
+            <h1>Inloggen</h1>
+            <form action="login.php" method="post">
+                <label for="email">
+                    <i class="fas fa-user"></i>
+                </label>
+                <input type="email" name="email" <?php print($email);?> id="email" required>
+                <label for="password">
+                    <i class="fas fa-lock"></i>
+                </label>
+                <input type="password" name="password" <?php print($password);?> required>
+                <input type="submit" name="submitLogin" class="button" value="Inloggen">
+            </form>
+        </div>
+    </div>
+    <div class="login">
+        <h1>Maak een account</h1>
+        <form action="registratie%20nieuw%20tabel.php" method="post" enctype="multipart/form-data">
+            <!--            <div class="alert alert-error"></div>-->
+            <label for="text">
+                <i class="fas fa-user"></i>
+            </label>
+            <input type="text" placeholder="Voornaam" name="FirstName" required><br>
+            <label for="text">
+                <i class="fas fa-user"></i>
+            </label>
+            <input type="text" placeholder="Achternaam" name="LastName" required><br>
+            <label for="email">
+                <i class="fas fa-envelope"></i>
+            </label>
+            <input type="email" placeholder="E-Mail" name="email" required><br>
+            <label for="email">
+                <i class="fas fa-key"></i>
+            </label>
+            <input type="password" placeholder="Wachtwoord" name="password" autocomplete="new-password" required><br>
+            <label for="email">
+                <i class="fas fa-key"></i>
+            </label>
+            <input type="password" placeholder="Bevestig wachtwoord" name="confirmpassword" autocomplete="new-password" required><br>
+            <label for="text">
+                <i class="fas fa-phone"></i>
+            </label>
+            <input type="tel" placeholder="Telefoonnummer" name="PhoneNumber"><br>
+            <label for="text">
+                <i class="fas fa-mail-bulk"></i>
+            </label>
+            <input type="text" placeholder="Postcode" name="PostalCode" required><br>
+            <label for="text">
+                <i class="fas fa-map-marker-alt"></i>
+            </label>
+            <input type="text" placeholder="Plaats" name="City" required><br>
+            <label for="text">
+                <i class="fas fa-road"></i>
+            </label>
+            <input type="text" placeholder="Straatnaam" name="StreetName" class="loginAddress" */ required>
+            <input type="text" placeholder="Huisnummer" name="HouseNumber" class="loginAddress" required><br>
+            <input type="submit" value="Registreer!" name="submit" class="btn brn-block btn-primary">
+        </form>
+    </div>
 </div>
 <?php }?>

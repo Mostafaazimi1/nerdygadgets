@@ -44,11 +44,8 @@ if ($R) {
     $Images = $R;
 }
 
+// START VAN VIEW HTML
 
-
-?>
-<div id="CenteredContent">
-    <?php
     if ($Result != null) {
         ?>
         <?php
@@ -61,14 +58,14 @@ if ($R) {
         ?>
 
         <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName'];?></h1>
-        <div class="viewMainHeader row">
+        <div class="viewMainHeader naastElkaar">
             <div class="ImageViewHeader">
                 <?php
                 if (isset($Images)) {
                     // print Single
                     if (count($Images) == 1) {
                         ?>
-                        <div>
+                        <div id="ProductImage">
                             <img src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
                         </div>
                         <?php
@@ -119,7 +116,7 @@ if ($R) {
                     <div class="PrijsEnAfrekenenChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <p> Inclusief BTW </p>
-                        <div class="VoorraadText"><?php if (isset($Result['QuantityOnHand']) >= 1000){ echo "<p class='voorraad'>Ruime voorraad</p>";
+                        <div class="VoorraadText"><?php if (isset($Result['QuantityOnHand']) >= 1000){ echo "<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Ruime voorraad beschikbaar.</p>";
                         }
                         else { print ($Result['QuantityOnHand']); }?></div><br>
                         <form action="add.php" method="post">
@@ -131,7 +128,7 @@ if ($R) {
                 </div>
             </div>
         </div>
-        <div class="ExtraInfoView row">
+        <div class="ExtraInfoView naastElkaar">
             <div class="productInformatie">
                 <h3>Productinformatie</h3>
                 <p><?php print $Result['SearchDetails']; ?></p>
@@ -182,4 +179,3 @@ if ($R) {
     } else {
         ?><h2 id="ProductNotFound">Het opgevraagde product is niet gevonden.</h2><?php
     } ?>
-</div>

@@ -46,42 +46,48 @@ include "losseFunctions.php";
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 </head>
 <body>
-<div class="centerContainer">
-    <div class="row" id="Header">
-        <div class="logoDiv">
-            <a href="./">
-                <img id="LogoImage" src="Public/ProductIMGHighRes/NerdyGadgets-Logo.png">
-            </a>
+<header>
+    <div class="MainDivLayout topMenu">
+        <div class="DivContainter">
+            <div class="HeaderDiv naastElkaar">
+                <div class="logoDiv">
+                    <a href="./">
+                        <img id="LogoImage" src="Public/ProductIMGHighRes/NerdyGadgets-Logo.png">
+                    </a>
+                </div>
+                <div class="menuDiv">
+                    <ul id="ul-class-topBar">
+                        <li>
+                            <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#007bff;"></i>
+                                Zoeken</a>
+                        </li>
+                        <li>
+                            <?php
+                            if (isset($_SESSION['login'])) {
+                                if ($_SESSION['login']) {
+                                    print('<a href="logout.php" class="HrefDecoration">Uitloggen</a>');
+                                }
+                            } else {
+                                print('<a href="login.php" class="HrefDecoration">Inloggen</a>');
+                            }
+                            ?>
+                        </li>
+                        <li>
+                            <a href="winkelmandje.php" class="HrefDecoration"><i class="fas fa-shopping-cart"
+                                                                                 style="color:#007bff;"></i> Winkelmandje (<?php echo getCount($winkelwagen);?>)</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="menuDiv">
-            <ul id="ul-class-topBar">
-                <li>
-                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i>
-                        Zoeken</a>
-                </li>
-                <li>
-                    <?php
-                    if (isset($_SESSION['login'])) {
-                        if ($_SESSION['login']) {
-                            print('<a href="logout.php" class="HrefDecoration">Uitloggen</a>');
-                        }
-                    } else {
-                        print('<a href="login.php" class="HrefDecoration">Inloggen</a>');
-                    }
-                    ?>
-                </li>
-                <li>
-                    <a href="winkelmandje.php" class="HrefDecoration"><i class="fas fa-shopping-cart"
-                                                                         style="color:#676EFF;"></i> Winkelmandje (<?php echo getCount($winkelwagen);?>)</a>
-                </li>
-            </ul>
-        </div>
-    </div class="row">
-    <div class="row" id="HeaderCategorie">
-        <div id="CategoriesBar">
-            <ul id="ul-class-categorie">
-                <?php
-                $Query = "
+    </div>
+    <div class="MainDivLayout categorieMenu">
+        <div class="DivContainter">
+            <div class="categorieMenuDiv naastElkaar">
+                <div id="CategoriesBar">
+                    <ul id="ul-class-categorie">
+                        <?php
+                        $Query = "
                 SELECT StockGroupID, StockGroupName, ImagePath
                 FROM stockgroups 
                 WHERE StockGroupID IN (
@@ -90,25 +96,31 @@ include "losseFunctions.php";
                                         ) AND ImagePath IS NOT NULL
                 ORDER BY StockGroupID ASC;
                 ";
-                $Statement = mysqli_prepare($Connection, $Query);
-                mysqli_stmt_execute($Statement);
-                $HeaderStockGroups = mysqli_stmt_get_result($Statement);
+                        $Statement = mysqli_prepare($Connection, $Query);
+                        mysqli_stmt_execute($Statement);
+                        $HeaderStockGroups = mysqli_stmt_get_result($Statement);
 
-                foreach ($HeaderStockGroups as $HeaderStockGroup) {
-                    ?>
-                    <li>
-                        <a href="browse.php?category_id=<?php print $HeaderStockGroup['StockGroupID']; ?>"
-                           class="HrefDecorationCategorie"><?php print $HeaderStockGroup['StockGroupName']; ?></a>
-                    </li>
-                    <?php
-                }
-                ?>
-                <li>
-                    <a href="categories.php" class="HrefDecorationCategorie">Hele assortiment</a>
-                </li>
-            </ul>
+                        foreach ($HeaderStockGroups as $HeaderStockGroup) {
+                            ?>
+                            <li>
+                                <a href="browse.php?category_id=<?php print $HeaderStockGroup['StockGroupID']; ?>"
+                                   class="HrefDecorationCategorie"><?php print $HeaderStockGroup['StockGroupName']; ?></a>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                        <li>
+                            <a href="categories.php" class="HrefDecorationCategorie">Hele assortiment</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row" id="Content">
-        <div class="col-12" id="geenMargin">
-            <div id="SubContent">
+
+
+
+</header>
+<div class="MainDivLayout">
+    <div class="DivContainter">
+        <div class="websiteContent">
