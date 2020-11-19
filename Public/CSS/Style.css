@@ -15,7 +15,7 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url(../Img/mouse-hover-icon-22.jpg) 96% / 30px no-repeat #EEE;
+    background: url(../Img/angle-down2.jpg) 96% / 30px no-repeat #EEE;
 }
 
 a {
@@ -82,7 +82,7 @@ ul#ul-class-topBar li {
     font-size: 20px;
     text-decoration: none;
     text-decoration-color: currentcolor;
-    margin-right: 2em;
+    margin-left: 2em;
 }
 ul#ul-class-navigation {
     right: 10px;
@@ -97,12 +97,7 @@ ul#ul-class-navigation li {
     text-decoration: none;
     text-decoration-color: currentcolor;
 }
-#Header {
-    height: 100px;
-    z-index: 999;
-    width: 100%;
-    padding: 26px 0;
-}
+
 #Content {
     width: 100%;
     margin-top: 40px!important;
@@ -251,20 +246,10 @@ ul#ul-class-navigation li {
 #LogoImage {
     max-width: 200px;
 }
-#CategoriesBar {
-    margin-left: 7%;
-    margin-right: auto;
-}
 #ul-class-categorie{
-    /*margin-bottom: 0px;*/
+
 }
-ul#ul-class-categorie li {
-    display: inline;
-    color: #FFFFFF;
-    margin-right: 1em;
-    font-size: 15px;
-    text-decoration: none;
-}
+
 ul#ul-class-categorie-price li {
     display: inline;
 }
@@ -608,19 +593,8 @@ ul#ul-class-categorie-price li {
 .product-overzicht table{
     width: 100%;
 }
-.menuDiv {
-    width: 80%;
-    text-align: right;
-    /*padding-left: 30%;*/
-}
-.menuDiv li {
-    display: inline;
-    list-style: none;
-    /*padding-left: 20px;*/
-}
-.LogoDiv{
-    /*width: 50%!important;*/
-}
+
+
 #Header.row{
     margin: auto;
     padding-left: 8%;
@@ -657,4 +631,116 @@ ul#ul-class-categorie-price li {
 }
 .voorraad{
     color: #2BAE49;
+}
+#ProductImage img {
+    max-height: 375px;
+    display: block;
+    margin: auto;
+}
+.naastElkaar{
+    display:-ms-flexbox;
+    display:flex;
+    -ms-flex-wrap:wrap;
+    flex-wrap:wrap;
+}
+
+/* Website max breedte en background */
+.MainDivLayout{
+    padding: 0 20px!important;
+}
+.DivContainter{
+    max-width: 1200px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+}
+.websiteContent{
+    width: 100%;
+    margin-top: 24px;
+}
+
+/* Menu css */
+.categorieMenu{
+    background-color: #313638!important;
+}
+.categorieMenuDiv{
+    width: 100%;
+}
+.HeaderDiv {
+    width: 100%;
+    z-index: 999;
+    padding: 26px 0;
+}
+#CategoriesBar{
+    padding: 18px 0;
+}
+#CategoriesBar, ul#ul-class-categorie {
+    margin: 0!important;
+    padding-inline-start: 0;
+}
+ul#ul-class-categorie li {
+    display: inline;
+    color: #FFFFFF;
+    margin-right: 1em;
+    font-size: 15px;
+    text-decoration: none;
+}
+.logoDiv {
+    width: 20%!important;
+}
+.menuDiv {
+    width: 80%;
+    text-align: right;
+    float: right;
+}
+.menuDiv li {
+    display: inline;
+    list-style: none;
+}
+
+/* Winkelwagen CSS */
+.hideTH th{
+    display: none!important;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right; !important;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }

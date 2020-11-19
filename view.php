@@ -44,11 +44,8 @@ if ($R) {
     $Images = $R;
 }
 
+// START VAN VIEW HTML
 
-
-?>
-<div id="CenteredContent">
-    <?php
     if ($Result != null) {
         ?>
         <?php
@@ -61,15 +58,15 @@ if ($R) {
         ?>
 
         <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName'];?></h1>
-        <div class="viewMainHeader row">
+        <div class="viewMainHeader naastElkaar">
             <div class="ImageViewHeader">
                 <?php
                 if (isset($Images)) {
                     // print Single
                     if (count($Images) == 1) {
                         ?>
-                        <div>
-                            <img style="width: 100%;" src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
+                        <div id="ProductImage">
+                            <img src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
                         </div>
                         <?php
                     } else if (count($Images) >= 2) { ?>
@@ -119,19 +116,27 @@ if ($R) {
                     <div class="PrijsEnAfrekenenChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <p> Inclusief BTW </p>
-                        <div class="VoorraadText"><?php if (isset($Result['QuantityOnHand']) >= 1000){ echo "<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Ruime voorraad</p>";
+                        <div class="VoorraadText"><?php if (isset($Result['QuantityOnHand']) >= 1000){ echo "<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Ruime voorraad beschikbaar.</p>";
                         }
                         else { print ($Result['QuantityOnHand']); }?></div><br>
                         <form action="add.php" method="post">
                             <input type="hidden" name="action" value="submit" />
                             Aantal<br><input type="text" name="aantal" value="1" style="margin-bottom: 12px;">
-                            <button class="bestelling-btn" type="submit" name="addcart" value="<?php print $Result['StockItemID']?>"><i class="fas fa-shopping-cart" style="color:#FFFFFF; padding-right: 7px;" aria-hidden="true"></i>Toevoegen aan winkelwagen</button>
+                            <button class="bestelling-btn" id="myBtn" type="submit" name="addcart" value="<?php print $Result['StockItemID']?>"><i class="fas fa-shopping-cart" style="color:#FFFFFF; padding-right: 7px;" aria-hidden="true"></i>Toevoegen aan winkelwagen</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ExtraInfoView row">
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Een...is toegevoegd in uw winkelwagen</p>
+            </div>
+        </div>
+
+        <div class="ExtraInfoView naastElkaar">
             <div class="productInformatie">
                 <h3>Productinformatie</h3>
                 <p><?php print $Result['SearchDetails']; ?></p>
@@ -182,4 +187,27 @@ if ($R) {
     } else {
         ?><h2 id="ProductNotFound">Het opgevraagde product is niet gevonden.</h2><?php
     } ?>
-</div>
+
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

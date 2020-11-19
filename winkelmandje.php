@@ -9,6 +9,11 @@ $products = loadProducts($winkelwagen, $Connection);
 
 <div class="winkelmandje">
     <h1>Winkelmandje</h1>
+    <?php
+    if(!$products){
+        echo "<p style='font-size: 20px; margin-top: 24px;'>Je winkelwagen is momenteel leeg.</p>";
+    } else {
+    ?>
     <div class="overzicht-wrapper">
         <div class="product-overzicht">
             <table>
@@ -76,3 +81,4 @@ $products = loadProducts($winkelwagen, $Connection);
         </div>
     </div>
 </div>
+<?php } ?>

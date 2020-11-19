@@ -15,20 +15,14 @@ if (isset($_SESSION["AfrekenGegevens"])) {
                 <table>
                     <div class="Naam">
                         <tr>
-                            <th>Naam</th>
-                            <th> </th>
+                            <th>Voornaam</th>
+                            <th>Achternaam </th>
                             <th> </th>
                         </tr>
                         <tr>
                             <td><?php echo $afrekenGegevens["voornaam"]?></td>
-                            <?php if ($afrekenGegevens["tussenv"]==""){
-                                echo"<td>" . $afrekenGegevens['achternaam'] . "</td>";
-                            }
-                            else{
-                                echo"<td>" . $afrekenGegevens['tussenv'] . "</td>";
-                                echo"<td>" . $afrekenGegevens['achternaam'] . "</td>";
-                            }//of achternaam op de plek van tussenvoegsel kan staan als tussenvoegsel leeg is.
-                            ?>
+                            <td><?php echo $afrekenGegevens["achternaam"]?></td>
+
                         </tr>
                         <tr>
                             <th>Postcode</th>

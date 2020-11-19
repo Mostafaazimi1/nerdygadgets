@@ -39,12 +39,10 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
             $result = $Connection->query($sql);
             $aantalresult = mysqli_num_rows($result);
             if ($aantalresult > 0) {
-                $DeliveryCityId = $Plaats;
-                echo $DeliveryCityId;
+                $DeliveryCityName = $Plaats;
             }   else {
                 echo ("Sorry, in ".$Plaats." leveren wij niet.");
             }
-            $Connection->close();
         }
         $password = md5($_POST["password"]); //wachtwoord wordt als hash beveiligd
         $email = $_POST["email"];
@@ -56,6 +54,28 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
         $StreetName = $_POST["StreetName"];
         $CurrentDate = date("Y/m/d");
         $FullName = ($FirstName." ".$LastName);
+        $BuyingGroupId = 1;
+        $PrimaryContactPersonId = 9;
+        $AlternateContactPersonId = 9;
+        $CustomerCategoryId = 1;
+        $CreditLimit = 0.00;
+        $StandardDiscountPercentage = 0.000;
+        $zero = 0;
+        $seven = 7;
+        $three = 3;
+        $NULL = NULL;
+        $unknown = "unknown";
+        $address = ($HouseNumber." ".$StreetName);
+        $ValidTo = "9999-12-31";
+        $BillToCustomerId = 1;
+        $DeliveryCityId = 1;
+        $LastEditedBy = 1;
+        $IsPermittedToLogon = 0;
+        $IsExternalLogonProvider = 1;
+        $IsSystemUser = 0;
+        $IsEmployee = 0;
+        $IsSalesPerson = 0;
+        $empty = "";
 
         //Als verbinding gesloten is, wordt de SQL query voorbereid.
         if ($Connection->connect_error) {
@@ -64,27 +84,36 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
         } else {
             // GEGEVENS IN CUSTOMERS                    faxnumber = string
             $stmt = $Connection->prepare(
-                "insert into customers(CustomerName, BillToCustomerId, CustomerCategoryId, BuyingGroupId, PrimaryContactPerson,
-                                                AlternateContactPerson, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit,
+                "INSERT INTO customers (CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID,
+                                                AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit,
                                                 AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays,
                                                 PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1,
                                                 DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation, PostalAddressLine1, PostalAddressLine2,
                                                 PostalPostalCode, LastEditedBy, ValidFrom, ValidTo)
-                                                values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("siiiiiiiidsdiiissssssssssssiss", $FullName, $CustomerId, 9, 0, 0,
-                0, 3, $CityName, $DeliveryCityId, 0.00, $CurrentDate, 0.000, 0, 0, 7,
-                $PhoneNumber, 0, NULL, NULL, 0, "unknown", $HouseNumber." ".$StreetName,
-                $postcode, "unknown", "unknown", "unknown", $postcode, 0, $CurrentDate,
-                "9999-12-31");
+                                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("siiiiiiiidsdiiissssssssssssiss", $FullName, $BillToCustomerId, $CustomerCategoryId, $BuyingGroupId, $PrimaryContactPersonId,
+                $AlternateContactPersonId, $three, $DeliveryCityId, $DeliveryCityId, $CreditLimit, $CurrentDate, $StandardDiscountPercentage, $zero, $zero, $seven,
+                $PhoneNumber, $zero, $NULL, $NULL, $zero, $unknown, $address,
+                $postcode, $unknown, $unknown, $DeliveryCityName, $postcode, $LastEditedBy, $CurrentDate,
+                $ValidTo);
             $execval = $stmt->execute();
             echo $execval;
             echo "Customer gegevens zijn succesvol toegevoegd aan database!";
             $stmt->close();
-            $Connection->close();
         }
     }
 
-    // VRAAG VALUE VAN CUSTOMERID UIT CUSTOMERS EN GEEF DEZE EIGEN VARIABELEN -zodat je ze in people tabel kan inserten!
+        // VRAAG VALUE VAN CUSTOMERID UIT CUSTOMERS EN GEEF DEZE EIGEN VARIABELEN -zodat je ze in people tabel kan inserten!
+        if ($Connection->connect_error) {
+            echo "$Connection->connect_error";
+            die("Connection Failed : " . $Connection->connect_error);
+    }   else {
+            $sql = "SELECT CustomerID FROM customers
+            WHERE CustomerName = ('$FullName') AND DeliveryPostalCode = ('$postcode') AND DeliveryAddressLine2 = ('$address')";
+            $result = $Connection->query($sql);
+            $row = mysqli_fetch_array($result);
+            $CustomerNUM = reset($row);
+    }
 
 
 //      Als verbinding gesloten is, wordt de SQL query voorbereid.
@@ -94,13 +123,14 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
         } else {
             // GEGEVENS IN PEOPLE                 image(Photo) = blob
             $stmt = $Connection->prepare(
-                    "insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName
-                                            IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson
-                                            UserPreferences, PhoneNumber, FaxNumber, EmailAddress, Photo, CustomFields
+                    "insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
+                                            IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson,
+                                            UserPreferences, PhoneNumber, FaxNumber, EmailAddress, Photo, CustomFields,
                                             OtherLanguages, LastEditedBy, ValidFrom, ValidTo, CustomerNUM)
-                                            values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssisibiiissssbssisss", $FullName, $Firstname, $FullName, 1, $email,
-                                                0, $password, 0, 0, 0, "", $PhoneNumber, "", $email, "", "", "", 1, $CurrentDate, "9999-12-31", $CustomerId);
+                                            values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssisibiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
+                                                $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
+                                                $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
             $execval = $stmt->execute();
             echo $execval;
             echo "People gegevens zijn succesvol toegevoegd aan database!";
@@ -117,26 +147,51 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
 </head>
 <body>
 <link href="http://localhost/nerdygadgets/" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css">
-<div class="body-content">
-    <div class="module">
-        <h1>Maak een account</h1>
-        <form action="registratie2.0.php" method="post" enctype="multipart/form-data">
-            <div class="alert alert-error"></div>
-            <input type="text" placeholder="Voornaam" name="FirstName" required><br>
-            <input type="text" placeholder="Achternaam" name="LastName" required><br>
-            <input type="email" placeholder="E-Mail" name="email" required><br>
-            <input type="password" placeholder="Wachtwoord" name="password" autocomplete="new-password" required><br>
-            <input type="password" placeholder="Bevestig wachtwoord" name="confirmpassword" autocomplete="new-password"
-                   required><br>
-            <input type="tel" placeholder="Telefoonnummer" name="PhoneNumber"><br>
-            <input type="text" placeholder="Plaats" name="Plaats" required><br>
-            <input type="text" placeholder="Straatnaam" name="StreetName" required>
-            <input type="text" placeholder="Huisnummer" name="HouseNumber" required><br>
-            <input type="text" placeholder="Postcode" name="PostCode" required><br>
-            <input type="submit" value="Registreer!" name="submit" class="btn brn-block btn-primary">
-        </form>
-    </div>
+<link rel="stylesheet" href="Style.css" type="text/css">
+<div class="login">
+    <h1>Maak een account</h1>
+    <form action="registratie2.0.php" method="post" enctype="multipart/form-data">
+        <!--            <div class="alert alert-error"></div>-->
+        <label for="text">
+            <i class="fas fa-user"></i>
+        </label>
+        <input type="text" placeholder="Voornaam" name="FirstName" required><br>
+        <label for="text">
+            <i class="fas fa-user"></i>
+        </label>
+        <input type="text" placeholder="Achternaam" name="LastName" required><br>
+        <label for="email">
+            <i class="fas fa-envelope"></i>
+        </label>
+        <input type="email" placeholder="E-Mail" name="email" required><br>
+        <label for="email">
+            <i class="fas fa-key"></i>
+        </label>
+        <input type="password" placeholder="Wachtwoord" name="password" autocomplete="new-password" required><br>
+        <label for="email">
+            <i class="fas fa-key"></i>
+        </label>
+        <input type="password" placeholder="Bevestig wachtwoord" name="confirmpassword" autocomplete="new-password" required><br>
+        <label for="text">
+            <i class="fas fa-phone"></i>
+        </label>
+        <input type="tel" placeholder="Telefoonnummer" name="PhoneNumber"><br>
+        <label for="text">
+            <i class="fas fa-mail-bulk"></i>
+        </label>
+        <input type="text" placeholder="Postcode" name="PostCode" required><br>
+        <label for="text">
+            <i class="fas fa-map-marker-alt"></i>
+        </label>
+        <input type="text" placeholder="Plaats" name="Plaats" required><br>
+        <label for="text">
+            <i class="fas fa-road"></i>
+        </label>
+        <input type="text" placeholder="Straatnaam" name="StreetName" class="loginAddress" */ required>
+        <input type="text" placeholder="Huisnummer" name="HouseNumber" class="loginAddress" required><br>
+        <input type="submit" value="Registreer!" name="submit" class="btn brn-block btn-primary">
+    </form>
 </div>
 </body>
 </html>
+
