@@ -154,11 +154,11 @@ if(isset($_SESSION["login"])) {
             <label for="text">
                 <i class="fas fa-mail-bulk"></i>
             </label>
-            <input type="text" placeholder="Postcode" name="PostalCode" required><br>
+            <input type="text" placeholder="Postcode" name="PostCode" required><br>
             <label for="text">
                 <i class="fas fa-map-marker-alt"></i>
             </label>
-            <input type="text" placeholder="Plaats" name="City" required><br>
+            <input type="text" placeholder="Plaats" name="Plaats" required><br>
             <label for="text">
                 <i class="fas fa-road"></i>
             </label>
