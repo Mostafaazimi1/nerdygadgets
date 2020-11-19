@@ -22,15 +22,17 @@ $telefoonnummer = "";
 if (isset($_SESSION["login"])) {
 $gegevens = $_SESSION['login'];
 print_r($_SESSION['login']);
+    $HuisnummerStraat = (explode(" ",$_SESSION['DeliveryAddressLine2']));
     $voornaam = $gegevens["PreferredName"];
     $achternaam = (str_replace($gegevens['PreferredName']." ", "", $gegevens['FullName']));
     $postcode = $gegevens[''];
-    $huisnummer = $gegevens[''];
+    $huisnummer = $HuisnummerStraat[1];
     $toev = $gegevens[''];
-    $straat = $gegevens[''];
+    $straat = $HuisnummerStraat[2];
     $plaats = $gegevens[''];
     $email = $gegevens['EmailAddress'];
     $telefoonnummer = $gegevens['PhoneNumber'];
+
 }
 
 
