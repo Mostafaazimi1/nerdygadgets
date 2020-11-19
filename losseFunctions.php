@@ -12,7 +12,6 @@ if (isset($_GET['delete'])) {
 if (isset($_POST['Afreken_submit'])) {
     $_SESSION['AfrekenGegevens'] = array(
         'voornaam' => $_POST['voornaam'],
-        'tussenv' => $_POST['tussenv'],
         'achternaam' => $_POST['achternaam'],
         'postcode' => $_POST['postcode'],
         'huisnummer' => $_POST['huisnummer'],
@@ -32,3 +31,5 @@ if(isset($_POST['afronden']) && $_GET['afronden'] == 'Bestelling afronden'){
     header("Location: overzicht.php");
     die();
 }
+
+

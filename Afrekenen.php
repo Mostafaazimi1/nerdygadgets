@@ -51,8 +51,6 @@ if (isset($_SESSION["login"])) {
                         <tr>
                             <td><input type="text" id="voornaam" name="voornaam" placeholder="Voornaam"
                                        value="<?php echo($voornaam); ?>" required></td>
-                            <td><input type="text" id="tussenv" name="tussenv" placeholder="Tussenv."
-                                       value="<?php echo($tussenvoegsel); ?>"></td>
                             <td><input type="text" id="achternaam" name="achternaam" placeholder="Achternaam"
                                        value="<?php echo($achternaam); ?>" required></td>
                         </tr>
