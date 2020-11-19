@@ -22,6 +22,7 @@ $products = loadProducts($winkelwagen, $Connection);
                     <th>Title</th>
                     <th>Prijs</th>
                     <th>Aantal</th>
+                    <th></th>
                     <th>Subtotaal</th>
                     <th>Verwijderen</th>
                 </tr>
@@ -35,7 +36,11 @@ $products = loadProducts($winkelwagen, $Connection);
                     echo "<td><img src='Public/StockItemIMG/" . $product['img'] . "' style='max-width: 30px'></td>";
                     echo "<td><p>" . $product['name'] . "</p></td>";
                     echo "<td><p>€" . $product['price'] . "</p></td>";
-                    echo "<td><p>" . $product['aantal'] . "</p></td>";
+                    echo "<form action='winkelmandje.php' type='GET'>";
+                    echo "<td><input type='number' name='aantal' value='" . $product['aantal'] . "' style='width: 55px;height: 40px;'></td>";
+                    echo "<input type='hidden' name='id' value='". $product['id'] ."'>";
+                    echo "<td><input type='submit' name='save-change' value='opslaan'></td>";
+                    echo "</form>";
                     echo "<td><p>€" . number_format($total, 2) . "</p></td>";
                     echo "<td><a href='winkelmandje.php?delete=" . $product['id'] . "'>X</a></td>";
                     echo "</tr>";

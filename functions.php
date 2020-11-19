@@ -96,11 +96,20 @@ function getCount($winkelwagen)
     return $count;
 }
 
+function updateAmount($id, $amount, $winkelwagen){
+    foreach ($winkelwagen as $key => $winkelwagenItem) {
+        if ($winkelwagenItem['id'] == $id) {
+            $_SESSION['winkelwagen'][$key]['aantal'] = $amount;
+            break;
+        }
+    }
+}
+
 function bestellingAfronden($winkelwagen, $afrekenGegevens)
 {
     if(isset($afrekenGegevens['newAcc'])){
         //hier query voor maken van die acc
     }
 
-    
+
 }
