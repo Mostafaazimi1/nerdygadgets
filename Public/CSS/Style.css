@@ -428,21 +428,8 @@ ul#ul-class-categorie-price li {
     text-align: center;
     margin: 20px;
 }
-#SelectedPage {
-    font-size: 18px;
-    display: inline;
-    font-weight: bold;
-    background-color: rgb(98, 158, 255);
-    padding: 15px 22px;
-    border-radius: 50px;
-}
-.PageNumber {
-    padding: 7px 15px;
-    border-radius: 39px;
-    background: rgb(36, 41, 143);
-    border: 1px rgb(98, 158, 255) solid;
-    color: #fff;
-}
+
+
 .login {
     width: 400px;
     background-color: #ffffff;
@@ -704,4 +691,24 @@ ul#ul-class-categorie li {
 /* Winkelwagen CSS */
 .hideTH th{
     display: none!important;
+}
+
+/* Browse navigation */
+.PageNumberActief {
+    padding: 7px 15px;
+    border-radius: 4px;
+    background-color: #e8f2ff;
+    border: 2px #007bff solid;
+    color: #000000;
+    font-weight: bold;
+}
+.PageNumberActief:hover{
+    cursor: default;
+}
+.PageNumber {
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: #FFFFFF;
+    border: 1px rgb(193, 193, 193) solid;
+    color: #007bff;
 }
