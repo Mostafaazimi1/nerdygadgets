@@ -12,7 +12,6 @@ $lastEditDate= date("Y/m/d");
 
 
 foreach ($products as $product) {
-    $total = $product['price'] * $product['aantal'];
     $allTotal += $total;
     $gegevens = $_SESSION['login'];
 
