@@ -4,7 +4,7 @@ include __DIR__ . "/header.php";
 $winkelwagen = $_SESSION['winkelwagen'];
 $products = loadProducts($winkelwagen, $Connection);
 $afrekenGegevens = $_SESSION['AfrekenGegevens'];
-
+$gegevens = $_SESSION['login'];
 ?>
 
 <?php
@@ -20,22 +20,50 @@ if(isset($_GET['afronden'])){
         $backOrderI = 1;
         $lastEditBY = 1;
         $lastEditDate = date("Y/m/d");
+        $tax= 15.000;
+        $packageType = 7; //niet juist moet query op worden uitgevoerd
+
+        //order nummer aanmaken
+        $orderInput = mysqli_prepare($Connection, "INSERT INTO orders (CustomerID, SalespersonPersonID, ContactPersonID, OrderDate, 
+                                                        ExpectedDeliveryDate, IsUndersupplyBackordered, LastEditedBy, LastEditedWhen) VALUES(?,?,?,?,?,?,?,?)");
+        mysqli_stmt_bind_param($orderInput, 'iiissiis', $gegevens['CustomerID'], $salesID, $contactID, $orderDate, $deliveryDate, $backOrderI, $lastEditBY, $lastEditDate);
+        mysqli_stmt_execute($orderInput);
+
+    $orderOutput="";
+    $orderInput = "SELECT OrderID FROM Orders ORDER BY OrderID DESC Limit 1";
+    $result5 = $Connection->query($orderInput);
+    if ($result5->num_rows > 0) {
+        while ($row2 = $result5->fetch_assoc()) {
+            $orderOutput = $row2["OrderID"];
+            continue;
+        }
+    }
+//$orderOutput geeft laatste orderID
+
+
 
         $allTotal = 0;
         foreach ($products as $product) {
 
-            $gegevens = $_SESSION['login'];
 
+            //voorraad aanpassen
             $productUpdate = mysqli_prepare($Connection, "UPDATE stockitemholdings SET QuantityOnHand = QuantityOnHand-(?) WHERE StockItemID=(?)");
             mysqli_stmt_bind_param($productUpdate, 'ii', $product['aantal'], $product['id']);
             mysqli_stmt_execute($productUpdate);
 
-            $orderInput = mysqli_prepare($Connection, "INSERT INTO orders (CustomerID, SalespersonPersonID, ContactPersonID, OrderDate, 
-                                                    ExpectedDeliveryDate, IsUndersupplyBackordered, LastEditedBy, LastEditedWhen) VALUES(?,?,?,?,?,?,?,?)");
-            mysqli_stmt_bind_param($orderInput, 'iiissiis', $gegevens['CustomerID'], $salesID, $contactID, $orderDate, $deliveryDate, $backOrderI, $lastEditBY, $lastEditDate);
+            //order koppelen aan items
+
+            $orderInput = mysqli_prepare($Connection, "INSERT INTO orderlines (OrderID, StockItemID, Description, PackageTypeID, Quantity,
+                                                            TaxRate, PickedQuantity, LastEditedBy, LastEditedWhen) VALUES (?,?,?,?,?,?,?,?,?)");
+            mysqli_stmt_bind_param($orderInput, 'iisiidiis', $orderOutput, $product['id'], $product['name'], $packageType, $product['aantal'], $tax, $product['aantal'], $lastEditBY, $lastEditDate);
             mysqli_stmt_execute($orderInput);
-            //return mysqli_stmt_affected_rows($orderInput) == 1;
+
+
+
         }
+        //unset sesion winkelmandje
+        unset($_SESSION['winkelwagen']);
+
         $_SESSION['messageCount2'] = 1;
         print('<meta http-equiv = "refresh" content = "0; url = ./" />');
 }
