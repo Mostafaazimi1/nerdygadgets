@@ -95,3 +95,8 @@ function getCount($winkelwagen)
 
     return $count;
 }
+
+function bestellingAfronden($winkelwagen, $user)
+{
+
+}

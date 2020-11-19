@@ -26,3 +26,9 @@ if (isset($_POST['Afreken_submit'])) {
     header("Location: overzicht.php");
     die();
 }
+
+if(isset($_POST['afronden']) && $_GET['afronden'] == 'Bestelling afronden'){
+    bestellingAfronden($_SESSION['winkelwagen'], $_SESSION['login']);
+    header("Location: overzicht.php");
+    die();
+}
