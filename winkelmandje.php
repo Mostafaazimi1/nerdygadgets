@@ -11,7 +11,7 @@ $products = loadProducts($winkelwagen, $Connection);
     <h1>Winkelmandje</h1>
     <?php
     if(!$products){
-        echo "Je winkelwagen is momenteel leeg.";
+        echo "<p style='font-size: 20px; margin-top: 24px;'>Je winkelwagen is momenteel leeg.</p>";
     } else {
     ?>
     <div class="overzicht-wrapper">
