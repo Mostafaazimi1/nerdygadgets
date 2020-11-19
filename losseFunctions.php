@@ -34,7 +34,6 @@ if (isset($_POST['Afreken_submit'])) {
 if(isset($_GET['save-change'])){
     $id = $_GET['id'];
     $amount = $_GET['aantal'];
-    print_r($_SESSION['winkelwagen']);
     updateAmount($id, $amount, $_SESSION['winkelwagen']);
     header("Location: winkelmandje.php");
     die();
