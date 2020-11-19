@@ -44,7 +44,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
                 echo ("Sorry, in ".$Plaats." leveren wij niet.");
             }
         }
-        $password = md5($_POST["password"]); //wachtwoord wordt als hash beveiligd
+        $password = $_POST["password"];
         $email = $_POST["email"];
         $PhoneNumber = $_POST["PhoneNumber"];
         $postcode = $_POST["PostCode"];
@@ -127,9 +127,9 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
                                             IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson,
                                             UserPreferences, PhoneNumber, FaxNumber, EmailAddress, Photo, CustomFields,
                                             OtherLanguages, LastEditedBy, ValidFrom, ValidTo, CustomerNUM)
-                                            values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssisibiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
-                                                $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
+                                            values(?, ?, ?, ?, ?, ?,".$password." , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssisiiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
+                                                $IsExternalLogonProvider, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
                                                 $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
             $execval = $stmt->execute();
             echo $execval;
@@ -150,7 +150,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
 <link rel="stylesheet" href="Style.css" type="text/css">
 <div class="login">
     <h1>Maak een account</h1>
-    <form action="registratie%20nieuw%20tabel.php" method="post" enctype="multipart/form-data">
+    <form action="registratie.php" method="post" enctype="multipart/form-data">
         <!--            <div class="alert alert-error"></div>-->
         <label for="text">
             <i class="fas fa-user"></i>

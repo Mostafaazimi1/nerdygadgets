@@ -50,7 +50,7 @@ if(isset($_SESSION["login"])) {
                         );
                         $sql2 = "SELECT CustomerID, CustomerName, DeliveryMethodID, DeliveryCityID,
                                     PostalCityID, PhoneNumber, DeliveryAddressLine2, DeliveryPostalCode,
-                                    PostalPostalCode FROM Customers WHERE CustomerID = ".$row["CustomerNUM"].";";
+                                    PostalPostalCode, PostalAddressLine2 FROM Customers WHERE CustomerID = ".$row["CustomerNUM"].";";
                         $result2 = $Connection->query($sql2);
                         if ($result2->num_rows > 0) {
                             while ($row2 = $result2->fetch_assoc()) {
@@ -64,6 +64,7 @@ if(isset($_SESSION["login"])) {
                                 $loginData["DeliveryAddressLine2"] = $row2["DeliveryAddressLine2"];
                                 $loginData["DeliveryPostalCode"] = $row2["DeliveryPostalCode"];
                                 $loginData["PostalPostalCode"] = $row2["PostalPostalCode"];
+                                $loginData["PostalAddressLine2"] = $row2["PostalAddressLine2"];
                                 continue;
                             }
                         }
@@ -125,7 +126,7 @@ if(isset($_SESSION["login"])) {
     </div>
     <div class="login">
         <h1>Maak een account</h1>
-        <form action="registratie%20nieuw%20tabel.php" method="post" enctype="multipart/form-data">
+        <form action="registratie.php" method="post" enctype="multipart/form-data">
             <!--            <div class="alert alert-error"></div>-->
             <label for="text">
                 <i class="fas fa-user"></i>
