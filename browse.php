@@ -261,7 +261,8 @@ if (isset($amount)) {
                 for ($i = 1; $i <= $AmountOfPages; $i++) {
                     if ($PageNumber == ($i - 1)) {
                         ?>
-                        <div id="SelectedPage"><?php print $i; ?></div><?php
+                        <button id="page_number" class="PageNumberActief"
+                                name="page_number"><?php print($i); ?></button><?php
                     } else { ?>
                         <button id="page_number" class="PageNumber" value="<?php print($i - 1); ?>" type="submit"
                                 name="page_number"><?php print($i); ?></button>

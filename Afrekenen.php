@@ -20,17 +20,17 @@ $telefoonnummer = "";
 
 <?php
 if (isset($_SESSION["login"])) {
-
-    $voornaam = "jan";
-    $tussenvoegsel = "";
-    $achternaam = "pieter";
-    $postcode = "2255AA";
-    $huisnummer = "14";
-    $toev = "";
-    $straat = "pollen";
-    $plaats = "beek";
-    $email = "123@pinda.nl";
-    $telefoonnummer = "0612345678";
+$gegevens = $_SESSION['login'];
+print_r($_SESSION['login']);
+    $voornaam = $gegevens["PreferredName"];
+    $achternaam = (str_replace($gegevens['PreferredName']." ", "", $gegevens['FullName']));
+    $postcode = $gegevens[''];
+    $huisnummer = $gegevens[''];
+    $toev = $gegevens[''];
+    $straat = $gegevens[''];
+    $plaats = $gegevens[''];
+    $email = $gegevens['EmailAddress'];
+    $telefoonnummer = $gegevens['PhoneNumber'];
 }
 
 
@@ -51,8 +51,6 @@ if (isset($_SESSION["login"])) {
                         <tr>
                             <td><input type="text" id="voornaam" name="voornaam" placeholder="Voornaam"
                                        value="<?php echo($voornaam); ?>" required></td>
-                            <td><input type="text" id="tussenv" name="tussenv" placeholder="Tussenv."
-                                       value="<?php echo($tussenvoegsel); ?>"></td>
                             <td><input type="text" id="achternaam" name="achternaam" placeholder="Achternaam"
                                        value="<?php echo($achternaam); ?>" required></td>
                         </tr>

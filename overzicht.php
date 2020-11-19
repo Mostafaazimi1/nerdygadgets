@@ -4,6 +4,7 @@ include __DIR__ . "/header.php";
 $winkelwagen = $_SESSION['winkelwagen'];
 $products = loadProducts($winkelwagen, $Connection);
 $afrekenGegevens = $_SESSION['AfrekenGegevens'];
+
 ?>
 <?php
 if (isset($_SESSION["AfrekenGegevens"])) {
@@ -105,7 +106,9 @@ if (isset($_SESSION["AfrekenGegevens"])) {
                     </tr>
                 </table>
                 <p>Inclusief btw</p>
-                <button class="bestelling-btn">Bestelling afronden</button>
+                <form action="overzicht.php" method="get">
+                    <input class="bestelling-btn" type="submit" name="afronden" value="Bestelling afronden">
+                </form>
             </div>
         </div>
     </div>
