@@ -22,12 +22,17 @@ if (isset($_POST['Afreken_submit'])) {
         'telefoonnummer' => $_POST['telefoonnummer']
     );
 
+    if(isset($_POST['account_aanmaken'])){
+        $_SESSION['AfrekenGegevens']['newAcc'] = TRUE;
+        $_SESSION['AfrekenGegevens']['password'] = $_POST['password'];
+    }
+
     header("Location: overzicht.php");
     die();
 }
 
 if(isset($_POST['afronden']) && $_GET['afronden'] == 'Bestelling afronden'){
-    bestellingAfronden($_SESSION['winkelwagen'], $_SESSION['login']);
+    bestellingAfronden($_SESSION['winkelwagen'], $_SESSION['AfrekenGegevens']);
     header("Location: overzicht.php");
     die();
 }

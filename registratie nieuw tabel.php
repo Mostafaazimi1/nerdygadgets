@@ -150,7 +150,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
 <link rel="stylesheet" href="Style.css" type="text/css">
 <div class="login">
     <h1>Maak een account</h1>
-    <form action="registratie2.0.php" method="post" enctype="multipart/form-data">
+    <form action="registratie%20nieuw%20tabel.php" method="post" enctype="multipart/form-data">
         <!--            <div class="alert alert-error"></div>-->
         <label for="text">
             <i class="fas fa-user"></i>
