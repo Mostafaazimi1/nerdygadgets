@@ -4,13 +4,12 @@ include __DIR__ . "/header.php";
 $winkelwagen = $_SESSION['winkelwagen'];
 $products = loadProducts($winkelwagen, $Connection);
 $afrekenGegevens = $_SESSION['AfrekenGegevens'];
+if(isset($_SESSION['login'])){
+    $gegevens = $_SESSION['login'];
+}
 
-$gegevens = $_SESSION['login'];
-?>
-
-<?php
 if(isset($_GET['afronden'])){
-
+    if(isset($_SESSION['login'])) {
         $winkelwagen = $_SESSION['winkelwagen'];
         $products = loadProducts($winkelwagen, $Connection);
         $allTotal = 0;
@@ -21,7 +20,7 @@ if(isset($_GET['afronden'])){
         $backOrderI = 1;
         $lastEditBY = 1;
         $lastEditDate = date("Y/m/d");
-        $tax= 15.000;
+        $tax = 15.000;
         $packageType = 7; //niet juist moet query op worden uitgevoerd
 
         //order nummer aanmaken
@@ -30,17 +29,16 @@ if(isset($_GET['afronden'])){
         mysqli_stmt_bind_param($orderInput, 'iiissiis', $gegevens['CustomerID'], $salesID, $contactID, $orderDate, $deliveryDate, $backOrderI, $lastEditBY, $lastEditDate);
         mysqli_stmt_execute($orderInput);
 
-    $orderOutput="";
-    $orderInput = "SELECT OrderID FROM Orders ORDER BY OrderID DESC Limit 1";
-    $result5 = $Connection->query($orderInput);
-    if ($result5->num_rows > 0) {
-        while ($row2 = $result5->fetch_assoc()) {
-            $orderOutput = $row2["OrderID"];
-            continue;
+        $orderOutput = "";
+        $orderInput = "SELECT OrderID FROM Orders ORDER BY OrderID DESC Limit 1";
+        $result5 = $Connection->query($orderInput);
+        if ($result5->num_rows > 0) {
+            while ($row2 = $result5->fetch_assoc()) {
+                $orderOutput = $row2["OrderID"];
+                continue;
+            }
         }
-    }
 //$orderOutput geeft laatste orderID
-
 
 
         $allTotal = 0;
@@ -60,13 +58,13 @@ if(isset($_GET['afronden'])){
             mysqli_stmt_execute($orderInput);
 
 
-
         }
         //unset sesion winkelmandje
         unset($_SESSION['winkelwagen']);
 
         $_SESSION['messageCount2'] = 1;
         print('<meta http-equiv = "refresh" content = "0; url = ./" />');
+    }
 }
 
 ?>
