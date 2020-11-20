@@ -163,8 +163,8 @@ if(isset($_SESSION["login"])) {
             <label for="text">
                 <i class="fas fa-road"></i>
             </label>
-            <input type="text" placeholder="Straatnaam" name="StreetName" class="loginAddress" */ required>
-            <input type="text" placeholder="Huisnummer" name="HouseNumber" class="loginAddress" required><br>
+            <input type="text" placeholder="Straatnaam" name="StreetName" class="loginStraat" */ required>
+            <input type="text" placeholder="Huisnummer" name="HouseNumber" class="loginhuisNummer" required><br>
             <input type="submit" value="Registreer!" name="submit" class="btn brn-block btn-primary">
         </form>
     </div>
