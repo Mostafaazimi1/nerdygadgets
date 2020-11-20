@@ -105,9 +105,9 @@ function updateAmount($id, $amount, $winkelwagen)
             if ($amount == 0 || $amount < 0) {
                 unset($_SESSION['winkelwagen'][$key]);
             } else {
-                if($amount < $_SESSION['winkelwagen'][$key]['aantalbeschikbaar']){
+               // if($amount < $_SESSION['winkelwagen'][$key]['aantalbeschikbaar']){
                     $_SESSION['winkelwagen'][$key]['aantal'] = $amount;
-                }
+              //  }
             }
             break;
         }
