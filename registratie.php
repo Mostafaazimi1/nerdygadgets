@@ -122,7 +122,6 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
             die("Connection Failed : " . $Connection->connect_error);
         } else {
             // GEGEVENS IN PEOPLE                 image(Photo) = blob
-            print("----".$password."---");
             $stmt = $Connection->prepare(
                     "insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
                                             IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson,
@@ -134,7 +133,8 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
                                                 $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
             $execval = $stmt->execute();
             echo $execval;
-            echo "People gegevens zijn succesvol toegevoegd aan database!";
+//            echo "People gegevens zijn succesvol toegevoegd aan database!";
+            print("Uw account is successvol aangemaakt!");
             $stmt->close();
             $Connection->close();
         }
