@@ -97,7 +97,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
                 $postcode, $unknown, $unknown, $DeliveryCityName, $postcode, $LastEditedBy, $CurrentDate,
                 $ValidTo);
             $execval = $stmt->execute();
-            echo $execval;
+//            echo $execval;
 //            echo "Customer gegevens zijn succesvol toegevoegd aan database!";
             $stmt->close();
         }
@@ -132,7 +132,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
                                                 $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
                                                 $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
             $execval = $stmt->execute();
-            echo $execval;
+            //echo $execval;
 //            echo "People gegevens zijn succesvol toegevoegd aan database!";
             print("Uw account is successvol aangemaakt!");
             $stmt->close();
