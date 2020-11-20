@@ -33,7 +33,7 @@ $products = loadProducts($winkelwagen, $Connection);
                     $total = $product['price'] * $product['aantal'];
                     $allTotal += $total;
                     echo "<tr>";
-                    echo "<td><img src='Public/StockItemIMG/" . $product['img'] . "' style='max-width: 30px'></td>";
+                    echo "<td><img src='Public/StockItemIMG/" . $product['img'] . "' style='max-width: 100px'></td>";
                     echo "<td><p>" . $product['name'] . "</p></td>";
                     echo "<td><p>€" . $product['price'] . "</p></td>";
                     echo "<form action='winkelmandje.php' type='GET'>";
