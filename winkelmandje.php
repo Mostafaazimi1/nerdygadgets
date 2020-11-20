@@ -7,12 +7,12 @@ $products = loadProducts($winkelwagen, $Connection);
 ?>
 
 
-<div class="winkelmandje">
+    <div class="winkelmandje">
     <h1>Winkelmandje</h1>
-    <?php
-    if(!$products){
-        echo "<p style='font-size: 20px; margin-top: 24px;'>Je winkelwagen is momenteel leeg.</p>";
-    } else {
+<?php
+if (!$products) {
+    echo "<p style='font-size: 20px; margin-top: 24px;'>Je winkelwagen is momenteel leeg.</p>";
+} else {
     ?>
     <div class="overzicht-wrapper">
         <div class="product-overzicht">
@@ -37,8 +37,8 @@ $products = loadProducts($winkelwagen, $Connection);
                     echo "<td><p>" . $product['name'] . "</p></td>";
                     echo "<td><p>€" . $product['price'] . "</p></td>";
                     echo "<form action='winkelmandje.php' type='GET'>";
-                    echo "<td><input type='number' name='aantal' value='" . $product['aantal'] . "' style='width: 55px;height: 40px;'></td>";
-                    echo "<input type='hidden' name='id' value='". $product['id'] ."'>";
+                    echo "<td><input type='number' min='0' max='" . $product['aantalbeschikbaar'] . "' name='aantal' value='" . $product['aantal'] . "' style='width: 55px;height: 40px;'></td>";
+                    echo "<input type='hidden' name='id' value='" . $product['id'] . "'>";
                     echo "<td><input type='submit' name='save-change' value='opslaan'></td>";
                     echo "</form>";
                     echo "<td><p>€" . number_format($total, 2) . "</p></td>";
@@ -85,5 +85,5 @@ $products = loadProducts($winkelwagen, $Connection);
             </form>
         </div>
     </div>
-</div>
+    </div>
 <?php } ?>

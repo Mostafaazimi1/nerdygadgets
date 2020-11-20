@@ -40,9 +40,10 @@ function loadProducts($winkelwagen, $conn)
         array_push($selectIds, $item['id']);
     }
 
-    $sql = "SELECT s.StockItemName name, s.UnitPrice, (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, s.StockItemID, si.ImagePath
+    $sql = "SELECT s.StockItemName name, sh.QuantityOnHand, s.UnitPrice, (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, s.StockItemID, si.ImagePath
             FROM stockitems s
-            LEFT JOIN stockitemimages si on s.StockItemID = si.StockItemID";
+            LEFT JOIN stockitemimages si on s.StockItemID = si.StockItemID
+            LEFT JOIN stockitemholdings sh on sh.StockItemID = s.StockItemID";
 
     $where = " WHERE";
 
@@ -63,6 +64,7 @@ function loadProducts($winkelwagen, $conn)
                 if ($winkelwagenItem['id'] == $row['StockItemID']) {
                     $newWinkelWagen[$key]['name'] = $row['name'];
                     $newWinkelWagen[$key]['img'] = $row['ImagePath'];
+                    $newWinkelWagen[$key]['aantalbeschikbaar'] = $row['QuantityOnHand'];
                     $newWinkelWagen[$key]['price'] = number_format(round($row['SellPrice'], 2), 2);
                     break;
                 }
@@ -96,10 +98,17 @@ function getCount($winkelwagen)
     return $count;
 }
 
-function updateAmount($id, $amount, $winkelwagen){
+function updateAmount($id, $amount, $winkelwagen)
+{
     foreach ($winkelwagen as $key => $winkelwagenItem) {
         if ($winkelwagenItem['id'] == $id) {
-            $_SESSION['winkelwagen'][$key]['aantal'] = $amount;
+            if ($amount == 0 || $amount < 0) {
+                unset($_SESSION['winkelwagen'][$key]);
+            } else {
+                if($amount < $_SESSION['winkelwagen'][$key]['aantalbeschikbaar']){
+                    $_SESSION['winkelwagen'][$key]['aantal'] = $amount;
+                }
+            }
             break;
         }
     }
@@ -107,7 +116,7 @@ function updateAmount($id, $amount, $winkelwagen){
 
 function bestellingAfronden($winkelwagen, $afrekenGegevens)
 {
-    if(isset($afrekenGegevens['newAcc'])){
+    if (isset($afrekenGegevens['newAcc'])) {
         //hier query voor maken van die acc
     }
 
