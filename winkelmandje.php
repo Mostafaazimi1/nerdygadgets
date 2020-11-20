@@ -80,7 +80,7 @@ $products = loadProducts($winkelwagen, $Connection);
                 </tr>
             </table>
             <p>Inclusief btw</p>
-            <form action="Afrekenen.php" method="post">
+            <form action="afrekenen.php" method="post">
                 <input type="submit" value="Bestelling afronden">
             </form>
         </div>

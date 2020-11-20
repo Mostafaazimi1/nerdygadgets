@@ -4,6 +4,7 @@ include __DIR__ . "/header.php";
 $winkelwagen = $_SESSION['winkelwagen'];
 $products = loadProducts($winkelwagen, $Connection);
 $afrekenGegevens = $_SESSION['AfrekenGegevens'];
+
 $gegevens = $_SESSION['login'];
 ?>
 
@@ -66,9 +67,6 @@ if(isset($_GET['afronden'])){
 
         $_SESSION['messageCount2'] = 1;
         print('<meta http-equiv = "refresh" content = "0; url = ./" />');
-}
-else{
-    print("else1");
 }
 
 ?>

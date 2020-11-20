@@ -4,23 +4,8 @@ include __DIR__ . "/header.php";
 $winkelwagen = $_SESSION['winkelwagen'];
 $products = loadProducts($winkelwagen, $Connection);
 
-$voornaam = "";
-$tussenvoegsel = "";
-$achternaam = "";
-$postcode = "";
-$huisnummer = "";
-$toev = "";
-$straat ="";
-$plaats = "";
-$email = "";
-$telefoonnummer = "";
-
-
-?>
-
-<?php
-if (isset($_SESSION["login"])) {
-$gegevens = $_SESSION['login'];
+if(isset($_SESSION["login"])) {
+    $gegevens = $_SESSION['login'];
     $HuisnummerStraat = (explode(" ",$gegevens['DeliveryAddressLine2']));
     $voornaam = $gegevens["PreferredName"];
     $achternaam = (str_replace($gegevens['PreferredName']." ", "", $gegevens['FullName']));
@@ -31,13 +16,21 @@ $gegevens = $_SESSION['login'];
     $plaats = $gegevens['PostalAddressLine2'];
     $email = $gegevens['EmailAddress'];
     $telefoonnummer = $gegevens['PhoneNumber'];
-
+} else {
+    $voornaam = "";
+    $tussenvoegsel = "";
+    $achternaam = "";
+    $postcode = "";
+    $huisnummer = "";
+    $toev = "";
+    $straat ="";
+    $plaats = "";
+    $email = "";
+    $telefoonnummer = "";
 }
 
-
 ?>
-
-<form method="post" action="Afrekenen.php">
+<form method="post" action="afrekenen.php">
     <div class="Bestelgegevens">
         <h1>Bestelgegevens</h1>
         <div class="overzicht-wrapper">
@@ -92,8 +85,7 @@ $gegevens = $_SESSION['login'];
                             <td><input type="text" id="telefoonnummer" name="telefoonnummer" placeholder="06 12345678"
                                        value="<?php echo($telefoonnummer); ?>" required></td>
                         </tr>
-                        <?php if (isset($_SESSION["login"])) {
-                        } else {//login blokje
+                        <?php if(!isset($_SESSION["login"])) {
                             echo "<tr>";
                             echo "<div>";
 
