@@ -64,6 +64,10 @@ if(isset($_GET['afronden'])){
 
         $_SESSION['messageCount2'] = 1;
         print('<meta http-equiv = "refresh" content = "0; url = ./" />');
+    } else {
+        // nodatklantlo[g
+        unset($_SESSION['winkelwagen']);
+        print('<meta http-equiv = "refresh" content = "0; url = ./" />');
     }
 }
 
