@@ -70,7 +70,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
         $BillToCustomerId = 1;
         $DeliveryCityId = 1;
         $LastEditedBy = 1;
-        $IsPermittedToLogon = 0;
+        $IsPermittedToLogon = 1;
         $IsExternalLogonProvider = 1;
         $IsSystemUser = 0;
         $IsEmployee = 0;
@@ -122,14 +122,15 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
             die("Connection Failed : " . $Connection->connect_error);
         } else {
             // GEGEVENS IN PEOPLE                 image(Photo) = blob
+            print("----".$password."---");
             $stmt = $Connection->prepare(
                     "insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
                                             IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson,
                                             UserPreferences, PhoneNumber, FaxNumber, EmailAddress, Photo, CustomFields,
                                             OtherLanguages, LastEditedBy, ValidFrom, ValidTo, CustomerNUM)
-                                            values(?, ?, ?, ?, ?, ?,".$password." , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssisiiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
-                                                $IsExternalLogonProvider, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
+                                            values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssisisiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
+                                                $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
                                                 $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
             $execval = $stmt->execute();
             echo $execval;

@@ -21,15 +21,14 @@ $telefoonnummer = "";
 <?php
 if (isset($_SESSION["login"])) {
 $gegevens = $_SESSION['login'];
-print_r($_SESSION['login']);
-    $HuisnummerStraat = (explode(" ",$_SESSION['DeliveryAddressLine2']));
+    $HuisnummerStraat = (explode(" ",$gegevens['DeliveryAddressLine2']));
     $voornaam = $gegevens["PreferredName"];
     $achternaam = (str_replace($gegevens['PreferredName']." ", "", $gegevens['FullName']));
-    $postcode = $gegevens[''];
-    $huisnummer = $HuisnummerStraat[1];
-    $toev = $gegevens[''];
-    $straat = $HuisnummerStraat[2];
-    $plaats = $gegevens[''];
+    $postcode = $gegevens['DeliveryPostalCode'];
+    $huisnummer = $HuisnummerStraat[0];
+    $toev = "";
+    $straat = $HuisnummerStraat[1];
+    $plaats = $gegevens['PostalAddressLine2'];
     $email = $gegevens['EmailAddress'];
     $telefoonnummer = $gegevens['PhoneNumber'];
 
