@@ -98,7 +98,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
                 $ValidTo);
             $execval = $stmt->execute();
             echo $execval;
-            echo "Customer gegevens zijn succesvol toegevoegd aan database!";
+//            echo "Customer gegevens zijn succesvol toegevoegd aan database!";
             $stmt->close();
         }
     }
