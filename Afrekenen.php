@@ -10,7 +10,7 @@ $achternaam = "";
 $postcode = "";
 $huisnummer = "";
 $toev = "";
-$straat = "";
+$straat ="";
 $plaats = "";
 $email = "";
 $telefoonnummer = "";
@@ -73,7 +73,7 @@ $gegevens = $_SESSION['login'];
                         </tr>
 
                         <tr>
-                            <td><input type="text" id="straatnaam" name="straat" placeholder="Straat"
+                            <td><input type="text" id="straatnaam" name="straat" placeholder='Straat'
                                        value="<?php echo($straat); ?> " required></td>
                             <td><input type="text" id="woonplaats" name="plaats" placeholder="Plaats"
                                        value="<?php echo($plaats); ?>" required></td>
