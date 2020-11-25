@@ -21,7 +21,8 @@ $Query = "
 
 $ShowStockLevel = 1000;
 $Statement = mysqli_prepare($Connection, $Query);
-mysqli_stmt_bind_param($Statement, "i", $_GET['id']);
+$itemID = $_GET['id'];
+mysqli_stmt_bind_param($Statement, "i", $itemID);
 mysqli_stmt_execute($Statement);
 $ReturnableResult = mysqli_stmt_get_result($Statement);
 if ($ReturnableResult && mysqli_num_rows($ReturnableResult) == 1) {
@@ -36,10 +37,28 @@ $Query = "
                 WHERE StockItemID = ?";
 
 $Statement = mysqli_prepare($Connection, $Query);
-mysqli_stmt_bind_param($Statement, "i", $_GET['id']);
+mysqli_stmt_bind_param($Statement, "i", $itemID);
 mysqli_stmt_execute($Statement);
 $R = mysqli_stmt_get_result($Statement);
 $R = mysqli_fetch_all($R, MYSQLI_ASSOC);
+
+$sql1 = "SELECT COUNT(*) AS total, AVG(rating) AS avgrating FROM `review` WHERE StockItemID = ".$itemID;
+$result1 = $Connection->query($sql1);
+if ($result1->num_rows > 0) {
+    while ($row1 = $result1->fetch_assoc()) {
+        // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
+        $itemCount = $row1["total"];
+        $avgRating = (int)$row1["avgrating"];
+        continue;
+    }
+}
+
+//$sql2 = "SELECT AVG(Rating) avgrating FROM `review` WHERE StockItemID = ".$itemID;
+//$result1 = $Connection->query($sql1);
+//if ($result1->num_rows > 0) {
+////                    $row1 = $result1->fetch_assoc();
+//    $itemCount = $result1->fetch_assoc()["total"];
+//}
 
 if ($R) {
     $Images = $R;
@@ -173,6 +192,183 @@ if ($R) {
 
                     <p><?php print $Result['CustomFields']; ?>.</p>
                     <?php
+                }
+                ?>
+            </div>
+        </div>
+        <div class="reviews">
+            <div>
+                <div>
+                    <h3>Reviews</h3>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <?php
+                        print('<h1>'.$avgRating.'</h1>');
+                        print('<p>van de 5 gemiddeld</p>');
+                    ?>
+                </div>
+                <div>
+                    <?php
+                        for($i3=0; $i3 < 5; $i3++) {
+                            if($avgRating > 0) {
+                                print('<i class="fas fa-star"></i>');
+                            } else {
+                                print('<i class="far fa-star"></i>');
+                            }
+                            $avgRating--;
+                        }
+                    ?>
+                </div>
+                <div>
+                    <p>Aantal reviews: <?php print("<b>".$itemCount."</b>");?></p>
+                </div>
+            </div>
+            <div>
+                <form action="review.php" method="get">
+                    <input type="hidden" name="orderID" value="<?php print($itemID); ?>" />
+                    <input id="writeReview" type="submit" name="reviewButton" value="Schrijf een review">
+                </form>
+            </div>
+            <div>
+                <?php
+//                $sql1 = "SELECT COUNT(*) total FROM `review` WHERE StockItemID = ".$itemID;
+//                $result1 = $Connection->query($sql1);
+//                if ($result1->num_rows > 0) {
+////                    $row1 = $result1->fetch_assoc();
+//                    print( "aantal: ".($result1->fetch_assoc()["total"])."<br>");
+//                }
+//                $result1 = $Connection->mysqli_fetch_array($sql1);
+//                print($result1['total']);
+
+//                $sql1=mysql_query("SELECT COUNT(*) AS total FROM review WHERE StockItemID = 136");
+//                $data=mysql_fetch_assoc($sql1);
+//                echo $data['total'];
+
+                print("<br>");
+//                print($sql1);
+                $sql2 = "SELECT PersonID, ReviewTitle, Rating, Recommend, Description, RateDate FROM review WHERE StockItemID = ".$itemID;
+                $result2 = $Connection->query($sql2);
+                if ($result2->num_rows > 0) {
+                    while ($row2 = $result2->fetch_assoc()) {
+                        print("<div class='individualReview'>");
+                        $rating = $row2["Rating"];
+                        for($i3=0; $i3 < 5; $i3++) {
+                            if($rating > 0) {
+                                print('<i class="fas fa-star"></i>');
+                            } else {
+                                print('<i class="far fa-star"></i>');
+                            }
+                            $rating--;
+                        }
+                        print("&#8287".$row2["ReviewTitle"]."<br>");
+                        // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
+                        $sql3 = "SELECT PreferredName FROM People WHERE PersonID = ".$row2["PersonID"];
+                        $result3 = $Connection->query($sql3);
+                        if ($result3->num_rows == 1) {
+                            print($result3->fetch_assoc()["PreferredName"]."&#8287;&#8287;&#8287;");
+                            print($row2["RateDate"]."<br>");
+                        }
+                        if($row2["Recommend"]) {
+                            print("<i class='fas fa-check-circle'></i>");
+                            print(" Ik raad dit product aan<br>");
+                        }
+                        print("<br>".$row2["Description"]."<br>");
+                        print("<br><br>");
+                        print("</div>");
+                        continue;
+                    }
+//                    // output data of each row
+//                    $passFound = FALSE;
+//                    while ($row = $result->fetch_assoc()) {
+//                        if (($row["LogonName"] != "NO LOGON") && ($row["LogonName"] == strtolower($_POST["email"])) && ($_POST["password"] == $row["HashedPassword"])) {
+//                            if ($row["CustomerNUM"] == "") {
+//                                // Er is geen customerid gekoppeld, dus de opgeslagen account gegevens zijn incompleet.
+//                                // De gebruiker krijgt hievan een melding
+//                                unset($passFound);
+//                                $email = 'value="' . $_POST["email"] . '"';
+//                                $password = 'value="' . $_POST["password"] . '"';
+//                                print('<div class="notificationError">');
+//                                print('<h2>We wijzen je graag op het volgende:</h2><br>');
+//                                print('<p>Uw accountgegevens zijn beschadigd. Neem alstublieft contact op met de systeembeheerder.</p>');
+//                                print('</div>');
+//                            } elseif (($row["IsPermittedToLogon"] == 0)) {
+//                                // De gebruiker mag niet mag inloggen, hij krijgt hievan een melding
+//                                unset($passFound);
+//                                $email = 'value="' . $_POST["email"] . '"';
+//                                $password = 'value="' . $_POST["password"] . '"';
+//                                print('<div class="notificationError">');
+//                                print('<h2>We wijzen je graag op het volgende:</h2><br>');
+//                                print('<p>Uw account is uitgeschakeld door de systeembeheerder.</p>');
+//                                print('</div>');
+//                                //registratiemelding geven
+//                            } elseif ($row["CustomerNUM"] != "") {
+//                                // De gegevens komen overeen, de gebruiker mag en wordt ingelogd
+//                                // Array met de gegevens van de klant, geplaatst in $_SESSION['login'] = $loginData;
+//                                $_SESSION['messageCount'] = 1;
+//                                $passFound = TRUE;
+//                                $loginData = array(
+//                                    "PersonID" => $row["PersonID"],
+//                                    "FullName" => $row["FullName"],
+//                                    "PreferredName" => $row["PreferredName"],
+//                                    "IsPermittedToLogon" => $row["IsPermittedToLogon"],
+//                                    "LogonName" => $row["LogonName"],
+//                                    "PhoneNumber" => $row["PhoneNumber"],
+//                                    "EmailAddress" => $row["EmailAddress"],
+//                                );
+//                                $sql3 = "SELECT CustomerID, CustomerName, DeliveryMethodID, DeliveryCityID,
+//                PostalCityID, PhoneNumber, DeliveryAddressLine2, DeliveryPostalCode,
+//                PostalPostalCode, PostalAddressLine2 FROM Customers WHERE CustomerID = " . $row["CustomerNUM"] . ";";
+//                                $result3 = $Connection->query($sql3);
+//                                if ($result3->num_rows > 0) {
+//                                    while ($row2 = $result2->fetch_assoc()) {
+//                                        // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
+//                                        $loginData["CustomerID"] = $row2["CustomerID"];
+//                                        $loginData["CustomerName"] = $row2["CustomerName"];
+//                                        $loginData["DeliveryMethodID"] = $row2["DeliveryMethodID"];
+//                                        $loginData["DeliveryCityID"] = $row2["DeliveryCityID"];
+//                                        $loginData["PostalCityID"] = $row2["PostalCityID"];
+//                                        $loginData["PhoneNumber2"] = $row2["PhoneNumber"];
+//                                        $loginData["DeliveryAddressLine2"] = $row2["DeliveryAddressLine2"];
+//                                        $loginData["DeliveryPostalCode"] = $row2["DeliveryPostalCode"];
+//                                        $loginData["PostalPostalCode"] = $row2["PostalPostalCode"];
+//                                        $loginData["PostalAddressLine2"] = $row2["PostalAddressLine2"];
+//                                        continue;
+//                                    }
+//                                }
+//                                $_SESSION['login'] = $loginData;
+//                                continue;
+//                            } else {
+//                                print("error! No connection with customer table");
+//                            }
+//                        }
+//                    }
+//                    if (isset($passFound)) {
+//                        // Wachtwoord is gevonden, gebruiker wordt geredirect naar home
+//                        if ($passFound) {
+//                            print('<meta http-equiv = "refresh" content = "0; url = ./" />');
+//                            exit();
+//                        } else {
+//                            // Wachtwoord is niet gevonden, gebruiker moet opnieuw invoeren
+//                            print('<div class="notificationError">');
+//                            print('<h2>We wijzen je graag op het volgende:</h2><br>');
+//                            print('<p>De combinatie van e-mailadres en wachtwoord is niet geldig.</p>');
+//                            print('</div>');
+//                            $email = 'value="' . $_POST["email"] . '"';
+//                            $password = 'value="' . $_POST["password"] . '"';
+//                            //registratiemelding geven
+//                        }
+//                    }
+                } else {
+                    // De database is leeg, dus er staan geen accounts in
+                    print('<div class="notificationError">');
+                    print('<h2>We wijzen je graag op het volgende:</h2><br>');
+                    print('<p>De combinatie van e-mailadres en wachtwoord is niet geldig.</p>');
+                    print('</div>');
+                    $email = 'value="' . $_POST["email"] . '"';
+                    $password = 'value="' . $_POST["password"] . '"';
+                    //registratie melding geven
                 }
                 ?>
             </div>

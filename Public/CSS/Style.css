@@ -722,3 +722,13 @@ ul#ul-class-categorie li {
 .loginhuisNummer{
     width: 107px!important;
 }
+.individualReview {
+    width: 50%;
+    margin-bottom: 20px;
+    border: 5px solid black;
+}
+#writeReview {
+    border: 1px solid black;
+    width: 15%;
+    padding: 5px;
+}
