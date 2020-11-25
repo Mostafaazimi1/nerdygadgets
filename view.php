@@ -228,7 +228,7 @@ if ($R) {
             <div>
                 <form action="review.php" method="get">
                     <input type="hidden" name="orderID" value="<?php print($itemID); ?>" />
-                    <input id="writeReview" type="submit" name="reviewButton" value="Schrijf een review">
+                    <input class="buttonClass" type="submit" name="reviewButton" value="Schrijf een review">
                 </form>
             </div>
             <div>
