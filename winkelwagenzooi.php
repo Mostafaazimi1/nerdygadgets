@@ -6,26 +6,35 @@ $products = loadProducts($winkelwagen, $Connection);
 
 // gegevens van de niet ingelogde klant worden bewaard in de database table customers
 // eerst opvragen customerid die hoort bij session -- customerid is gelinkt met customerid van table orders
-if (isset($_SESSION["login"])) {
-    // Gebruiker is ingelogd
-    $gegevens = $_SESSION['login'];
-    $HuisnummerStraat = (explode(" ", $gegevens['DeliveryAddressLine2'], 2));
-    $FirstName = $gegevens["PreferredName"];
-    $LastName = (str_replace($gegevens['PreferredName'] . " ", "", $gegevens['FullName']));
-    $postcode = $gegevens['DeliveryPostalCode'];
-    $HouseNumber = $HuisnummerStraat[0];
-    $tussenvoegsel = "";
-    $StreetName = $HuisnummerStraat[1] ;
-    $Plaats = $gegevens['CityName'];
-    $email = $gegevens['EmailAddress'];
-    $PhoneNumber = $gegevens['PhoneNumber'];
-} else {
-    // Gebruiker is niet ingelogd
-    $tussenvoegsel = "";
-    $Plaats = ucfirst($_POST["Plaats"]);
-}
 
 if(isset($_POST["Afreken_submit"])) {
+    if (isset($_SESSION["login"])) {
+        // Gebruiker is ingelogd
+        $gegevens = $_SESSION['login'];
+        $HuisnummerStraat = (explode(" ", $gegevens['DeliveryAddressLine2']));
+        $FirstName = $gegevens["PreferredName"];
+        $LastName = (str_replace($gegevens['PreferredName'] . " ", "", $gegevens['FullName']));
+        $postcode = $gegevens['DeliveryPostalCode'];
+        $HouseNumber = $HuisnummerStraat[0];
+        $toev = "";
+        $StreetName = $HuisnummerStraat[1];
+        $Plaats = $gegevens['PostalAddressLine2'];
+        $email = $gegevens['EmailAddress'];
+        $HouseNumber = $gegevens['PhoneNumber'];
+        $Plaats = ucfirst($_POST["Plaats"]);
+    } else {
+        // Gebruiker is niet ingelogd
+        $FirstName = "";
+        $tussenvoegsel = "";
+        $LastName = "";
+        $postcode = "";
+        $HouseNumber = "";
+        $toev = "";
+        $StreetName = "";
+        $Plaats = "";
+        $email = "";
+        $PhoneNumber = "";
+    }
     //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
     // ANDERS AFBREKEN
     $sql = "SELECT CityName FROM cities WHERE CityName = '" . $Plaats . "' LIMIT 1";
@@ -39,7 +48,7 @@ if(isset($_POST["Afreken_submit"])) {
         $password = $_POST["password"];
         $email = $_POST["email"];
         $PhoneNumber = $_POST["PhoneNumber"];
-        $postcode = $_POST["postcode"];
+        $postcode = $_POST["PostCode"];
         $FirstName = $_POST["FirstName"];
         $LastName = $_POST["LastName"];
         $HouseNumber = $_POST["HouseNumber"];
@@ -88,16 +97,17 @@ if(isset($_POST["Afreken_submit"])) {
         //echo "Customer gegevens zijn succesvol toegevoegd aan database!";
         $stmt->close();
     }
+
+    // VRAAG VALUE VAN CUSTOMERID UIT CUSTOMERS EN GEEF DEZE EIGEN VARIABELEN -zodat je ze in people tabel kan inserten!
+    $sql = "SELECT CustomerID FROM customers WHERE CustomerName = ('$FullName') AND DeliveryPostalCode =
+            ('$postcode') AND DeliveryAddressLine2 = ('$address')";
+    $result = $Connection->query($sql);
+    $row = mysqli_fetch_array($result);
+    $CustomerNUM = reset($row);
+
     //      Als verbinding gesloten is, wordt de SQL query voorbereid.
     if(isset($_POST["account_aanmaken"]) AND isset($_POST["password"]) AND isset($_POST["confirmpassword"])) {
         if(($_POST['account_aanmaken'] == 'ja') AND (($_POST["password"]) != ($_POST["confirmpassword"]))) {
-            // VRAAG VALUE VAN CUSTOMERID UIT CUSTOMERS EN GEEF DEZE EIGEN VARIABELEN -zodat je ze in people tabel kan inserten!
-            $sql = "SELECT CustomerID FROM customers WHERE CustomerName = ('$FullName') AND DeliveryPostalCode =
-                    ('$postcode') AND DeliveryAddressLine2 = ('$address')";
-            $result = $Connection->query($sql);
-            $row = mysqli_fetch_array($result);
-            $CustomerNUM = reset($row);
-
             // GEGEVENS IN PEOPLE image(Photo) = blob
             $stmt1 = $Connection->prepare("insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
                             IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson,
@@ -151,6 +161,8 @@ if(isset($_POST["Afreken_submit"])) {
                                        value="<?php echo($postcode); ?>" required></td>
                             <td><input type="text" id="huisnummer" name="HouseNumber" placeholder="Nr."
                                        value="<?php echo($HouseNumber); ?>" required></td>
+                            <td><input type="text" id="toev" name="toev" placeholder="Toev."
+                                       value="<?php echo($toev); ?>"></td>
                         </tr>
                         <tr>
                             <th>Straatnaam</th>
@@ -179,16 +191,16 @@ if(isset($_POST["Afreken_submit"])) {
                         </tr>
                         <?php if(!isset($_SESSION["login"])) {
                             echo "<div>";
-                                echo "<tr>";
-                                    echo "<th></th>";
-                                    echo "<td><input type='checkbox' name='account_aanmaken' value='ja'></td>";
-                                    echo "<td>account aanmaken</td>";
-                                echo "</tr>";
-                                echo "<tr>";
-                                    echo "<th></th>";
-                                    echo "<td><input type='password' placeholder='Wachtwoord' name='password' autocomplete='new-password'></td>";
-                                    echo "<td><input type='password' placeholder='Bevestig wachtwoord' name='confirmpassword' autocomplete='new-password'></td>";
-                                echo "</tr>";
+                            echo "<tr>";
+                            echo "<th></th>";
+                            echo "<td><input type='checkbox' name='account_aanmaken' value='ja'></td>";
+                            echo "<td>account aanmaken</td>";
+                            echo "</tr>";
+                            echo "<tr>";
+                            echo "<th></th>";
+                            echo "<td><input type='password' placeholder='Wachtwoord' name='password' autocomplete='new-password'></td>";
+                            echo "<td><input type='password' placeholder='Bevestig wachtwoord' name='confirmpassword' autocomplete='new-password'></td>";
+                            echo "</tr>";
                             echo "</div>";
                         }
                         ?>
