@@ -24,15 +24,9 @@ if(isset($_POST["Afreken_submit"])) {
         $Plaats = ucfirst($_POST["Plaats"]);
     } else {
         // Gebruiker is niet ingelogd
-        $FirstName = "";
         $tussenvoegsel = "";
-        $LastName = "";
-        $postcode = "";
-        $HouseNumber = "";
         $toev = "";
-        $StreetName = "";
-        $Plaats = "";
-        $email = "";
+        $Plaats = $_POST['Plaats'];
         $PhoneNumber = "";
     }
     //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
