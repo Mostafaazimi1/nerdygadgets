@@ -11,15 +11,15 @@ if (isset($_GET['delete'])) {
 
 if (isset($_POST['Afreken_submit'])) {
     $_SESSION['AfrekenGegevens'] = array(
-        'voornaam' => $_POST['voornaam'],
-        'achternaam' => $_POST['achternaam'],
+        'voornaam' => $_POST['FirstName'],
+        'achternaam' => $_POST['LastName'],
         'postcode' => $_POST['postcode'],
-        'huisnummer' => $_POST['huisnummer'],
+        'huisnummer' => $_POST['HouseNumber'],
         'toev' => $_POST['toev'],
-        'straat' => $_POST['straat'],
-        'plaats' => $_POST['plaats'],
+        'straat' => $_POST['StreetName'],
+        'plaats' => $_POST['Plaats'],
         'email' => $_POST['email'],
-        'telefoonnummer' => $_POST['telefoonnummer']
+        'telefoonnummer' => $_POST['PhoneNumber']
     );
 
     if(isset($_POST['account_aanmaken'])){
