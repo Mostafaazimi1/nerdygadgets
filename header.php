@@ -2,7 +2,7 @@
 include "connect.php";
 include "functions.php";
 session_start();
-include "losseFunctions.php";
+//include "losseFunctions.php";
 
 ?>
 <!DOCTYPE html>
