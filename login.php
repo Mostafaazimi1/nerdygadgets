@@ -78,8 +78,15 @@ if(isset($_SESSION["login"])) {
             if(isset($passFound)){
                 // Wachtwoord is gevonden, gebruiker wordt geredirect naar home
                 if($passFound) {
-                    print('<meta http-equiv = "refresh" content = "0; url = ./" />');
-                    exit();
+                    if(isset($_SESSION['reviewID'])) {
+                        $reviewID = $_SESSION['reviewID'];
+                        unset($_SESSION['reviewID']);
+                        print('<meta http-equiv = "refresh" content = "0; url = ./review.php?id='.$reviewID.'&reviewButton=Schrijf+een+review" />');
+                        exit();
+                    } else {
+                        print('<meta http-equiv = "refresh" content = "0; url = ./" />');
+                        exit();
+                    }
                 } else {
                     // Wachtwoord is niet gevonden, gebruiker moet opnieuw invoeren
                     print('<div class="notificationError">');

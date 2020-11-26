@@ -366,7 +366,7 @@ if ($R) {
                     print('<h2>We wijzen je graag op het volgende:</h2><br>');
                     print('<p>De combinatie van e-mailadres en wachtwoord is niet geldig.</p>');
                     print('</div>');
-                    $email = 'value="' . $_POST["email"] . '"';
+                    $email = 'value="'.$_POST["email"].'"';
                     $password = 'value="' . $_POST["password"] . '"';
                     //registratie melding geven
                 }

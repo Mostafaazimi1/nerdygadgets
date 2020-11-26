@@ -1,7 +1,8 @@
 <?php
 include __DIR__ . "/header.php";
 if(!isset($_SESSION['login'])){
-    print("niet ingelogd");
+    $_SESSION['reviewID'] = $_GET['orderID'];
+    print('<meta http-equiv = "refresh" content = "0; url = ./login.php" />');
     } else {
         if(isset($_POST["submitReview"])) {
             $gegevens = $_SESSION['login'];
