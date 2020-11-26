@@ -5,6 +5,12 @@ if(isset($_SESSION["login"])) {
     print("<h1>U bent al ingelogd!</h1><br>");
     print('<a href="./">Ga terug naar de homepagina..</a>');
 } else {
+    if(isset($_SESSION['reviewID'])) {
+        print('<div>');
+        print('<a class="buttonClass" href="./view.php?id=' . $_SESSION['reviewID'] . '">Terug</a>');
+        print('&#160;&#160;<a class="buttonClass" href="./">Home pagina</a>');
+        print('</div><br>');
+    }
     if(isset($_POST["email"]) && isset($_POST["password"])) {
         //wanneer email en ww gevult zijn wordt dit uitgevoerd
         $sql = "SELECT PersonID, FullName, PreferredName, IsPermittedToLogon, LogonName, HashedPassword, PhoneNumber, EmailAddress, CustomerNUM FROM people";
@@ -81,7 +87,7 @@ if(isset($_SESSION["login"])) {
                     if(isset($_SESSION['reviewID'])) {
                         $reviewID = $_SESSION['reviewID'];
                         unset($_SESSION['reviewID']);
-                        print('<meta http-equiv = "refresh" content = "0; url = ./review.php?id='.$reviewID.'&reviewButton=Schrijf+een+review" />');
+                        print('<meta http-equiv = "refresh" content = "0; url = ./review.php?id='.$reviewID.'&reviewButton=Schrijf+een+review&newLogin=1" />');
                         exit();
                     } else {
                         print('<meta http-equiv = "refresh" content = "0; url = ./" />');

@@ -33,14 +33,19 @@ if(!isset($_SESSION['login'])){
 //            print($_POST['description']);
 
         } else {
-            if (isset($_GET["orderID"])) {
+            if (isset($_GET["orderID"]) OR isset($_GET['newLogin'])) {
+                if(isset($_GET["orderID"])){
+                    $orderID = $_GET["orderID"];
+                } elseif(isset($_GET['newLogin'])) {
+                    $orderID = $_GET['newLogin'];
+                }
                 print('<div>');
-                print('<a class="buttonClass" href="./view.php?id='.$_GET["orderID"].'">Terug</a>');
+                print('<a class="buttonClass" href="./view.php?id='.$orderID.'">Terug</a>');
                 print('&#160;&#160;<a class="buttonClass" href="./">Home pagina</a>');
                 print('</div><br>');
 
                 if(isset($_GET["reviewButton"])) {
-                    if (isset($_GET["orderID"])) {
+                    if (isset($orderID)) {
                         //Schrijf je review
                         if(isset($_SESSION['login'])){
                             $gegevens = $_SESSION['login'];
