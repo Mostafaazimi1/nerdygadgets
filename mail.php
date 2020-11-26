@@ -10,9 +10,13 @@ if(isset($_POST["sendmail"])) {
    $to = "klantenservice.nerdygadgets@gmail.com";
    $mailen = mail($to, $onderwerp, $volledigetekst);
 
-    if($mailen == true) {
-        header("Location: klantenservice.php?bericht&verzenden=succes");
-    } else {
-        print("Uw bericht kon niet worden verzonden");
-    }
+   if($tekst == "Stel hier uw vraag of klacht") {
+       print("Vul uw vraag of klacht in");
+   } else {
+       if ($mailen == true) {
+           header("Location: klantenservice.php?bericht&verzenden=succes");
+       } else {
+           print("Uw bericht kon niet worden verzonden");
+       }
+   }
 }
