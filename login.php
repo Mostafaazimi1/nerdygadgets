@@ -13,7 +13,7 @@ if(isset($_SESSION["login"])) {
     }
     if(isset($_POST["email"]) && isset($_POST["password"])) {
         //wanneer email en ww gevult zijn wordt dit uitgevoerd
-        $sql = "SELECT PersonID, FullName, PreferredName, IsPermittedToLogon, LogonName, HashedPassword, PhoneNumber, EmailAddress, CustomerNUM FROM people";
+        $sql = "SELECT PersonID, FullName, PreferredName, IsPermittedToLogon, LogonName, HashedPassword, EmailAddress, CustomerNUM FROM people";
         $result = $Connection->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
@@ -51,7 +51,6 @@ if(isset($_SESSION["login"])) {
                             "PreferredName" => $row["PreferredName"],
                             "IsPermittedToLogon" => $row["IsPermittedToLogon"],
                             "LogonName" => $row["LogonName"],
-                            "PhoneNumber" => $row["PhoneNumber"],
                             "EmailAddress" => $row["EmailAddress"],
                         );
                         $sql2 = "SELECT CustomerID, CustomerName, DeliveryMethodID, DeliveryCityID,
@@ -60,13 +59,21 @@ if(isset($_SESSION["login"])) {
                         $result2 = $Connection->query($sql2);
                         if ($result2->num_rows > 0) {
                             while ($row2 = $result2->fetch_assoc()) {
+                                $sql3 = "SELECT CityName FROM cities WHERE CityID = '".$row2["DeliveryCityID"]."' LIMIT 1";
+                                $result3 = $Connection->query($sql3);
+                                if ($result3->num_rows > 0) {
+                                    while ($row3 = $result3->fetch_assoc()) {
+                                        $loginData["CityName"] = $row3["CityName"];
+                                        continue;
+                                    }
+                                }
                                 // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
                                 $loginData["CustomerID"] = $row2["CustomerID"];
                                 $loginData["CustomerName"] = $row2["CustomerName"];
                                 $loginData["DeliveryMethodID"] = $row2["DeliveryMethodID"];
                                 $loginData["DeliveryCityID"] = $row2["DeliveryCityID"];
                                 $loginData["PostalCityID"] = $row2["PostalCityID"];
-                                $loginData["PhoneNumber2"] = $row2["PhoneNumber"];
+                                $loginData["PhoneNumber"] = $row2["PhoneNumber"];
                                 $loginData["DeliveryAddressLine2"] = $row2["DeliveryAddressLine2"];
                                 $loginData["DeliveryPostalCode"] = $row2["DeliveryPostalCode"];
                                 $loginData["PostalPostalCode"] = $row2["PostalPostalCode"];
