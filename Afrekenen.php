@@ -7,6 +7,18 @@ $products = loadProducts($winkelwagen, $Connection);
 // gegevens van de niet ingelogde klant worden bewaard in de database table customers
 // eerst opvragen customerid die hoort bij session -- customerid is gelinkt met customerid van table orders
 
+// Gebruiker is niet ingelogd
+        $FirstName = "";
+        $tussenvoegsel = "";
+        $LastName = "";
+        $postcode = "";
+        $HouseNumber = "";
+        $toev = "";
+        $StreetName = "";
+        $Plaats = "";
+        $email = "";
+        $PhoneNumber = "";
+
 if(isset($_POST["Afreken_submit"])) {
     if (isset($_SESSION["login"])) {
         // Gebruiker is ingelogd
@@ -22,18 +34,6 @@ if(isset($_POST["Afreken_submit"])) {
         $email = $gegevens['EmailAddress'];
         $HouseNumber = $gegevens['PhoneNumber'];
         $Plaats = ucfirst($_POST["Plaats"]);
-    } else {
-        // Gebruiker is niet ingelogd
-        $FirstName = "";
-        $tussenvoegsel = "";
-        $LastName = "";
-        $postcode = "";
-        $HouseNumber = "";
-        $toev = "";
-        $StreetName = "";
-        $Plaats = "";
-        $email = "";
-        $PhoneNumber = "";
     }
     //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
     // ANDERS AFBREKEN
@@ -48,7 +48,7 @@ if(isset($_POST["Afreken_submit"])) {
         $password = $_POST["password"];
         $email = $_POST["email"];
         $PhoneNumber = $_POST["PhoneNumber"];
-        $postcode = $_POST["PostCode"];
+        $postcode = $_POST["postcode"];
         $FirstName = $_POST["FirstName"];
         $LastName = $_POST["LastName"];
         $HouseNumber = $_POST["HouseNumber"];
