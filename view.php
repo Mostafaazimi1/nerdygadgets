@@ -277,7 +277,6 @@ if ($R) {
                         print("<br>".$row2["Description"]."<br>");
                         print("<br><br>");
                         print("</div>");
-                        continue;
                     }
 //                    // output data of each row
 //                    $passFound = FALSE;
@@ -362,13 +361,9 @@ if ($R) {
 //                    }
                 } else {
                     // De database is leeg, dus er staan geen accounts in
-                    print('<div class="notificationError">');
-                    print('<h2>We wijzen je graag op het volgende:</h2><br>');
-                    print('<p>De combinatie van e-mailadres en wachtwoord is niet geldig.</p>');
+                    print('<div></div>');
+                    print('<p>Er zijn nog geen reviews geschreven.</p>');
                     print('</div>');
-                    $email = 'value="'.$_POST["email"].'"';
-                    $password = 'value="' . $_POST["password"] . '"';
-                    //registratie melding geven
                 }
                 ?>
             </div>
