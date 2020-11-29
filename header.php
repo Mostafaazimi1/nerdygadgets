@@ -156,7 +156,7 @@ if (isset($_POST['afronden']) && $_GET['afronden'] == 'Bestelling afronden') {
                             <a href="categories.php" class="HrefDecorationCategorie">Hele assortiment</a>
                         </li>
                         <li>
-                            <a href="klantenservice.php.php" class="HrefDecorationCategorie">Klantenservice</a>
+                            <a href="klantenservice.php" class="HrefDecorationCategorie">Klantenservice</a>
                         </li>
                     </ul>
                 </div>
