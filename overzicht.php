@@ -1,9 +1,17 @@
 <?php
 include __DIR__ . "/header.php";
 
+// code from header
+if (isset($_POST['afronden']) && $_GET['afronden'] == 'Bestelling afronden') {
+    bestellingAfronden($_SESSION['winkelwagen'], $_SESSION['AfrekenGegevens']);
+    header("Location: overzicht.php");
+    die();
+}
+
 $winkelwagen = $_SESSION['winkelwagen'];
 $products = loadProducts($winkelwagen, $Connection);
 $afrekenGegevens = $_SESSION['AfrekenGegevens'];
+
 if(isset($_SESSION['login'])){
     $gegevens = $_SESSION['login'];
 }
@@ -103,7 +111,7 @@ if (isset($_SESSION["AfrekenGegevens"])) {
                         <tr>
                             <td><?php echo $afrekenGegevens["postcode"]?></td>
                             <td><?php echo $afrekenGegevens["huisnummer"]?></td>
-                            <td><?php echo $afrekenGegevens["toev"]?></td>
+<!--                            <td>--><?php //echo $afrekenGegevens["toev"]?><!--</td>-->
                         </tr>
                         <tr>
                             <th>Straatnaam</th>

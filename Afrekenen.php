@@ -1,6 +1,30 @@
 <?php
 include __DIR__ . "/header.php";
 
+// Code from header
+if (isset($_POST['Afreken_submit'])) {
+    $_SESSION['AfrekenGegevens'] = array(
+        'voornaam' => $_POST['FirstName'],
+        'achternaam' => $_POST['LastName'],
+        'postcode' => $_POST['postcode'],
+        'huisnummer' => $_POST['HouseNumber'],
+//        'toev' => $_POST['toev'],
+        'straat' => $_POST['StreetName'],
+        'plaats' => $_POST['Plaats'],
+        'email' => $_POST['email'],
+        'telefoonnummer' => $_POST['PhoneNumber']
+    );
+
+    if (isset($_POST['account_aanmaken'])) {
+        $_SESSION['AfrekenGegevens']['newAcc'] = TRUE;
+        $_SESSION['AfrekenGegevens']['password'] = $_POST['password'];
+    }
+
+//    header("Location: overzicht.php");
+    print('<meta http-equiv = "refresh" content = "0; url = ./overzicht.php" />');
+//    die();
+}
+
 $winkelwagen = $_SESSION['winkelwagen'];
 $products = loadProducts($winkelwagen, $Connection);
 
@@ -14,7 +38,7 @@ $products = loadProducts($winkelwagen, $Connection);
         $LastName = "";
         $postcode = "";
         $HouseNumber = "";
-        $toev = "";
+//        $toev = "";
         $StreetName = "";
         $Plaats = "";
         $email = "";
@@ -29,7 +53,7 @@ if(isset($_POST["Afreken_submit"])) {
         $LastName = (str_replace($gegevens['PreferredName'] . " ", "", $gegevens['FullName']));
         $postcode = $gegevens['DeliveryPostalCode'];
         $HouseNumber = $HuisnummerStraat[0];
-        $toev = "";
+//        $toev = "";
         $StreetName = $HuisnummerStraat[1];
         $Plaats = $gegevens['PostalAddressLine2'];
         $email = $gegevens['EmailAddress'];
