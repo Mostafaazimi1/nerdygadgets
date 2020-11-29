@@ -248,7 +248,7 @@ if ($R) {
 
                 print("<br>");
 //                print($sql1);
-                $sql2 = "SELECT PersonID, ReviewTitle, Rating, Recommend, Description, RateDate FROM review WHERE StockItemID = ".$itemID;
+                $sql2 = "SELECT PersonID, ReviewTitle, Rating, Recommend, Description, RateDate FROM review WHERE StockItemID = ".$itemID." ORDER BY Rating DESC";
                 $result2 = $Connection->query($sql2);
                 if ($result2->num_rows > 0) {
                     while ($row2 = $result2->fetch_assoc()) {
@@ -278,87 +278,7 @@ if ($R) {
                         print("<br><br>");
                         print("</div>");
                     }
-//                    // output data of each row
-//                    $passFound = FALSE;
-//                    while ($row = $result->fetch_assoc()) {
-//                        if (($row["LogonName"] != "NO LOGON") && ($row["LogonName"] == strtolower($_POST["email"])) && ($_POST["password"] == $row["HashedPassword"])) {
-//                            if ($row["CustomerNUM"] == "") {
-//                                // Er is geen customerid gekoppeld, dus de opgeslagen account gegevens zijn incompleet.
-//                                // De gebruiker krijgt hievan een melding
-//                                unset($passFound);
-//                                $email = 'value="' . $_POST["email"] . '"';
-//                                $password = 'value="' . $_POST["password"] . '"';
-//                                print('<div class="notificationError">');
-//                                print('<h2>We wijzen je graag op het volgende:</h2><br>');
-//                                print('<p>Uw accountgegevens zijn beschadigd. Neem alstublieft contact op met de systeembeheerder.</p>');
-//                                print('</div>');
-//                            } elseif (($row["IsPermittedToLogon"] == 0)) {
-//                                // De gebruiker mag niet mag inloggen, hij krijgt hievan een melding
-//                                unset($passFound);
-//                                $email = 'value="' . $_POST["email"] . '"';
-//                                $password = 'value="' . $_POST["password"] . '"';
-//                                print('<div class="notificationError">');
-//                                print('<h2>We wijzen je graag op het volgende:</h2><br>');
-//                                print('<p>Uw account is uitgeschakeld door de systeembeheerder.</p>');
-//                                print('</div>');
-//                                //registratiemelding geven
-//                            } elseif ($row["CustomerNUM"] != "") {
-//                                // De gegevens komen overeen, de gebruiker mag en wordt ingelogd
-//                                // Array met de gegevens van de klant, geplaatst in $_SESSION['login'] = $loginData;
-//                                $_SESSION['messageCount'] = 1;
-//                                $passFound = TRUE;
-//                                $loginData = array(
-//                                    "PersonID" => $row["PersonID"],
-//                                    "FullName" => $row["FullName"],
-//                                    "PreferredName" => $row["PreferredName"],
-//                                    "IsPermittedToLogon" => $row["IsPermittedToLogon"],
-//                                    "LogonName" => $row["LogonName"],
-//                                    "PhoneNumber" => $row["PhoneNumber"],
-//                                    "EmailAddress" => $row["EmailAddress"],
-//                                );
-//                                $sql3 = "SELECT CustomerID, CustomerName, DeliveryMethodID, DeliveryCityID,
-//                PostalCityID, PhoneNumber, DeliveryAddressLine2, DeliveryPostalCode,
-//                PostalPostalCode, PostalAddressLine2 FROM Customers WHERE CustomerID = " . $row["CustomerNUM"] . ";";
-//                                $result3 = $Connection->query($sql3);
-//                                if ($result3->num_rows > 0) {
-//                                    while ($row2 = $result2->fetch_assoc()) {
-//                                        // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
-//                                        $loginData["CustomerID"] = $row2["CustomerID"];
-//                                        $loginData["CustomerName"] = $row2["CustomerName"];
-//                                        $loginData["DeliveryMethodID"] = $row2["DeliveryMethodID"];
-//                                        $loginData["DeliveryCityID"] = $row2["DeliveryCityID"];
-//                                        $loginData["PostalCityID"] = $row2["PostalCityID"];
-//                                        $loginData["PhoneNumber2"] = $row2["PhoneNumber"];
-//                                        $loginData["DeliveryAddressLine2"] = $row2["DeliveryAddressLine2"];
-//                                        $loginData["DeliveryPostalCode"] = $row2["DeliveryPostalCode"];
-//                                        $loginData["PostalPostalCode"] = $row2["PostalPostalCode"];
-//                                        $loginData["PostalAddressLine2"] = $row2["PostalAddressLine2"];
-//                                        continue;
-//                                    }
-//                                }
-//                                $_SESSION['login'] = $loginData;
-//                                continue;
-//                            } else {
-//                                print("error! No connection with customer table");
-//                            }
-//                        }
-//                    }
-//                    if (isset($passFound)) {
-//                        // Wachtwoord is gevonden, gebruiker wordt geredirect naar home
-//                        if ($passFound) {
-//                            print('<meta http-equiv = "refresh" content = "0; url = ./" />');
-//                            exit();
-//                        } else {
-//                            // Wachtwoord is niet gevonden, gebruiker moet opnieuw invoeren
-//                            print('<div class="notificationError">');
-//                            print('<h2>We wijzen je graag op het volgende:</h2><br>');
-//                            print('<p>De combinatie van e-mailadres en wachtwoord is niet geldig.</p>');
-//                            print('</div>');
-//                            $email = 'value="' . $_POST["email"] . '"';
-//                            $password = 'value="' . $_POST["password"] . '"';
-//                            //registratiemelding geven
-//                        }
-//                    }
+//                   
                 } else {
                     // De database is leeg, dus er staan geen accounts in
                     print('<div></div>');
