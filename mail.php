@@ -2,13 +2,13 @@
 if(isset($_POST["sendmail"])) {
    $naam = $_POST["naam"];
    $email = $_POST["email"];
-   $telNummer = $_POST["telNummer"];
+   $phoneNumber = $_POST["phoneNumber"];
    $onderwerp = $_POST["onderwerp"];
    $tekst = $_POST["tekst"];
    $to = "klantenservice.nerdygadgets@gmail.com";
 
-   if ($telNummer) {
-       $volledigetekst = $tekst . "\nVan " . $naam . "\n$email" . "\ntelefoonnummer: " . $telNummer;
+   if ($phoneNumber) {
+       $volledigetekst = $tekst . "\nVan: " . $naam . "\nemail: $email" . "\ntelefoonnummer: " . $phoneNumber;
        $mailen = mail($to, $onderwerp, $volledigetekst);
        header("Location: klantenservice.php?bericht&verzenden=succes");
    } else {
