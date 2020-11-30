@@ -60,8 +60,9 @@ if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
     if (isset($_POST['account_aanmaken'])) {
         if (($_POST["password"]) == ($_POST["confirmpassword"])) {
             $createAccount = TRUE;
+            $wrongPass = FALSE;
         } else {
-            echo("pass don't match");
+            $wrongPass=TRUE;
             $FirstName=$_POST['FirstName'];
             $LastName=$_POST['LastName'];
             $postcode=$_POST['postcode'];
@@ -230,18 +231,19 @@ if($complete){
                                        value="<?php echo($PhoneNumber); ?>" required></td>
                         </tr>
                         <?php if(!isset($_SESSION["login"])) {
-                            echo "<div>";
                             echo "<tr>";
-                            echo "<th></th>";
-                            echo "<td><input type='checkbox' name='account_aanmaken' value='ja'></td>";
+                            echo "<td><input type='checkbox' name='account_aanmaken' value='ja'"; if ($wrongPass){echo("checked");}echo("></td>");
                             echo "<td>account aanmaken</td>";
                             echo "</tr>";
                             echo "<tr>";
-                            echo "<th></th>";
+                            if ($wrongPass){
+                                echo "<tr>";
+                                echo "<td>Wachtwoorden komen NIET overeen!</td>";
+                                echo "</tr>";
+                            }
                             echo "<td><input type='password' placeholder='Wachtwoord' name='password' autocomplete='new-password'></td>";
                             echo "<td><input type='password' placeholder='Bevestig wachtwoord' name='confirmpassword' autocomplete='new-password'></td>";
                             echo "</tr>";
-                            echo "</div>";
                         }
                         ?>
                     </div>
