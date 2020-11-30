@@ -1,36 +1,3 @@
-
-Skip to content
-Sign up
-Mostafaazimi1 /
-nerdygadgets
-
-1
-0
-
-0
-
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-
-More
-Join GitHub today
-
-GitHub is home to over 50 million developers working together to host and review code, manage projects, and build software together.
-nerdygadgets/Afrekenen.php /
-@jjdrost
-jjdrost Update Afrekenen.php
-Latest commit ed16c81 10 hours ago
-History
-4 contributors
-@Trezay
-@jjdrost
-@simonvankleef
-@Mostafaazimi1
-299 lines (276 sloc) 12.5 KB
 <?php
 include __DIR__ . "/header.php";
 
@@ -63,7 +30,7 @@ if (isset($_SESSION["login"])) {
     $postcode = $gegevens['DeliveryPostalCode'];
     $HouseNumber = $HuisnummerStraat[0];
     $StreetName = $HuisnummerStraat[1];
-    $Plaats = $gegevens['CityName'];
+    $Plaats = $gegevens['PostalAddressLine2'];
     $email = $gegevens['EmailAddress'];
     $PhoneNumber = $gegevens['PhoneNumber'];
 }
@@ -328,17 +295,3 @@ if($complete){
         </div>
     </div>
 </form>
-
-© 2020 GitHub, Inc.
-Terms
-Privacy
-
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
