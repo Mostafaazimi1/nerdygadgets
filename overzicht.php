@@ -111,7 +111,6 @@ if (isset($_SESSION["AfrekenGegevens"])) {
                         <tr>
                             <td><?php echo $afrekenGegevens["postcode"]?></td>
                             <td><?php echo $afrekenGegevens["huisnummer"]?></td>
-<!--                            <td>--><?php //echo $afrekenGegevens["toev"]?><!--</td>-->
                         </tr>
                         <tr>
                             <th>Straatnaam</th>
