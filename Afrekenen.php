@@ -30,7 +30,7 @@ if (isset($_SESSION["login"])) {
     $postcode = $gegevens['DeliveryPostalCode'];
     $HouseNumber = $HuisnummerStraat[0];
     $StreetName = $HuisnummerStraat[1];
-    $Plaats = $gegevens['CityName'];
+    $Plaats = $gegevens['PostalAddressLine2'];
     $email = $gegevens['EmailAddress'];
     $PhoneNumber = $gegevens['PhoneNumber'];
 }
