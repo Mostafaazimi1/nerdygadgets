@@ -5,7 +5,8 @@ if(isset($_SESSION["login"])) {
     print("<h1>U bent al ingelogd!</h1><br>");
     print('<a href="./">Ga terug naar de homepagina..</a>');
 } else {
-    if(isset($_SESSION['reviewID'])) {
+    if(isset($_GET['orderID'])) {
+        $_SESSION['reviewID'] = $_GET['orderID'];
         print('<div>');
         print('<a class="buttonClass" href="./view.php?id=' . $_SESSION['reviewID'] . '">Terug</a>');
         print('&#160;&#160;<a class="buttonClass" href="./">Home pagina</a>');
@@ -94,10 +95,11 @@ if(isset($_SESSION["login"])) {
                     if(isset($_SESSION['reviewID'])) {
                         $reviewID = $_SESSION['reviewID'];
                         unset($_SESSION['reviewID']);
-                        print('<meta http-equiv = "refresh" content = "0; url = ./review.php?id='.$reviewID.'&reviewButton=Schrijf+een+review&newLogin=1" />');
+                        print('<meta http-equiv = "refresh" content = "0; url = ./review.php?orderID='.$reviewID.'&reviewButton=Schrijf+een+review&newLogin=1" />');
                         exit();
                     } else {
-                        print('<meta http-equiv = "refresh" content = "0; url = ./" />');
+                        print("nee");
+//                        print('<meta http-equiv = "refresh" content = "0; url = ./" />');
                         exit();
                     }
                 } else {

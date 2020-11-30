@@ -12,10 +12,11 @@ if(isset($_GET["orderID"])){
 
 if(!isset($_SESSION['login'])){
     // Variable voor terugverwijzing naar review formulier
-    $_SESSION['reviewID'] = $_GET['orderID'];
-    print('<meta http-equiv = "refresh" content = "0; url = ./login.php" />');
+//    $_SESSION['reviewID'] = $_GET['orderID'];
+    print('<meta http-equiv = "refresh" content = "0; url = ./login.php?orderID='.$orderID.'" />');
     } else {
     $gegevens = $_SESSION['login'];
+//    print($orderID);
     $sql1 = "SELECT PersonID, StockItemID, ReviewTitle, Rating, Recommend, Description FROM Review WHERE PersonID = ".$gegevens["PersonID"]." AND StockItemID = ".$orderID;
     $result1 = $Connection->query($sql1);
     if ($result1->num_rows > 0) {
@@ -31,76 +32,30 @@ if(!isset($_SESSION['login'])){
 //        print("bestaat");
         // ergens update
     } else {
-        print("gegevens nog niet in db");
+        //print("gegevens nog niet in dbs");
+        $dataKnown = FALSE;
         $title = "";
         $rating = 0;
         $recommend = 1;
         $description = "";
     }
         if(isset($_POST["submitReview"])) {
-            if($dataKnown){
-                // code voor updaten
-            } else {
-                //code voor niewe
-            }
-
-//            $sql1 = "SELECT PersonID, StockItemID, ReviewTitle, Rating, Recommend, Description FROM Review WHERE PersonID = ".$gegevens["PersonID"]." AND StockItemID = ".$_POST['orderID'];
-//            $result1 = $Connection->query($sql1);
-//            if ($result1->num_rows > 0) {
-//                // Userid orderid staat al in db
-//                while ($row1 = $result1->fetch_assoc()) {
-//                    // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
-//                    print($row1['PersonID']);
-//                    print($row1['StockItemID']);
-//                    print($row1['ReviewTitle']);
-//                    print($row1['Rating']);
-//                    print($row1['Recommend']);
-//                    print($row1['Description']);
-//                }
-//                print("bestaat");
-
-            $sql2 = "SELECT PersonID, StockItemID FROM Review WHERE PersonID = ".$gegevens["PersonID"]." AND StockItemID = ".$_POST['orderID'];
-            $result2 = $Connection->query($sql2);
-            if ($result2->num_rows > 0) {
-                // Userid orderid staat al in db
-                while ($row2 = $result2->fetch_assoc()) {
-                    // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
-                    print($row2['PersonID']);
-                    print($row2['StockItemID']);
-                }
-                //bestaat
-                // ergens update
+            // Als data in db bekend is
+            if($dataKnown) {
+                $sql2 = ("UPDATE Review SET ReviewTitle = '".$_POST['title']."', Rating = ".$_POST['star'].",
+                        Recommend = ".$_POST['recommend'].", Description = '".trim($_POST['description'])."'
+                        WHERE PersonID = ".$gegevens['PersonID']." AND StockItemID = ".$_POST['orderID']."");
+                $result2 = $Connection->query($sql2);
                 print('<meta http-equiv = "refresh" content = "0; url = ./view.php?id='.$orderID.'" />');
             } else {
+                //code voor insert
                 // Userid orderid not present is db
-                $sql3 = "INSERT INTO Review (PersonID, StockItemID, ReviewTitle, Rating, Recommend, Description)
+                $sql2 = "INSERT INTO Review (PersonID, StockItemID, ReviewTitle, Rating, Recommend, Description)
                     VALUES(".$gegevens["PersonID"].", ".$_POST['orderID'].", '".$_POST['title']."', "
                     .$_POST['star'].", ".$_POST['recommend'].", '".trim($_POST['description'])."')";
-                $result3 = $Connection->query($sql3);
-                print($result3);
+                $result2 = $Connection->query($sql2);
+                print('<meta http-equiv = "refresh" content = "0; url = ./view.php?id='.$orderID.'" />');
             }
-
-
-//            if ($result1->num_rows > 0) {
-//                while ($row1 = $result1->fetch_assoc()) {
-//                    // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
-//                    $itemCount = $row1["total"];
-//                    $avgRating = (int)$row1["avgrating"];
-//                    continue;
-//                }
-//            }
-//            print($gegevens["PersonID"]);
-//            print("<br>");
-//            print($_POST['orderID']);
-//            print("<br>");
-//            print($_POST['title']);
-//            print("<br>");
-//            print($_POST['star']);
-//            print("<br>");
-//            print($_POST['recommend']);
-//            print("<br>");
-//            print($_POST['description']);
-
         } else {
             if (isset($_GET["orderID"]) OR isset($_GET['newLogin'])) {
 //                if(isset($_GET["orderID"])){
