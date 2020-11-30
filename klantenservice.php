@@ -24,7 +24,7 @@ U kunt ons dagelijks bereiken van 8:00 - 20:00.<br><br>
     E-mail: <input type="email" name="email" value="<?php echo ($email);?>" placeholder="voorbeeld@voorbeeld.nl" required><br>
     Telefoonnummer: <input type="tel" name="phoneNumber" value="<?php echo ($PhoneNumber);?>" placeholder="06 12345678"><br>
     Onderwerp: <input type="text" name="onderwerp" placeholder="Waar gaat uw vraag over?" required><br>
-    Vraag: <br><textarea type="text" name="tekst" placeholder="Stel hier uw vraag of klacht" required></textarea><br>
+    Uw bericht: <br><textarea type="text" name="tekst" placeholder="Stel hier uw vraag of klacht" required></textarea><br>
     <button type="submit" name="sendmail">Verzend</button>
 </form>
 
