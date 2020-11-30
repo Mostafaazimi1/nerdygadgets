@@ -98,8 +98,7 @@ if(isset($_SESSION["login"])) {
                         print('<meta http-equiv = "refresh" content = "0; url = ./review.php?orderID='.$reviewID.'&reviewButton=Schrijf+een+review&newLogin=1" />');
                         exit();
                     } else {
-                        print("nee");
-//                        print('<meta http-equiv = "refresh" content = "0; url = ./" />');
+                        print('<meta http-equiv = "refresh" content = "0; url = ./" />');
                         exit();
                     }
                 } else {
