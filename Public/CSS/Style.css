@@ -788,3 +788,15 @@ ul#ul-class-categorie li {
     left: 0;
     color: #FFD700;
 }
+
+/* Klantenservice */
+.contactform {
+    width: 50%;
+}
+
+.contactinformation {
+    width: 50%;
+}
+.contactinfo {
+    width: 100%;
+}
