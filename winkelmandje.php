@@ -1,9 +1,24 @@
 <?php
 include 'header.php';
 
-$winkelwagen = $_SESSION['winkelwagen'];
+//$winkelwagen = $_SESSION['winkelwagen'];
 
-$products = loadProducts($winkelwagen, $Connection);
+$products = loadProducts($_SESSION['winkelwagen'], $Connection);
+
+
+// Code from header
+if (isset($_GET['delete'])) {
+    $_SESSION['winkelwagen'] = deleteProduct($_SESSION['winkelwagen'], (int)$_GET['delete']);
+    print('<meta http-equiv = "refresh" content = "0; url = ./winkelmandje.php" />');
+}
+
+// Code from header
+if (isset($_GET['save-change'])) {
+    $id = $_GET['id'];
+    $amount = $_GET['aantal'];
+    updateAmount($id, $amount, $_SESSION['winkelwagen']);
+    print('<meta http-equiv = "refresh" content = "0; url = ./winkelmandje.php" />');
+}
 ?>
 
 
