@@ -4,7 +4,7 @@ mysqli_set_charset($Connection, 'latin1');
 include __DIR__ . "/header.php";
 
 $Query = " 
-           SELECT SI.StockItemID, 
+           SELECT SI.StockItemID, SI.Tags, 
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
             CONCAT(QuantityOnHand)AS QuantityOnHand,
