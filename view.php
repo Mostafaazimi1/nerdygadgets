@@ -71,9 +71,6 @@ if ($Result != null) {
     <?php
     if (isset($Result['Video'])) {
         ?>
-        <?php
-        if (isset($Result['Video'])) {
-            ?>
             <div id="VideoFrame">
                 <?php print $Result['Video']; ?>
             </div>
@@ -455,5 +452,6 @@ if ($Result != null) {
     <?php
 } else {
     ?><h2 id="ProductNotFound">Het opgevraagde product is niet gevonden.</h2><?php
+    }
 } ?>
 
