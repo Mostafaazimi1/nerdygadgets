@@ -6,7 +6,7 @@ session_start();
 if (!isset($_SESSION['winkelwagen'])) {
     $_SESSION['winkelwagen'] = array();
 //    $winkelwagen = $_SESSION['winkelwagen'];
-}s
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" style="">
