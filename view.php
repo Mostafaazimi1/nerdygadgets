@@ -90,6 +90,61 @@ if ($R) {
                         </div>
                         <?php
                     } else if (count($Images) >= 2) { ?>
+                        <div class="gallery-parent">
+                            <!-- SwiperJs and EasyZoom plugins start -->
+                            <div class="swiper-container gallery-top">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="images/nature-1.jpg">
+                                            <img src="images/nature-1.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="images/nature-2.jpg">
+                                            <img src="images/nature-2.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="images/nature-3.jpg">
+                                            <img src="images/nature-3.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="images/nature-4.jpg">
+                                            <img src="images/nature-4.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="images/nature-5.jpeg">
+                                            <img src="images/nature-5.jpeg" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Add Arrows -->
+                                <div class="swiper-button-next swiper-button-white"></div>
+                                <div class="swiper-button-prev swiper-button-white"></div>
+                            </div>
+                            <div class="swiper-container gallery-thumbs">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="images/nature-1.jpg" alt="" />
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="images/nature-2.jpg" alt="" />
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="images/nature-3.jpg" alt="" />
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="images/nature-4.jpg" alt="" />
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="images/nature-5.jpeg" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- SwiperJs and EasyZoom plugins end -->
+                        </div>
                         <div id="ImageFrame">
                             <div id="ImageCarousel" class="carousel slide" data-interval="false">
                                 <!-- Indicators -->
@@ -125,8 +180,10 @@ if ($R) {
                     }
                 } else {
                     ?>
-                    <div id="ImageFrame"
-                         style="background-image: url('Public/StockGroupIMG/<?php print $Result['BackupImagePath']; ?>'); background-size: cover;"></div>
+                    <div id="ProductImage">
+                        <img src="Public/StockGroupIMG/<?php print $Result['BackupImagePath']; ?>">
+                    </div>
+
                     <?php
                 }
                 ?>
