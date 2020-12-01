@@ -60,14 +60,14 @@ if(isset($_SESSION["login"])) {
                         $result2 = $Connection->query($sql2);
                         if ($result2->num_rows > 0) {
                             while ($row2 = $result2->fetch_assoc()) {
-                                $sql3 = "SELECT CityName FROM cities WHERE CityID = '".$row2["DeliveryCityID"]."' LIMIT 1";
-                                $result3 = $Connection->query($sql3);
-                                if ($result3->num_rows > 0) {
-                                    while ($row3 = $result3->fetch_assoc()) {
-                                        $loginData["CityName"] = $row3["CityName"];
-                                        continue;
-                                    }
-                                }
+//                                $sql3 = "SELECT CityName FROM cities WHERE CityID = '".$row2["DeliveryCityID"]."' LIMIT 1";
+//                                $result3 = $Connection->query($sql3);
+//                                if ($result3->num_rows > 0) {
+//                                    while ($row3 = $result3->fetch_assoc()) {
+//                                        $loginData["CityName"] = $row3["CityName"];
+//                                        continue;
+//                                    }
+//                                }
                                 // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
                                 $loginData["CustomerID"] = $row2["CustomerID"];
                                 $loginData["CustomerName"] = $row2["CustomerName"];
@@ -98,8 +98,7 @@ if(isset($_SESSION["login"])) {
                         print('<meta http-equiv = "refresh" content = "0; url = ./review.php?orderID='.$reviewID.'&reviewButton=Schrijf+een+review&newLogin=1" />');
                         exit();
                     } else {
-                        print("nee");
-//                        print('<meta http-equiv = "refresh" content = "0; url = ./" />');
+                        print('<meta http-equiv = "refresh" content = "0; url = ./" />');
                         exit();
                     }
                 } else {
