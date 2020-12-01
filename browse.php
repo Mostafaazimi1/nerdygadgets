@@ -83,6 +83,7 @@ if ($SearchString != "") {
 $Offset = $PageNumber * $ProductsOnPage;
 
 $ShowStockLevel = 1000;
+$OutOfStock = 0;
 if ($CategoryID == "") {
     if ($queryBuildResult != "") {
         $queryBuildResult = "WHERE " . $queryBuildResult;
@@ -90,7 +91,9 @@ if ($CategoryID == "") {
 
     $Query = "
                 SELECT SI.StockItemID, SI.StockItemName, SI.MarketingComments, ROUND(TaxRate * RecommendedRetailPrice / 100 + RecommendedRetailPrice,2) as SellPrice,
-                (CASE WHEN (SIH.QuantityOnHand) >= ? THEN 'Ruime voorraad beschikbaar.' ELSE CONCAT('Voorraad: ',QuantityOnHand) END) AS QuantityOnHand, 
+                (CASE WHEN (SIH.QuantityOnHand) >= ? THEN 'Ruime voorraad beschikbaar.' 
+                WHEN (SIH.QuantityOnHand) <= ? THEN 'Helaas, dit product is uitverkocht.' 
+                ELSE CONCAT('Voorraad: ',QuantityOnHand) END) AS QuantityOnHand, 
                 (SELECT ImagePath
                 FROM stockitemimages 
                 WHERE StockItemID = SI.StockItemID LIMIT 1) as ImagePath,
@@ -104,7 +107,7 @@ if ($CategoryID == "") {
 
 
     $Statement = mysqli_prepare($Connection, $Query);
-    mysqli_stmt_bind_param($Statement, "iii", $ShowStockLevel, $ProductsOnPage, $Offset);
+    mysqli_stmt_bind_param($Statement, "iiii", $ShowStockLevel, $OutOfStock, $ProductsOnPage, $Offset);
     mysqli_stmt_execute($Statement);
     $ReturnableResult = mysqli_stmt_get_result($Statement);
     $ReturnableResult = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC);
@@ -126,7 +129,9 @@ if ($CategoryID == "") {
     $Query = "
                 SELECT SI.StockItemID, SI.StockItemName, SI.MarketingComments, 
                 ROUND(SI.TaxRate * SI.RecommendedRetailPrice / 100 + SI.RecommendedRetailPrice,2) as SellPrice, 
-                (CASE WHEN (SIH.QuantityOnHand) >= ? THEN 'Ruime voorraad beschikbaar.' ELSE CONCAT('Voorraad: ',QuantityOnHand) END) AS QuantityOnHand,
+                (CASE WHEN (SIH.QuantityOnHand) >= ? THEN 'Ruime voorraad beschikbaar.'
+                WHEN (SIH.QuantityOnHand) <= ? THEN 'Helaas, dit product is uitverkocht.' 
+                ELSE CONCAT('Voorraad: ',QuantityOnHand) END) AS QuantityOnHand,
                 (SELECT ImagePath FROM stockitemimages WHERE StockItemID = SI.StockItemID LIMIT 1) as ImagePath,
                 (SELECT ImagePath FROM stockgroups JOIN stockitemstockgroups USING(StockGroupID) WHERE StockItemID = SI.StockItemID LIMIT 1) as BackupImagePath           
                 FROM stockitems SI 
@@ -139,7 +144,7 @@ if ($CategoryID == "") {
                 LIMIT ? OFFSET ?";
 
     $Statement = mysqli_prepare($Connection, $Query);
-    mysqli_stmt_bind_param($Statement, "iiii", $ShowStockLevel, $CategoryID, $ProductsOnPage, $Offset);
+    mysqli_stmt_bind_param($Statement, "iiiii", $ShowStockLevel, $OutOfStock, $CategoryID, $ProductsOnPage, $Offset);
     mysqli_stmt_execute($Statement);
     $ReturnableResult = mysqli_stmt_get_result($Statement);
     $ReturnableResult = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC);
