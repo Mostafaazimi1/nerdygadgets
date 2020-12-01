@@ -47,6 +47,10 @@ if (!isset($_SESSION['winkelwagen'])) {
     <meta name="msapplication-TileImage" content="Public/Favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="Public/CSS/swiper.min.css" />
+    <link rel="stylesheet" href="Public/CSS/easyzoom.css" />
+    <link rel="stylesheet" href="Public/CSS/main.css" />
 </head>
 <body>
 <header>
