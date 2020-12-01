@@ -526,7 +526,6 @@ ul#ul-class-categorie-price li {
     width: 100%;
 }
 
-
 #Header.row{
     margin: auto;
     padding-left: 8%;
@@ -660,6 +659,7 @@ ul#ul-class-categorie li {
 }
 .FootertopMenu{
     width: 100%;
+    padding: 100px 16px;
 }
 .FooterBottom{
     padding-top: 50px!important;
