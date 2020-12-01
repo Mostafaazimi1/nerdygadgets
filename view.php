@@ -7,9 +7,9 @@ $Query = "
            SELECT SI.StockItemID, 
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
-            CONCAT('Voorraad: ',QuantityOnHand)AS QuantityOnHand,
+            CONCAT(QuantityOnHand)AS QuantityOnHand,
             QuantityOnHand AS aantal,
-            SearchDetails, 
+            SearchDetails,
             (CASE WHEN (RecommendedRetailPrice*(1+(TaxRate/100))) > 50 THEN 0 ELSE 6.95 END) AS SendCosts, MarketingComments, CustomFields, SI.Video,
             (SELECT ImagePath FROM stockgroups JOIN stockitemstockgroups USING(StockGroupID) WHERE StockItemID = SI.StockItemID LIMIT 1) as BackupImagePath   
             FROM stockitems SI 
@@ -223,23 +223,35 @@ if ($Result != null) {
                 <div class="PrijsEnAfrekenenChild">
                     <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                     <p> Inclusief BTW </p>
-                    <div class="VoorraadText"><?php if (isset($Result['QuantityOnHand']) >= 1000) {
-                            echo "<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Ruime voorraad beschikbaar.</p>";
-                        } else {
-                            print ($Result['QuantityOnHand']);
-                        } ?></div>
-                    <br>
-                    <form action="add.php" method="post">
-                        <input type="hidden" name="action" value="submit"/>
-                        Aantal<br><input type="number" name="aantal" min="0" value="1"
-                                         max="<?php echo $Result['aantal']; ?>" style="margin-bottom: 12px;">
-                        <button class="bestelling-btn" type="submit" name="addcart"
-                                value="<?php print $Result['StockItemID'] ?>"><i class="fas fa-shopping-cart"
-                                                                                 style="color:#FFFFFF; padding-right: 7px;"
-                                                                                 aria-hidden="true"></i>Toevoegen aan
+
+                    <div class="VoorraadText"> <?php
+                        $voorraadbeschikbaartext=(int)$Result['QuantityOnHand'];
+                        if ($voorraadbeschikbaartext>= 1000){
+                            echo("<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Ruime voorraad beschikbaar.</p>"); //Big stock above 1000
+                        }
+                        elseif ($voorraadbeschikbaartext<= 0){
+                            echo("<p class='voorraad' style='color:#ff0000 !important;'><i class='fas fa-box' style='color:#ff0000 !important; padding-right: 7px;' aria-hidden='true'></i>UITVERKOCHT</p>"); //Sold out
+                        }
+                        else{
+                            echo("<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Voorraad: ". $Result['QuantityOnHand']. "</p>"); //Show stock
+                        }
+                        ?>
+                    </div>
+                    <?php if($Result['aantal']>0){?>
+                        <br >
+                    <form action = "add.php" method = "post" >
+                        <input type = "hidden" name = "action" value = "submit" />
+                        Aantal<br ><input type = "number" name = "aantal" min = "0" value = "1"
+                                         max = "<?php echo $Result['aantal']; ?>" style = "margin-bottom: 12px;" >
+                        <button class="bestelling-btn" type = "submit" name = "addcart"
+                                value = "<?php print $Result['StockItemID'] ?>" ><i class="fas fa-shopping-cart"
+                                                                                 style = "color:#FFFFFF; padding-right: 7px;"
+                                                                                 aria - hidden = "true" ></i > Toevoegen aan
                             winkelwagen
-                        </button>
-                    </form>
+                            </button >
+                    </form >
+                    <?php }?>
+
                 </div>
             </div>
         </div>
