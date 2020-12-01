@@ -852,14 +852,18 @@ ul#ul-class-categorie li {
 
 /* Klantenservice */
 .contactform {
-    width: 50%;
+    width: 60%;
     padding-right: 100px;
 }
 
 .contactinformation {
     padding-left: 100px;
-    width: 50%;
+    width: 40%;
 }
 .contactinfo {
     width: 100%;
+}
+
+.tekst {
+    color: #000000;
 }
