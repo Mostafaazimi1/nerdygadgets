@@ -71,11 +71,94 @@ if ($Result != null) {
     <?php
     if (isset($Result['Video'])) {
         ?>
-        <div id="VideoFrame">
-            <?php print $Result['Video']; ?>
-        </div>
-    <?php }
-    ?>
+        <?php
+        if (isset($Result['Video'])) {
+            ?>
+            <div id="VideoFrame">
+                <?php print $Result['Video']; ?>
+            </div>
+        <?php }
+        ?>
+
+        <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName'];?></h1>
+        <div class="viewMainHeader naastElkaar">
+            <div class="ImageViewHeader">
+                <?php
+                if (isset($Images)) {
+                    // print Single
+                    if (count($Images) == 1) {
+                        ?>
+                        <div id="ProductImage">
+                            <img src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
+                        </div>
+                        <?php
+                    } else if (count($Images) >= 2) { ?>
+                        <div class="gallery-parent">
+                            <!-- SwiperJs and EasyZoom plugins start -->
+                            <div class="swiper-container gallery-top">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="images/nature-1.jpg">
+                                            <img src="images/nature-1.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="images/nature-2.jpg">
+                                            <img src="images/nature-2.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="images/nature-3.jpg">
+                                            <img src="images/nature-3.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="images/nature-4.jpg">
+                                            <img src="images/nature-4.jpg" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="images/nature-5.jpeg">
+                                            <img src="images/nature-5.jpeg" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Add Arrows -->
+                                <div class="swiper-button-next swiper-button-white"></div>
+                                <div class="swiper-button-prev swiper-button-white"></div>
+                            </div>
+                            <div class="swiper-container gallery-thumbs">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="images/nature-1.jpg" alt="" />
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="images/nature-2.jpg" alt="" />
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="images/nature-3.jpg" alt="" />
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="images/nature-4.jpg" alt="" />
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="images/nature-5.jpeg" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- SwiperJs and EasyZoom plugins end -->
+                        </div>
+                        <div id="ImageFrame">
+                            <div id="ImageCarousel" class="carousel slide" data-interval="false">
+                                <!-- Indicators -->
+                                <ul class="carousel-indicators">
+                                    <?php for ($i = 0; $i < count($Images); $i++) {
+                                        ?>
+                                        <li data-target="#ImageCarousel"
+                                            data-slide-to="<?php print $i ?>" <?php print (($i == 0) ? 'class="active"' : ''); ?>></li>
+                                        <?php
+                                    } ?>
+                                </ul>
 
     <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName']; ?></h1>
     <div class="viewMainHeader naastElkaar">
@@ -120,7 +203,14 @@ if ($Result != null) {
                                 <span class="carousel-control-next-icon"></span>
                             </a>
                         </div>
+                        <?php
+                    }
+                } else {
+                    ?>
+                    <div id="ProductImage">
+                        <img src="Public/StockGroupIMG/<?php print $Result['BackupImagePath']; ?>">
                     </div>
+
                     <?php
                 }
             } else {
