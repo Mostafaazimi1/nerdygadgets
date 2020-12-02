@@ -3,7 +3,8 @@ include __DIR__ . "/header.php";
 $stmt = $Connection->prepare("SELECT SearchDetails FROM stockitems");
 $stmt->execute();
 $SearchDetails = [];
-foreach ($stmt->get_result() as $row) {
+foreach ($stmt->get_result() as $row)
+{
     $SearchDetails[] = metaphone($row['SearchDetails']);
 }
 print_r($SearchDetails);
