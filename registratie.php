@@ -137,7 +137,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
             //echo $execval;
 //            echo "People gegevens zijn succesvol toegevoegd aan database!";
             print("Uw account is successvol aangemaakt!");
-            echo $execval;
+            //echo $execval;
             //echo "People gegevens zijn succesvol toegevoegd aan database!";
             $stmt->close();
         }
