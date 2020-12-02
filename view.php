@@ -164,10 +164,8 @@ if ($Result != null) {
                         }
                         elseif ($voorraadbeschikbaartext<= 0){
                             echo("<p class='voorraad' style='color:#ff0000 !important;'><i class='fas fa-box' style='color:#ff0000 !important; padding-right: 7px;' aria-hidden='true'></i>UITVERKOCHT</p>"); //Sold out
-                        }elseif ($voorraadbeschikbaartext >= 2 || $voorraadbeschikbaartext < 100) {
-                            echo("<p class='voorraad' style='color:#ffa500 !important;'><i class='fas fa-box' style='color:#ffa500 !important; padding-right: 7px;' aria-hidden='true'></i>Bijna uitverkocht. Nog " . $Result['QuantityOnHand']  . " stuks over</p>"); //Stock almost sold out
-                        }elseif ($voorraadbeschikbaartext == 1) {
-                            echo("<p class='voorraad' style='color:#ffa500 !important;'><i class='fas fa-box' style='color:#ffa500 !important; padding-right: 7px;' aria-hidden='true'></i>Bijna uitverkocht. Nog " . $Result['QuantityOnHand']  . " stuk over</p>"); //Stock almost sold out
+                        }elseif ($voorraadbeschikbaartext > 0 && $voorraadbeschikbaartext < 100) {
+                            echo("<p class='voorraad' style='color:#ffa500 !important;'><i class='fas fa-box' style='color:#ffa500 !important; padding-right: 7px;' aria-hidden='true'></i>Bijna uitverkocht. Voorraad: " . $Result['QuantityOnHand']  . "</p>"); //Stock almost sold out
                         }else{
                             echo("<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Voorraad: ". $Result['QuantityOnHand']. "</p>"); //Show stock
                         }
