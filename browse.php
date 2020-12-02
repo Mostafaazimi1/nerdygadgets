@@ -93,6 +93,7 @@ if ($CategoryID == "") {
                 SELECT SI.StockItemID, SI.StockItemName, SI.MarketingComments, ROUND(TaxRate * RecommendedRetailPrice / 100 + RecommendedRetailPrice,2) as SellPrice,
                 (CASE WHEN (SIH.QuantityOnHand) >= ? THEN 'Ruime voorraad beschikbaar.' 
                 WHEN (SIH.QuantityOnHand) <= ? THEN 'Helaas, dit product is uitverkocht.' 
+                WHEN (SIH.QuantityOnHand) < 100 THEN 'Let op, bijna uitverkocht!' 
                 ELSE CONCAT('Voorraad: ',QuantityOnHand) END) AS QuantityOnHand, 
                 (SELECT ImagePath
                 FROM stockitemimages 
@@ -131,6 +132,7 @@ if ($CategoryID == "") {
                 ROUND(SI.TaxRate * SI.RecommendedRetailPrice / 100 + SI.RecommendedRetailPrice,2) as SellPrice, 
                 (CASE WHEN (SIH.QuantityOnHand) >= ? THEN 'Ruime voorraad beschikbaar.'
                 WHEN (SIH.QuantityOnHand) <= ? THEN 'Helaas, dit product is uitverkocht.' 
+                WHEN (SIH.QuantityOnHand) < 100 AND (SIH.QuantityOnHand) > 0 THEN 'Let op! dit product is bijna uitverkocht.' 
                 ELSE CONCAT('Voorraad: ',QuantityOnHand) END) AS QuantityOnHand,
                 (SELECT ImagePath FROM stockitemimages WHERE StockItemID = SI.StockItemID LIMIT 1) as ImagePath,
                 (SELECT ImagePath FROM stockgroups JOIN stockitemstockgroups USING(StockGroupID) WHERE StockItemID = SI.StockItemID LIMIT 1) as BackupImagePath           

@@ -164,8 +164,10 @@ if ($Result != null) {
                         }
                         elseif ($voorraadbeschikbaartext<= 0){
                             echo("<p class='voorraad' style='color:#ff0000 !important;'><i class='fas fa-box' style='color:#ff0000 !important; padding-right: 7px;' aria-hidden='true'></i>UITVERKOCHT</p>"); //Sold out
-                        }elseif ($voorraadbeschikbaartext > 0 || $voorraadbeschikbaartext <100) {
-                            echo("<p class='voorraad' style='color:#ffa500 !important;'><i class='fas fa-box' style='color:#ffa500 !important; padding-right: 7px;' aria-hidden='true'></i>Let op, bijna uitverkocht!</p>"); //Stock almost sold out
+                        }elseif ($voorraadbeschikbaartext >= 2 || $voorraadbeschikbaartext < 100) {
+                            echo("<p class='voorraad' style='color:#ffa500 !important;'><i class='fas fa-box' style='color:#ffa500 !important; padding-right: 7px;' aria-hidden='true'></i>Bijna uitverkocht. Nog " . $Result['QuantityOnHand']  . " stuks over</p>"); //Stock almost sold out
+                        }elseif ($voorraadbeschikbaartext == 1) {
+                            echo("<p class='voorraad' style='color:#ffa500 !important;'><i class='fas fa-box' style='color:#ffa500 !important; padding-right: 7px;' aria-hidden='true'></i>Bijna uitverkocht. Nog " . $Result['QuantityOnHand']  . " stuk over</p>"); //Stock almost sold out
                         }else{
                             echo("<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Voorraad: ". $Result['QuantityOnHand']. "</p>"); //Show stock
                         }
@@ -175,14 +177,11 @@ if ($Result != null) {
                         <br >
                     <form action = "add.php" method = "post" >
                         <input type = "hidden" name = "action" value = "submit" />
-                        Aantal<br ><input type = "number" name = "aantal" min = "0" value = "1"
-                                         max = "<?php echo $Result['aantal']; ?>" style = "margin-bottom: 12px;" >
+                        Aantal<br ><input type = "number" name = "aantal" min = "0" value = "1" max = "<?php echo $Result['aantal']; ?>" style = "margin-bottom: 12px;" >
                         <button class="bestelling-btn" type = "submit" name = "addcart"
                                 value = "<?php print $Result['StockItemID'] ?>" ><i class="fas fa-shopping-cart"
-                                                                                 style = "color:#FFFFFF; padding-right: 7px;"
-                                                                                 aria - hidden = "true" ></i > Toevoegen aan
-                            winkelwagen
-                            </button >
+                                style = "color:#FFFFFF; padding-right: 7px;" aria - hidden = "true" ></i > Toevoegen aan winkelwagen
+                        </button >
                     </form >
                     <?php }?>
 
