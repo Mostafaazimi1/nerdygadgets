@@ -10,6 +10,15 @@ if(isset($_SESSION['messageCount2'])) {
     unset($_SESSION['messageCount2']);
     print("<h4>Uw order is successvol geplaatst</h4>");
 }
+if(isset($_SESSION['messageCount3'])) {
+    if($_SESSION['messageCount3'] != 0) {
+        print("<h4>Uw account is successvol aangemaakt!</h4>");
+        $_SESSION['messageCount3']--;
+    } else {
+        print("<h4>Uw account is successvol aangemaakt!</h4>");
+        unset($_SESSION['messageCount3']);
+    }
+}
 ?>
 <div class="IndexStyle">
     <div class="col-11">
