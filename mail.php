@@ -8,11 +8,11 @@ if(isset($_POST["sendmail"])) {
    $to = "klantenservice.nerdygadgets@gmail.com";
 
    if ($phoneNumber) {
-       $volledigetekst = $tekst . "\nVan: " . $naam . "\nemail: $email" . "\ntelefoonnummer: " . $phoneNumber;
+       $volledigetekst = $tekst . "\nVan: " . $naam . "\nE-mail: $email" . "\nTelefoonnummer: " . $phoneNumber;
        $mailen = mail($to, $onderwerp, $volledigetekst);
        header("Location: klantenservice.php?bericht&verzenden=succes");
    } else {
-       $volledigetekst = $tekst . "\nVan " . $naam . "\n$email";
+       $volledigetekst = $tekst . "\nVan: " . $naam . "\nEmail: $email";
        $mailen = mail($to, $onderwerp, $volledigetekst);
        header("Location: klantenservice.php?bericht&verzenden=succes");
    }
