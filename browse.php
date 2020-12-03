@@ -107,7 +107,7 @@ $OutOfStock = 0;
 if ($CategoryID == "") {
 
     $Query = "
-                SELECT SI.StockItemID, SI.StockItemName, SI.MarketingComments, ROUND(TaxRate * RecommendedRetailPrice / 100 + RecommendedRetailPrice,2) as SellPrice,
+                SELECT SI.StockItemID, SI.StockItemName, SI.MarketingComments, ROUND(TaxRate * RecommendedRetailPrice / 100 + RecommendedRetailPrice,2) as SellPrice, korting,
                 (CASE WHEN (SIH.QuantityOnHand) >= ? THEN 'Ruime voorraad beschikbaar.' 
                 WHEN (SIH.QuantityOnHand) <= ? THEN 'Helaas, dit product is uitverkocht.' 
                 WHEN (SIH.QuantityOnHand) < 100 THEN 'Let op, bijna uitverkocht!' 
@@ -145,7 +145,7 @@ if ($CategoryID == "") {
 
     $Query = "
                 SELECT SI.StockItemID, SI.StockItemName, SI.MarketingComments, 
-                ROUND(SI.TaxRate * SI.RecommendedRetailPrice / 100 + SI.RecommendedRetailPrice,2) as SellPrice, 
+                ROUND(SI.TaxRate * SI.RecommendedRetailPrice / 100 + SI.RecommendedRetailPrice,2) as SellPrice, korting, 
                 (CASE WHEN (SIH.QuantityOnHand) >= ? THEN 'Ruime voorraad beschikbaar.'
                 WHEN (SIH.QuantityOnHand) <= ? THEN 'Helaas, dit product is uitverkocht.' 
                 WHEN (SIH.QuantityOnHand) < 100 AND (SIH.QuantityOnHand) > 0 THEN 'Let op! dit product is bijna uitverkocht.' 
@@ -181,6 +181,10 @@ $amount = $Result[0];
 if (isset($amount)) {
     $AmountOfPages = ceil($amount["count(*)"] / $ProductsOnPage);
 }
+
+
+
+
 ?>
 <div id="FilterFrame"><h4 class="FilterText">Filteren</h4>
     <form>
@@ -233,6 +237,11 @@ if (isset($amount)) {
     <?php
     if (isset($ReturnableResult) && count($ReturnableResult) > 0) {
         foreach ($ReturnableResult as $row) {
+
+            $retailPrice= $row['SellPrice'];
+            $toPayPrice = round($row['SellPrice']*((100-$row['korting'])/100), 2);
+            $discount=($row['korting']);
+
             ?>
             <a class="ListItem" href='view.php?id=<?php print $row['StockItemID']; ?>'>
                 <div class="naastElkaar" id="ProductFrame">
@@ -255,7 +264,13 @@ if (isset($amount)) {
                     <div class="productFrameRechts">
                         <div id="StockItemFrameRight">
                             <div class="CenterPriceLeftChild">
-                                <p class="StockItemPriceText"><?php print sprintf("€ %0.2f", $row["SellPrice"]); ?></p>
+                                <?php
+                                if ($discount>0){
+                                    print("<p class='Advice'> Adviesprijs</p>");
+                                    print("<p class='RetailPrice'> ". sprintf("€ %0.2f", $retailPrice). "</p>");
+                                }
+                                ?>
+                                <p class="StockItemPriceText"><?php print sprintf("€ %0.2f", $toPayPrice); ?></p>
                                 <p class="StockItemBTW">Inclusief BTW </p>
                             </div>
                         </div>
