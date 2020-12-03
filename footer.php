@@ -58,7 +58,7 @@
                     <img class="FooterLogo" src="Public/ProductIMGHighRes/NerdyGadgets-Logo.png">
                 </div>
                 <div style="margin-bottom: 32px;">
-                    <a href="">Algemene voorwaarden </a>   |   <a href=""> Privacy </a>   |   <a href=""> Cookies </a>   |   <a> © 2020 Nerdy Gadgets</a>
+                    <a href="">Algemene voorwaarden </a>   |   <a href=""> Privacy </a>   |   <a href=""> Cookies </a>   |   <a> © <?php print(date("Y")); ?> Nerdy Gadgets</a>
                 </div>
             </div>
         </div>
