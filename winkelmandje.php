@@ -77,7 +77,7 @@ if (!$products) {
                     <td>Verzendkosten</td>
                     <td class="td-gratis-verz table-rechts">
                         <?php if ($allTotal < 25) {
-                            echo "€6,25";
+                            echo "€6.25";
                         } else {
                             echo 'Gratis';
                         } ?>
