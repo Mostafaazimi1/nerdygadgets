@@ -215,7 +215,7 @@ if ($Result != null) {
     <div class="ExtraInfoView naastElkaar">
         <div class="productInformatie">
             <h3>Productinformatie</h3>
-            <p><?php print $Result['SearchDetails']; ?></p>
+            <p><?php print $Result['MarketingComments']; ?></p>
         </div>
         <div class="productSpecs">
             <h3>Specificaties</h3>

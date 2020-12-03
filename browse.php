@@ -248,7 +248,6 @@ if (isset($amount)) {
                             <div>
                                 <p class="StockItemID">Artikelnummer: <?php print $row["StockItemID"]; ?></p>
                                 <h3 class="StockItemName"><?php print $row["StockItemName"]; ?></h3>
-                                <p class="StockItemComments"><?php print $row["MarketingComments"]; ?></p>
                                 <p class="ItemQuantity"><?php print $row["QuantityOnHand"]; ?></p>
                             </div>
                         </div>
