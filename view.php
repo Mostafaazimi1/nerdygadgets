@@ -20,7 +20,6 @@ $Query = "
             WHERE SI.stockitemid = ?
             GROUP BY StockItemID";
 
-
 $ShowStockLevel = 1000;
 $Statement = mysqli_prepare($Connection, $Query);
 $itemID = $_GET['id'];
@@ -162,29 +161,13 @@ if ($Result != null) {
                 <div class="PrijsEnAfrekenenChild">
                     <?php
                     //korting of geen korting
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
                     $SellPrice = $Result['SellPrice'];
                     if ($Result['korting'] == 0) {
                     } else {
                         $SellPrice = $SellPrice * ((100 - $Result['korting']) / 100);
-=======
->>>>>>> Stashed changes
-                    $discount=$Result['korting'];
-                    $retailPrice = $Result['SellPrice'];
-                    $sellPrice= round($Result['SellPrice']*((100-$discount)/100), 2);
-
-                    if ($discount>0){
-                        print("<p class='Advice'> Adviesprijs</p>");
-                        print("<p class='RetailPrice'>". sprintf("€ %0.2f", $retailPrice). "</p>");
-<<<<<<< Updated upstream
-=======
->>>>>>> 418ca8ab4d9e1982cad75d02bd9306be9344e1f9
->>>>>>> Stashed changes
                     }
                     ?>
-                    <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $sellPrice); ?></b></p>
+                    <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $SellPrice); ?></b></p>
                     <p> Inclusief BTW </p>
 
                     <div class="VoorraadText"> <?php
