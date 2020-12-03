@@ -40,7 +40,7 @@ function loadProducts($winkelwagen, $conn)
         array_push($selectIds, $item['id']);
     }
 
-    $sql = "SELECT s.StockItemName name, sh.QuantityOnHand, s.UnitPrice, (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, s.StockItemID, si.ImagePath
+    $sql = "SELECT s.StockItemName name, sh.QuantityOnHand, s.UnitPrice, (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, s.StockItemID, si.ImagePath, s.korting
             FROM stockitems s
             LEFT JOIN stockitemimages si on s.StockItemID = si.StockItemID
             LEFT JOIN stockitemholdings sh on sh.StockItemID = s.StockItemID";
@@ -66,6 +66,8 @@ function loadProducts($winkelwagen, $conn)
                     $newWinkelWagen[$key]['img'] = $row['ImagePath'];
                     $newWinkelWagen[$key]['aantalbeschikbaar'] = $row['QuantityOnHand'];
                     $newWinkelWagen[$key]['price'] = number_format(round($row['SellPrice'], 2), 2);
+                    $newWinkelWagen[$key]['korting']=$row['korting'];
+                    $newWinkelWagen[$key]['kortingc']=((100-$row['korting'])/100);
                     break;
                 }
             }

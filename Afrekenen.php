@@ -8,6 +8,7 @@ $createAccount=false;
 $createGuest=false;
 $wrongPass=false;
 
+
 //Start variable
 if (!isset($_POST['Afreken_submit'])) {
     $FirstName = "";
@@ -253,7 +254,7 @@ if($complete){
             <?php
             $allTotal = 0;
             foreach ($products as $product) {
-                $total = $product['price'] * $product['aantal'];
+                $total = (($product['price']*$product['kortingc'] )* $product['aantal']);
                 $allTotal += $total;
             }
             ?>
@@ -262,7 +263,7 @@ if($complete){
                 <table>
                     <tr>
                         <td>Subtotaal</td>
-                        <td class="td-geld table-rechts">€<?php echo $allTotal; ?>,-</td>
+                        <td class="td-geld table-rechts">€<?php echo (round($allTotal,2)); ?></td>
                     </tr>
                     <tr>
                         <td>Verzendkosten</td>
@@ -283,7 +284,7 @@ if($complete){
                             <?php if ($allTotal < 25) {
                                 echo "€" . ($allTotal + 6.25);
                             } else {
-                                echo "€" . $allTotal . ",-";
+                                echo "€" . round($allTotal,2);
                             } ?>
                         </td>
                     </tr>
