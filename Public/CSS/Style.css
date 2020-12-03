@@ -167,6 +167,22 @@ ul#ul-class-navigation li {
     margin: 0;
     font-weight: bold;
 }
+.Advice{
+    font-size: 15px;
+    color: #000000;
+    margin: 0;
+    font-style: oblique;
+}
+.RetailPrice{
+    font-size: 15px;
+    color: #000000;
+    margin: 0;
+
+    text-decoration: line-through;
+}
+
+
+
 .StockItemBTW{
     font-size: 14px;
     color: #949494;
