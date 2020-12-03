@@ -60,6 +60,7 @@ if (!$products) {
                     echo "<td><a href='winkelmandje.php?delete=" . $product['id'] . "'>X</a></td>";
                     echo "</tr>";
                 }
+                $allTotal = number_format((float)$allTotal, 2, '.', '');
                 ?>
 
             </table>
@@ -70,13 +71,13 @@ if (!$products) {
             <table>
                 <tr>
                     <td>Subtotaal</td>
-                    <td class="td-geld table-rechts">€<?php echo $allTotal; ?>,-</td>
+                    <td class="td-geld table-rechts">€<?php echo $allTotal; ?></td>
                 </tr>
                 <tr>
                     <td>Verzendkosten</td>
                     <td class="td-gratis-verz table-rechts">
                         <?php if ($allTotal < 25) {
-                            echo "€6,25";
+                            echo "€6.25";
                         } else {
                             echo 'Gratis';
                         } ?>
@@ -90,7 +91,7 @@ if (!$products) {
                     <td class="td-geld table-rechts"> <?php if ($allTotal < 25) {
                             echo "€" . ($allTotal + 6.25);
                         } else {
-                            echo "€" . $allTotal . ",-";
+                            echo "€" . $allTotal;
                         } ?></td>
                 </tr>
             </table>
