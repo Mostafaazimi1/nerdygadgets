@@ -698,6 +698,27 @@ ul#ul-class-categorie li {
 .FooterLogo{
     width: 187px;
 }
+.FooterBottom a{
+    color: #505050!important;
+}
+.FooterBottom p{
+    color: #505050!important;
+}
+.FooterBottom a:hover{
+    color: #007bff!important;
+}
+.FooterBottom i{
+    padding-left: 7px;
+}
+.copyrightFooter a{
+    color: #505050!important;
+}
+.copyrightFooter p{
+    color: #505050!important;
+}
+.copyrightFooter a:hover{
+    color: #007bff!important;
+}
 
 /* Winkelwagen CSS */
 .hideTH th{
