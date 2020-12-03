@@ -79,16 +79,21 @@ if ($Result != null) {
             <div>
 
 <!--                FIXEN MET RIK VAN DE CODE-->
-<!--                --><?php
-//                for ($i3 = 0; $i3 < 5; $i3++) {
-//                    if ($avgRating > 0) {
+                <?php
+                $ratingStars = "";
+                $avgRatingvar = $avgRating;
+                for ($i3 = 0; $i3 < 5; $i3++) {
+                    if ($avgRatingvar > 0) {
+                        $ratingStars .= '<i class="fas fa-star"></i>';
 //                        print('<i class="fas fa-star"></i>');
-//                    } else {
+                    } else {
+                        $ratingStars .= '<i class="far fa-star"></i>';
 //                        print('<i class="far fa-star"></i>');
-//                    }
-//                    $avgRating--;
-//                }
-//                ?>
+                    }
+                    $avgRatingvar--;
+                }
+                print($ratingStars);
+                ?>
             </div>
         </div>
         <div class="TextSterrenH1">
@@ -334,14 +339,8 @@ if ($Result != null) {
             </div>
             <div>
                 <?php
-                for ($i3 = 0; $i3 < 5; $i3++) {
-                    if ($avgRating > 0) {
-                        print('<i class="fas fa-star"></i>');
-                    } else {
-                        print('<i class="far fa-star"></i>');
-                    }
-                    $avgRating--;
-                }
+                // Print rating stars from average rating
+                print($ratingStars);
                 ?>
             </div>
             <div>
