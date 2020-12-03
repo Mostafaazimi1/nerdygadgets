@@ -73,6 +73,10 @@ if ($Result != null) {
 <!--        --><?php //print $Result['Video']; ?>
 <!--    </div>-->
 <?php //}
+
+    $tags = str_replace('"', '', substr($Result['Tags'], 1, -1));
+    $tagsArray = explode(",", $tags);
+    $sameProducts = loadProductsByTag($tagsArray, $Connection);
 //?>
         <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName'];?></h1>
         <div class="viewMainHeader naastElkaar">

@@ -90,6 +90,10 @@ function deleteProduct($winkelwagen, $id)
     return $winkelwagen;
 }
 
+function loadProductsByTag($tags, $connection){
+
+}
+
 function getCount($winkelwagen)
 {
     $count = 0;
