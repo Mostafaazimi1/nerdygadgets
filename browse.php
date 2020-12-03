@@ -239,7 +239,7 @@ if (isset($amount)) {
         foreach ($ReturnableResult as $row) {
 
             $retailPrice= $row['SellPrice'];
-            $toPayPrice = round($row['SellPrice']*((100-$row['korting'])/100), 2);
+            $sellPrice = round($row['SellPrice']*((100-$row['korting'])/100), 2);
             $discount=($row['korting']);
 
             ?>
@@ -270,7 +270,7 @@ if (isset($amount)) {
                                     print("<p class='RetailPrice'> ". sprintf("€ %0.2f", $retailPrice). "</p>");
                                 }
                                 ?>
-                                <p class="StockItemPriceText"><?php print sprintf("€ %0.2f", $toPayPrice); ?></p>
+                                <p class="StockItemPriceText"><?php print sprintf("€ %0.2f", $sellPrice); ?></p>
                                 <p class="StockItemBTW">Inclusief BTW </p>
                             </div>
                         </div>
