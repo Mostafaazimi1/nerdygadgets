@@ -73,7 +73,28 @@ if ($Result != null) {
 <!--    </div>-->
 <?php //}
 //?>
-        <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName'];?></h1>
+    <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName'];?></h1>
+    <div class="naastElkaar reviewUnderH1">
+        <div class="SterrenH1">
+            <div>
+
+<!--                FIXEN MET RIK VAN DE CODE-->
+<!--                --><?php
+//                for ($i3 = 0; $i3 < 5; $i3++) {
+//                    if ($avgRating > 0) {
+//                        print('<i class="fas fa-star"></i>');
+//                    } else {
+//                        print('<i class="far fa-star"></i>');
+//                    }
+//                    $avgRating--;
+//                }
+//                ?>
+            </div>
+        </div>
+        <div class="TextSterrenH1">
+            <p><?php print($itemCount); ?> reviews</p>
+        </div>
+    </div>
         <div class="viewMainHeader naastElkaar">
             <div class="ImageViewHeader">
                 <?php
@@ -155,7 +176,7 @@ if ($Result != null) {
             <div class="PrijsEnAfrekenenDiv">
                 <div class="PrijsEnAfrekenenChild">
                     <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
-                    <p> Inclusief BTW </p>
+                    <p style="font-size: 14px; color: #656565;"> Inclusief BTW </p>
 
                     <div class="VoorraadText"> <?php
                         $voorraadbeschikbaartext=(int)$Result['QuantityOnHand'];
@@ -178,10 +199,13 @@ if ($Result != null) {
                         Aantal<br ><input type = "number" name = "aantal" min = "0" value = "1" max = "<?php echo $Result['aantal']; ?>" style = "margin-bottom: 12px;" >
                         <button class="bestelling-btn" type = "submit" name = "addcart"
                                 value = "<?php print $Result['StockItemID'] ?>" ><i class="fas fa-shopping-cart"
-                                style = "color:#FFFFFF; padding-right: 7px;" aria - hidden = "true" ></i > Toevoegen aan winkelwagen
+                                style = "color:#FFFFFF; padding-right: 7px;" aria - = "true" ></i > Toevoegen aan winkelwagen
                         </button >
                     </form >
                     <?php }?>
+                    <div style="margin-top: 24px;">
+                        <img src="Public/Img/IncreaseTrustIcons.jpg">
+                    </div>
 
                 </div>
             </div>
@@ -199,10 +223,6 @@ if ($Result != null) {
             $CustomFields = json_decode($Result['CustomFields'], true);
             if (is_array($CustomFields)) { ?>
                 <table>
-                <thead>
-                <th>Naam</th>
-                <th>Data</th>
-                </thead>
                 <?php
                 foreach ($CustomFields as $SpecName => $SpecText) { ?>
                     <tr>
@@ -299,7 +319,6 @@ if ($Result != null) {
             </a>
         </div>
     </div>
-
     <div class="reviews">
         <div>
             <div>
@@ -396,4 +415,6 @@ if ($Result != null) {
 } else {
     ?><h2 id="ProductNotFound">Het opgevraagde product is niet gevonden.</h2><?php
 }?>
-
+<?php
+include __DIR__ . "/footer.php";
+?>
