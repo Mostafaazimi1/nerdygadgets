@@ -92,9 +92,9 @@ function deleteProduct($winkelwagen, $id)
 
 function loadProductsByTag($tags, $connection)
 {
-    $like = '';
+    $like = 'LIKE ';
     foreach ($tags as $tag) {
-        $like .= $like . "LIKE '%" . $tag . "%' OR ";
+        $like .= "'%" . $tag . "%' OR ";
     }
 
     $like = substr($like, 0, -3);
@@ -104,7 +104,7 @@ function loadProductsByTag($tags, $connection)
             JOIN stockitemimages si on s.StockItemID = si.StockItemID
             WHERE s.Tags " . $like . "
             ORDER BY RAND() LIMIT 3";
-
+    
     $result = mysqli_query($connection, $sql);
     $items = array();
 
