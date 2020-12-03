@@ -8,6 +8,7 @@ $Query = "
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
             CONCAT(QuantityOnHand)AS QuantityOnHand,
+            korting,
             QuantityOnHand AS aantal,
             SearchDetails,
             (CASE WHEN (RecommendedRetailPrice*(1+(TaxRate/100))) > 50 THEN 0 ELSE 6.95 END) AS SendCosts, MarketingComments, CustomFields, SI.Video,
@@ -154,7 +155,16 @@ if ($Result != null) {
         <div class="InfoViewHeader">
             <div class="PrijsEnAfrekenenDiv">
                 <div class="PrijsEnAfrekenenChild">
-                    <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
+                    <?php
+                    //korting of geen korting
+                    $SellPrice = $Result['SellPrice'];
+                    if ($Result['korting']==0){
+                    }
+                    else{
+                        $SellPrice=$SellPrice*((100-$Result['korting'])/100);
+                    }
+                    ?>
+                    <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $SellPrice); ?></b></p>
                     <p> Inclusief BTW </p>
 
                     <div class="VoorraadText"> <?php
