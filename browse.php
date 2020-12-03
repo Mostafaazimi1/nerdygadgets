@@ -62,22 +62,41 @@ switch ($SortOnPage) {
         $SortName = "price_low_high";
     }
 }
-$searchValues = explode(" ", $SearchString);
-// worden ze omgevormd tot script enkel gebaseerd op klank
-$searchValues = array_map(function($val) { return metaphone($val); }, $searchValues);
-$queryBuildResult = "";
 if ($SearchString != "") {
-    for ($i = 0; $i < count($searchValues); $i++) {
-        if ($i != 0) {
-            $queryBuildResult .= "AND ";
+    $exploded = explode(" ", $SearchString);
+    $searchValues = [];
+    foreach ($exploded as $val) {
+        $trimmed = trim($val);
+        if ($trimmed != "") {
+            array_push($searchValues, $val);
         }
-        $queryBuildResult .= "SI.SearchDetails_soundslike LIKE '%$searchValues[$i]%' ";
     }
-    if ($queryBuildResult != "") {
-        $queryBuildResult .= " OR ";
-    }
-    if ($SearchString != "" || $SearchString != null) {
-        $queryBuildResult .= "SI.StockItemID ='$SearchString'";
+
+// worden ze omgevormd tot script enkel gebaseerd op klank
+// $searchValues = array_map(function ($val) {return metaphone($val);}, $searchValues);
+    $searchValues = array_map(function ($val) {
+        if (is_numeric($val)) {
+            return $val;
+        } else {
+            return metaphone($val);
+        }
+    }, $searchValues);
+
+
+    $queryBuildResult = "";
+    if (count($searchValues) > 0) {
+        $queryBuildResult .= "WHERE ";
+        for ($i = 0; $i < count($searchValues); $i++) {
+            if ($i != 0) {
+                $queryBuildResult .= " OR ";
+            }
+
+            if (!is_numeric($searchValues[$i])) {
+                $queryBuildResult .= "SI.SearchDetails_soundslike LIKE '%$searchValues[$i]%'";
+            } else {
+                $queryBuildResult .= "SI.StockItemID = '$searchValues[$i]'";
+            }
+        }
     }
 }
 
@@ -86,9 +105,6 @@ $Offset = $PageNumber * $ProductsOnPage;
 $ShowStockLevel = 1000;
 $OutOfStock = 0;
 if ($CategoryID == "") {
-    if ($queryBuildResult != "") {
-        $queryBuildResult = "WHERE " . $queryBuildResult;
-    }
 
     $Query = "
                 SELECT SI.StockItemID, SI.StockItemName, SI.MarketingComments, ROUND(TaxRate * RecommendedRetailPrice / 100 + RecommendedRetailPrice,2) as SellPrice,
@@ -106,7 +122,6 @@ if ($CategoryID == "") {
                 GROUP BY StockItemID
                 ORDER BY " . $Sort . " 
                 LIMIT ?  OFFSET ?";
-
 
     $Statement = mysqli_prepare($Connection, $Query);
     mysqli_stmt_bind_param($Statement, "iiii", $ShowStockLevel, $OutOfStock, $ProductsOnPage, $Offset);
@@ -233,7 +248,6 @@ if (isset($amount)) {
                             <div>
                                 <p class="StockItemID">Artikelnummer: <?php print $row["StockItemID"]; ?></p>
                                 <h3 class="StockItemName"><?php print $row["StockItemName"]; ?></h3>
-                                <p class="StockItemComments"><?php print $row["MarketingComments"]; ?></p>
                                 <p class="ItemQuantity"><?php print $row["QuantityOnHand"]; ?></p>
                             </div>
                         </div>

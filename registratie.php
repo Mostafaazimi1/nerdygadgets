@@ -93,15 +93,6 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
 //            echo $execval;
 //            echo "Customer gegevens zijn succesvol toegevoegd aan database!";
             $stmt->close();
-                $stmt->bind_param("siiiiiiiidsdiiissssssssssssiss", $FullName, $BillToCustomerId, $CustomerCategoryId, $BuyingGroupId, $PrimaryContactPersonId,
-                    $AlternateContactPersonId, $three, $DeliveryCityId, $DeliveryCityId, $CreditLimit, $CurrentDate, $StandardDiscountPercentage, $zero, $zero, $seven,
-                    $PhoneNumber, $zero, $NULL, $NULL, $zero, $unknown, $address,
-                    $postcode, $unknown, $unknown, $DeliveryCityName, $postcode, $LastEditedBy, $CurrentDate,
-                    $ValidTo);
-                $execval = $stmt->execute();
-                echo $execval;
-                //echo "Customer gegevens zijn succesvol toegevoegd aan database!";
-                $stmt->close();
             }
         }
 
@@ -135,11 +126,10 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
                 $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
             $execval = $stmt->execute();
             //echo $execval;
-//            echo "People gegevens zijn succesvol toegevoegd aan database!";
-            print("Uw account is successvol aangemaakt!");
-            echo $execval;
             //echo "People gegevens zijn succesvol toegevoegd aan database!";
             $stmt->close();
+            $_SESSION['messageCount3'] = 1;
+            print('<meta http-equiv = "refresh" content = "0; url = ./" />');
         }
         // UPDATEN BILLTOCUSTOMERID IN TABLE customers
         if ($Connection->connect_error) {

@@ -83,6 +83,11 @@ if (!isset($_SESSION['winkelwagen'])) {
                             <a href="winkelmandje.php" class="HrefDecoration">
                                 <i class="fas fa-shopping-cart" style="color:#007bff;"></i>
                                 Winkelmandje (<?php echo getCount($_SESSION['winkelwagen']);?>)
+<!--                                <span class="WinkelmandjeAantal">-->
+<!--                                    <span class="WinkelmandjeAantalCount">-->
+<!--                                        --><?php //echo getCount($_SESSION['winkelwagen']);?>
+<!--                                    </span>-->
+<!--                                </span>-->
                             </a>
                         </li>
                     </ul>

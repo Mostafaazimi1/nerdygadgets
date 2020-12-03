@@ -23,19 +23,19 @@
             <div class="FooterBottom naastElkaar">
                 <div class="FooterBox1">
                     <h6>Klantenservice</h6>
-                    <a href="">Contact opnemen</a><br>
-                    <a href="">Verzending & bezorging</a><br>
-                    <a href="">Betaling</a><br>
-                    <a href="">Retourneren</a><br>
-                    <a href="">Garantie & reparatie</a><br>
+                    <a href="klantenservice.php">Contact opnemen</a><br>
+                    <a href="klantenservice.php">Verzending & bezorging</a><br>
+                    <a href="klantenservice.php">Betaling</a><br>
+                    <a href="klantenservice.php">Retourneren</a><br>
+                    <a href="klantenservice.php">Garantie & reparatie</a><br>
                     <br>
-                    <a href="">Alles over onze klantenservice</a>
+                    <a href="klantenservice.php">Alles over onze klantenservice</a>
                 </div>
                 <div class="FooterBox2">
                     <h6>Over Nerdy Gadgets</h6>
-                    <a href="">Contact</a><br>
-                    <a href="">FAQ</a><br>
-                    <a href="">Openingstijden</a><br>
+                    <a href="klantenservice.php">Contact</a><br>
+                    <a href="klantenservice.php">FAQ</a><br>
+                    <a href="klantenservice.php">Openingstijden</a><br>
                 </div>
                 <div class="FooterBox3">
                     <h6>Contact</h6>
@@ -58,7 +58,7 @@
                     <img class="FooterLogo" src="Public/ProductIMGHighRes/NerdyGadgets-Logo.png">
                 </div>
                 <div style="margin-bottom: 32px;">
-                    <a href="">Algemene voorwaarden </a>   |   <a href=""> Privacy </a>   |   <a href=""> Cookies </a>   |   <a> © 2020 Nerdy Gadgets</a>
+                    <a href="">Algemene voorwaarden </a>   |   <a href=""> Privacy </a>   |   <a href=""> Cookies </a>   |   <a> © <?php print(date("Y")); ?> Nerdy Gadgets</a>
                 </div>
             </div>
         </div>
