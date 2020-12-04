@@ -374,7 +374,7 @@ if ($Result != null) {
             $result2 = $Connection->query($sql2);
             if ($result2->num_rows > 0) {
                 while ($row2 = $result2->fetch_assoc()) {
-                    print("<div class='individualReview'>");
+                    print("<hr style='width: 50%; margin-left: 0;'><br><div class='individualReview'>");
                     $rating = $row2["Rating"];
                     for ($i3 = 0; $i3 < 5; $i3++) {
                         if ($rating > 0) {
@@ -384,6 +384,7 @@ if ($Result != null) {
                         }
                         $rating--;
                     }
+
                     print("&#8287" . $row2["ReviewTitle"] . "<br>");
                     // Voeg bijvehorende gegevens van de klant toe aan de array uit customers tabel
                     $sql3 = "SELECT PreferredName FROM People WHERE PersonID = " . $row2["PersonID"];
@@ -397,7 +398,7 @@ if ($Result != null) {
                         print(" Ik raad dit product aan<br>");
                     }
                     print("<br>" . $row2["Description"] . "<br>");
-                    print("<br><br>");
+                    print("<br><hr>");
                     print("</div>");
                 }
 //                   

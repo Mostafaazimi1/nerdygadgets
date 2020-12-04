@@ -832,15 +832,35 @@ ul#ul-class-categorie li {
 .individualReview {
     width: 50%;
     margin-bottom: 20px;
-    border: 5px solid black;
 }
 .buttonClass {
-    border: 1px solid black;
     width: 15%;
+    background-color: #007bff;
     padding: 5px;
+    color: #FFFFFF;
+    font-weight: 500;
+    transition: 0.4s;
+}
+.buttonClass:hover{
+    background-color: #2189f9;
 }
 #reviews {
     width: 40%;
+}
+.individualReview .fas{
+    color: #F9C241;
+}
+.individualReview .far{
+    color: #bebebe;
+}
+.individualReview .fa-check-circle{
+    color: #2BAE49!important;
+}
+.reviews .fas{
+    color: #F9C241;
+}
+.reviews .far{
+    color: #bebebe;
 }
 .reviews{
     margin-top: 75px;
