@@ -126,6 +126,11 @@ if (!isset($_SESSION['winkelwagen'])) {
                         <li>
                             <a href="categories.php" class="HrefDecorationCategorie">Hele assortiment</a>
                         </li>
+
+                    </ul>
+                </div>
+                <div class="ServiceClass">
+                    <ul class="klantenserviceli" id="ul-class-categorie">
                         <li>
                             <a href="klantenservice.php" class="HrefDecorationCategorie">Klantenservice</a>
                         </li>

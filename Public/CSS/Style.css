@@ -628,6 +628,7 @@ ul#ul-class-categorie-price li {
 }
 #CategoriesBar{
     padding: 18px 0;
+    width: 80%!important;
 }
 #CategoriesBar, ul#ul-class-categorie {
     margin: 0!important;
@@ -639,6 +640,19 @@ ul#ul-class-categorie li {
     margin-right: 1em;
     font-size: 15px;
     text-decoration: none;
+}
+.ServiceClass{
+    text-align: right;
+    float: right;
+    padding: 18px 0;
+    width: 20%;
+}
+.ServiceClass ul#ul-class-categorie {
+    margin: 0!important;
+    padding-inline-start: 0!important;
+}
+.klantenserviceli li{
+    margin-right: 0!important;
 }
 .logoDiv {
     width: 20%!important;

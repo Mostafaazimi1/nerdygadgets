@@ -223,7 +223,9 @@ if ($Result != null) {
                             </button>
                         </form>
                     <?php } ?>
-
+                    <div style="margin-top: 36px">
+                        <img src="Public/Img/IncreaseTrustIcons.jpg">
+                    </div>
                 </div>
             </div>
         </div>
