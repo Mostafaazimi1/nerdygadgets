@@ -78,7 +78,30 @@ if ($Result != null) {
     $tagsArray = explode(",", $tags);
     $sameProducts = loadProductsByTag($tagsArray, $Connection);
 //?>
-    <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName']; ?></h1>
+    <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName'];?></h1>
+    <div class="naastElkaar reviewUnderH1">
+        <div class="SterrenH1">
+            <div>
+                <?php
+                $ratingStars = "";
+                $avgRatingvar = $avgRating;
+                for ($i3 = 0; $i3 < 5; $i3++) {
+                    if ($avgRatingvar > 0) {
+                        $ratingStars .= '<i class="fas fa-star"></i>';
+//                        print('<i class="fas fa-star"></i>');
+                    } else {
+                        $ratingStars .= '<i class="far fa-star"></i>';
+//                        print('<i class="far fa-star"></i>');
+                    }
+                    $avgRatingvar--;
+                }
+                print($ratingStars); ?>
+            </div>
+        </div>
+        <div class="TextSterrenH1">
+            <p><?php print($itemCount); ?> reviews</p>
+        </div>
+    </div>
     <div class="viewMainHeader naastElkaar">
         <div class="ImageViewHeader">
             <?php
@@ -192,7 +215,7 @@ if ($Result != null) {
                             <button class="bestelling-btn" type="submit" name="addcart"
                                     value="<?php print $Result['StockItemID'] ?>"><i class="fas fa-shopping-cart"
                                                                                      style="color:#FFFFFF; padding-right: 7px;"
-                                                                                     aria - hidden="true"></i> Toevoegen
+                                                                                     aria -></i> Toevoegen
                                 aan winkelwagen
                             </button>
                         </form>
@@ -206,7 +229,7 @@ if ($Result != null) {
     <div class="ExtraInfoView naastElkaar">
         <div class="productInformatie">
             <h3>Productinformatie</h3>
-            <p><?php print $Result['SearchDetails']; ?></p>
+            <p><?php print $Result['MarketingComments']; ?></p>
         </div>
         <div class="productSpecs">
             <h3>Specificaties</h3>
@@ -214,10 +237,6 @@ if ($Result != null) {
             $CustomFields = json_decode($Result['CustomFields'], true);
             if (is_array($CustomFields)) { ?>
                 <table>
-                <thead>
-                <th>Naam</th>
-                <th>Data</th>
-                </thead>
                 <?php
                 foreach ($CustomFields as $SpecName => $SpecText) { ?>
                     <tr>
@@ -383,3 +402,6 @@ if ($Result != null) {
     ?><h2 id="ProductNotFound">Het opgevraagde product is niet gevonden.</h2><?php
 } ?>
 
+<?php
+include __DIR__ . "/footer.php";
+?>
