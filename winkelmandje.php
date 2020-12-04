@@ -45,7 +45,7 @@ if (!$products) {
                 <?php
                 $allTotal = 0;
                 foreach ($products as $product) {
-                    $total = $product['price'] * $product['aantal'];
+                    $total = (($product['price']*$product['kortingc'] )* $product['aantal']);
                     $allTotal += $total;
                     echo "<tr>";
                     echo "<td><img src='Public/StockItemIMG/" . $product['img'] . "' style='max-width: 100px'></td>";

@@ -8,6 +8,7 @@ $Query = "
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
             CONCAT(QuantityOnHand)AS QuantityOnHand,
+            korting,
             QuantityOnHand AS aantal,
             SearchDetails,
             (CASE WHEN (RecommendedRetailPrice*(1+(TaxRate/100))) > 50 THEN 0 ELSE 6.95 END) AS SendCosts, MarketingComments, CustomFields, SI.Video,
@@ -68,149 +69,134 @@ if ($R) {
 
 if ($Result != null) {
     ?>
-<!--    <div id="VideoFrame">-->
-<!--        --><?php //print $Result['Video']; ?>
-<!--    </div>-->
-<?php //}
+    <!--    <div id="VideoFrame">-->
+    <!--        --><?php //print $Result['Video']; ?>
+    <!--    </div>-->
+    <?php //}
+
+    $tags = str_replace('"', '', substr($Result['Tags'], 1, -1));
+    $tagsArray = explode(",", $tags);
+    $sameProducts = loadProductsByTag($tagsArray, $Connection);
 //?>
-    <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName'];?></h1>
-    <div class="naastElkaar reviewUnderH1">
-        <div class="SterrenH1">
-            <div>
-
-<!--                FIXEN MET RIK VAN DE CODE-->
-                <?php
-                $ratingStars = "";
-                $avgRatingvar = $avgRating;
-                for ($i3 = 0; $i3 < 5; $i3++) {
-                    if ($avgRatingvar > 0) {
-                        $ratingStars .= '<i class="fas fa-star"></i>';
-//                        print('<i class="fas fa-star"></i>');
-                    } else {
-                        $ratingStars .= '<i class="far fa-star"></i>';
-//                        print('<i class="far fa-star"></i>');
-                    }
-                    $avgRatingvar--;
-                }
-                print($ratingStars);
+    <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName']; ?></h1>
+    <div class="viewMainHeader naastElkaar">
+        <div class="ImageViewHeader">
+            <?php
+            if (isset($Images)) {
+                // print Single
+            if (count($Images) == 1) {
                 ?>
-            </div>
-        </div>
-        <div class="TextSterrenH1">
-            <p><?php print($itemCount); ?> reviews</p>
-        </div>
-    </div>
-        <div class="viewMainHeader naastElkaar">
-            <div class="ImageViewHeader">
-                <?php
-                if (isset($Images)) {
-                    // print Single
-                    if (count($Images) == 1) {
-                        ?>
-                        <div id="ProductImage">
-                            <img src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
+                <div id="ProductImage">
+                    <img src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
+                </div>
+            <?php
+            } else if (count($Images) >= 2) { ?>
+                <div class="product__carousel">
+                    <div class="gallery-parent">
+                        <!-- SwiperJs and EasyZoom plugins start -->
+                        <div class="swiper-container gallery-top">
+                            <div class="swiper-wrapper">
+                                <?php for ($i = 0; $i < count($Images); $i++) {
+                                    ?>
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="Public/StockItemIMG/<?php print $Images[$i]['ImagePath'] ?>">
+                                            <img src="Public/StockItemIMG/<?php print $Images[$i]['ImagePath'] ?>">
+                                        </a>
+                                    </div>
+                                <?php } ?>
+                                <?php
+                                if (isset($Result['Video'])) {
+                                    ?>
+                                    <!--                                                        VIDEO IN CAROUSEL MOET NOG FIXEN-->
+                                    <!--                                                <div class="swiper-slide">-->
+                                    <!--                                                    <div id="CarouselVideoFrame">-->
+                                    <!--                                                        --><?php //print $Result['Video']; ?>
+                                    <!--                                                    </div>-->
+                                <?php }
+                                ?>
+                            </div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
                         </div>
-                        <?php
-                    } else if (count($Images) >= 2) { ?>
-                        <div class="product__carousel">
-                            <div class="gallery-parent">
-                                <!-- SwiperJs and EasyZoom plugins start -->
-                                <div class="swiper-container gallery-top">
-                                    <div class="swiper-wrapper">
-                                        <?php for ($i = 0; $i < count($Images); $i++) {
-                                            ?>
-                                        <div class="swiper-slide easyzoom easyzoom--overlay">
-                                            <a href="Public/StockItemIMG/<?php print $Images[$i]['ImagePath'] ?>">
-                                                <img src="Public/StockItemIMG/<?php print $Images[$i]['ImagePath'] ?>">
-                                            </a>
-                                        </div>
-                                        <?php } ?>
-                                        <?php
-                                            if (isset($Result['Video'])) {
-                                                ?>
-<!--                                                        VIDEO IN CAROUSEL MOET NOG FIXEN-->
-<!--                                                <div class="swiper-slide">-->
-<!--                                                    <div id="CarouselVideoFrame">-->
-<!--                                                        --><?php //print $Result['Video']; ?>
-<!--                                                    </div>-->
-                                                <?php }
-                                                ?>
+                        <div class="swiper-container gallery-thumbs">
+                            <div class="swiper-wrapper">
+                                <?php for ($i = 0; $i < count($Images); $i++) {
+                                    ?>
+                                    <div class="swiper-slide">
+                                        <img src="Public/StockItemIMG/<?php print $Images[$i]['ImagePath'] ?>" alt=""/>
                                     </div>
-                                    <!-- Add Arrows -->
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <div class="swiper-container gallery-thumbs">
-                                    <div class="swiper-wrapper">
-                                        <?php for ($i = 0; $i < count($Images); $i++) {
-                                        ?>
-                                            <div class="swiper-slide">
-                                                <img src="Public/StockItemIMG/<?php print $Images[$i]['ImagePath'] ?>" alt="" />
-                                            </div>
-                                        <?php } ?>
+                                <?php } ?>
 
-                                        <!--VIDEO IN CAROUSEL MOET NOG FIXEN-->
-<!--                                        --><?php
-//                                        if (isset($Result['Video'])) {
-//                                        ?>
-<!--                                            <div class="swiper-slide">-->
-<!--                                                <img src="Public/Img/online-video.png" alt="" />-->
-<!--                                            </div>-->
-<!--                                        --><?php //} ?>
-                                    </div>
-                                </div>
-                                <!-- SwiperJs and EasyZoom plugins end -->
+                                <!--VIDEO IN CAROUSEL MOET NOG FIXEN-->
+                                <!--                                        --><?php
+                                //                                        if (isset($Result['Video'])) {
+                                //                                        ?>
+                                <!--                                            <div class="swiper-slide">-->
+                                <!--                                                <img src="Public/Img/online-video.png" alt="" />-->
+                                <!--                                            </div>-->
+                                <!--                                        --><?php //} ?>
                             </div>
                         </div>
-                        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-                        <script src="Public/JS/swiper.min.js"></script>
-                        <script src="Public/JS/easyzoom.js"></script>
-                        <script src="Public/JS/main.js"></script>
-                   <?php }
-                } else {
-                    ?>
-                    <div id="ProductImage">
-                        <img src="Public/StockGroupIMG/<?php print $Result['BackupImagePath']; ?>">
+                        <!-- SwiperJs and EasyZoom plugins end -->
                     </div>
+                </div>
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                <script src="Public/JS/swiper.min.js"></script>
+                <script src="Public/JS/easyzoom.js"></script>
+                <script src="Public/JS/main.js"></script>
+            <?php }
+            } else {
+            ?>
+                <div id="ProductImage">
+                    <img src="Public/StockGroupIMG/<?php print $Result['BackupImagePath']; ?>">
+                </div>
 
-                    <?php
-                }
+                <?php
+            }
             ?>
         </div>
         <div class="InfoViewHeader">
             <div class="PrijsEnAfrekenenDiv">
                 <div class="PrijsEnAfrekenenChild">
-                    <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
-                    <p style="font-size: 14px; color: #656565;"> Inclusief BTW </p>
+                    <?php
+                    //korting of geen korting
+                    $SellPrice = $Result['SellPrice'];
+                    if ($Result['korting'] == 0) {
+                    } else {
+                        $SellPrice = $SellPrice * ((100 - $Result['korting']) / 100);
+                    }
+                    ?>
+                    <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $SellPrice); ?></b></p>
+                    <p> Inclusief BTW </p>
 
                     <div class="VoorraadText"> <?php
-                        $voorraadbeschikbaartext=(int)$Result['QuantityOnHand'];
-                        if ($voorraadbeschikbaartext>= 1000){
+                        $voorraadbeschikbaartext = (int)$Result['QuantityOnHand'];
+                        if ($voorraadbeschikbaartext >= 1000) {
                             echo("<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Ruime voorraad beschikbaar.</p>"); //Big stock above 1000
-                        }
-                        elseif ($voorraadbeschikbaartext<= 0){
+                        } elseif ($voorraadbeschikbaartext <= 0) {
                             echo("<p class='voorraad' style='color:#ff0000 !important;'><i class='fas fa-box' style='color:#ff0000 !important; padding-right: 7px;' aria-hidden='true'></i>UITVERKOCHT</p>"); //Sold out
-                        }elseif ($voorraadbeschikbaartext > 0 && $voorraadbeschikbaartext < 100) {
-                            echo("<p class='voorraad' style='color:#ffa500 !important;'><i class='fas fa-box' style='color:#ffa500 !important; padding-right: 7px;' aria-hidden='true'></i>Bijna uitverkocht. Voorraad: " . $Result['QuantityOnHand']  . "</p>"); //Stock almost sold out
-                        }else{
-                            echo("<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Voorraad: ". $Result['QuantityOnHand']. "</p>"); //Show stock
+                        } elseif ($voorraadbeschikbaartext > 0 && $voorraadbeschikbaartext < 100) {
+                            echo("<p class='voorraad' style='color:#ffa500 !important;'><i class='fas fa-box' style='color:#ffa500 !important; padding-right: 7px;' aria-hidden='true'></i>Bijna uitverkocht. Voorraad: " . $Result['QuantityOnHand'] . "</p>"); //Stock almost sold out
+                        } else {
+                            echo("<p class='voorraad'><i class='fas fa-box' style='color:#2BAE49; padding-right: 7px;' aria-hidden='true'></i>Voorraad: " . $Result['QuantityOnHand'] . "</p>"); //Show stock
                         }
                         ?>
                     </div>
-                    <?php if($Result['aantal']>0){?>
-                        <br >
-                    <form action = "add.php" method = "post" >
-                        <input type = "hidden" name = "action" value = "submit" />
-                        Aantal<br ><input type = "number" name = "aantal" min = "0" value = "1" max = "<?php echo $Result['aantal']; ?>" style = "margin-bottom: 12px;" >
-                        <button class="bestelling-btn" type = "submit" name = "addcart"
-                                value = "<?php print $Result['StockItemID'] ?>" ><i class="fas fa-shopping-cart"
-                                style = "color:#FFFFFF; padding-right: 7px;" aria - = "true" ></i > Toevoegen aan winkelwagen
-                        </button >
-                    </form >
-                    <?php }?>
-                    <div style="margin-top: 24px;">
-                        <img src="Public/Img/IncreaseTrustIcons.jpg">
-                    </div>
+                    <?php if ($Result['aantal'] > 0) { ?>
+                        <br>
+                        <form action="add.php" method="post">
+                            <input type="hidden" name="action" value="submit"/>
+                            Aantal<br><input type="number" name="aantal" min="0" value="1"
+                                             max="<?php echo $Result['aantal']; ?>" style="margin-bottom: 12px;">
+                            <button class="bestelling-btn" type="submit" name="addcart"
+                                    value="<?php print $Result['StockItemID'] ?>"><i class="fas fa-shopping-cart"
+                                                                                     style="color:#FFFFFF; padding-right: 7px;"
+                                                                                     aria - hidden="true"></i> Toevoegen
+                                aan winkelwagen
+                            </button>
+                        </form>
+                    <?php } ?>
 
                 </div>
             </div>
@@ -220,7 +206,7 @@ if ($Result != null) {
     <div class="ExtraInfoView naastElkaar">
         <div class="productInformatie">
             <h3>Productinformatie</h3>
-            <p><?php print $Result['MarketingComments']; ?></p>
+            <p><?php print $Result['SearchDetails']; ?></p>
         </div>
         <div class="productSpecs">
             <h3>Specificaties</h3>
@@ -228,6 +214,10 @@ if ($Result != null) {
             $CustomFields = json_decode($Result['CustomFields'], true);
             if (is_array($CustomFields)) { ?>
                 <table>
+                <thead>
+                <th>Naam</th>
+                <th>Data</th>
+                </thead>
                 <?php
                 foreach ($CustomFields as $SpecName => $SpecText) { ?>
                     <tr>
@@ -265,65 +255,36 @@ if ($Result != null) {
             <h3>Andere producten</h3>
         </div>
         <div>
-            <a class="ListItem" href="view.php?id=2">
-                <div class="naastElkaar" id="ProductFrame" style="width: 31%; margin-left: 1%; margin-right: 1%; float:left;">
-                    <div class="productFrameLinks naastElkaar" id="geenPadding" style="width: 100%">
-                        <div class="productFrameLinksImage"><img class="ImgFrame" src="Public/StockItemIMG/usb.png" style="max-width: 100%; max-height: 100%;">
+            <?php
+            foreach ($sameProducts as $product) {
+                ?>
+                <a class="ListItem" href="view.php?id=<?php echo $product['id']; ?>">
+                    <div class="naastElkaar" id="ProductFrame"
+                         style="width: 31%; margin-left: 1%; margin-right: 1%; float:left;">
+                        <div class="productFrameLinks naastElkaar" id="geenPadding" style="width: 100%">
+                            <div class="productFrameLinksImage"><img class="ImgFrame" src="Public/StockItemIMG/<?php echo $product['img']; ?>"
+                                                                     style="max-width: 100%; max-height: 100%;">
+                            </div>
+                            <div class="productFrameLinksInfo" style="margin-left: 5%; width: 65%;">
+                                <h3 class="StockItemName"><?php echo $product['name']; ?></h3>
+                            </div>
                         </div>
-                        <div class="productFrameLinksInfo" style="margin-left: 5%; width: 65%;">
-                            <h3 class="StockItemName">USB rocket launcher (Gray)</h3>
-                        </div>
-                    </div>
-                    <div class="productFrameRechts" style="width: 100%">
-                        <div id="StockItemFrameRight">
-                            <div class="CenterPriceLeftChild">
-                                <p class="StockItemPriceText">€ 42.99</p>
-                                <p class="StockItemBTW">Inclusief BTW </p>
+                        <div class="productFrameRechts" style="width: 100%">
+                            <div id="StockItemFrameRight">
+                                <div class="CenterPriceLeftChild">
+                                    <p class="StockItemPriceText">€ <?php echo $product['price']; ?></p>
+                                    <p class="StockItemBTW">Inclusief BTW </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
-            <a class="ListItem" href="view.php?id=2">
-                <div class="naastElkaar" id="ProductFrame" style="width: 31%; margin-left: 1%; margin-right: 1%; float:left;">
-                    <div class="productFrameLinks naastElkaar" id="geenPadding" style="width: 100%">
-                        <div class="productFrameLinksImage"><img class="ImgFrame" src="Public/StockItemIMG/usb.png" style="max-width: 100%; max-height: 100%;">
-                        </div>
-                        <div class="productFrameLinksInfo" style="margin-left: 5%; width: 65%;">
-                            <h3 class="StockItemName">USB rocket launcher (Gray)</h3>
-                        </div>
-                    </div>
-                    <div class="productFrameRechts" style="width: 100%">
-                        <div id="StockItemFrameRight">
-                            <div class="CenterPriceLeftChild">
-                                <p class="StockItemPriceText">€ 42.99</p>
-                                <p class="StockItemBTW">Inclusief BTW </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a class="ListItem" href="view.php?id=2">
-                <div class="naastElkaar" id="ProductFrame" style="width: 31%; margin-left: 1%; margin-right: 1%; float:left;">
-                    <div class="productFrameLinks naastElkaar" id="geenPadding" style="width: 100%">
-                        <div class="productFrameLinksImage"><img class="ImgFrame" src="Public/StockItemIMG/usb.png" style="max-width: 100%; max-height: 100%;">
-                        </div>
-                        <div class="productFrameLinksInfo" style="margin-left: 5%; width: 65%;">
-                            <h3 class="StockItemName">USB rocket launcher (Gray)</h3>
-                        </div>
-                    </div>
-                    <div class="productFrameRechts" style="width: 100%">
-                        <div id="StockItemFrameRight">
-                            <div class="CenterPriceLeftChild">
-                                <p class="StockItemPriceText">€ 42.99</p>
-                                <p class="StockItemBTW">Inclusief BTW </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
+                </a>
+                <?php
+            }
+            ?>
         </div>
     </div>
+
     <div class="reviews">
         <div>
             <div>
@@ -339,8 +300,14 @@ if ($Result != null) {
             </div>
             <div>
                 <?php
-                // Print rating stars from average rating
-                print($ratingStars);
+                for ($i3 = 0; $i3 < 5; $i3++) {
+                    if ($avgRating > 0) {
+                        print('<i class="fas fa-star"></i>');
+                    } else {
+                        print('<i class="far fa-star"></i>');
+                    }
+                    $avgRating--;
+                }
                 ?>
             </div>
             <div>
@@ -414,7 +381,5 @@ if ($Result != null) {
     <?php
 } else {
     ?><h2 id="ProductNotFound">Het opgevraagde product is niet gevonden.</h2><?php
-}?>
-<?php
-include __DIR__ . "/footer.php";
-?>
+} ?>
+

@@ -145,11 +145,11 @@ if (isset($_SESSION["AfrekenGegevens"])) {
                     <?php
                     $allTotal = 0;
                     foreach ($products as $product) {
-                        $total = $product['price'] * $product['aantal'];
+                        $total = (($product['price']*$product['kortingc'] )* $product['aantal']);
                         $allTotal += $total;
                         echo "<tr>";
                         echo "<td><p>" . $product['name'] . "</p></td>";
-                        echo "<td><p>€" . $product['price'] . "</p></td>";
+                        echo "<td><p>€" . round($product['kortingc']*$product['price'], 2) . "</p></td>";
                         echo "<td><p>x" . $product['aantal'] . "</p></td>";
                         echo "</tr>";
 
@@ -157,7 +157,7 @@ if (isset($_SESSION["AfrekenGegevens"])) {
                     ?>
                     <tr>
                         <td>Subtotaal</td>
-                        <td class="td-geld table-rechts">€<?php echo $allTotal; ?>,-</td>
+                        <td class="td-geld table-rechts">€<?php echo round($allTotal,2); ?>,-</td>
                     </tr>
                     <tr>
                         <td>Verzendkosten</td>
@@ -177,7 +177,7 @@ if (isset($_SESSION["AfrekenGegevens"])) {
                         <td class="td-geld table-rechts"> <?php if ($allTotal < 25) {
                                 echo "€" . ($allTotal + 6.25);
                             } else {
-                                echo "€" . $allTotal . ",-";
+                                echo "€" . round($allTotal,2);
                             } ?></td>
                     </tr>
                 </table>
