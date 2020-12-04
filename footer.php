@@ -30,7 +30,7 @@
                 <div class="FooterBox3">
                     <h6>Contact</h6>
                     <p>Nerdy Gadgets<br>Straatweg 11<br>1111 AB Zwolle</p>
-                    <p>T.0612345678 <br>E. klantenservice.nerdygadgets@gmail.com</p>
+                    <p>T. 0612345678 <br>E. klantenservice.nerdygadgets@gmail.com</p>
                 </div>
                 <div class="FooterBox4">
                     <h6>Volg onze socials</h6>
