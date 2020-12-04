@@ -4,11 +4,10 @@ mysqli_set_charset($Connection, 'latin1');
 include __DIR__ . "/header.php";
 
 $Query = " 
-           SELECT SI.StockItemID, SI.Tags, 
+           SELECT SI.StockItemID, SI.Tags, korting,
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
             CONCAT(QuantityOnHand)AS QuantityOnHand,
-            korting,
             QuantityOnHand AS aantal,
             SearchDetails,
             (CASE WHEN (RecommendedRetailPrice*(1+(TaxRate/100))) > 50 THEN 0 ELSE 6.95 END) AS SendCosts, MarketingComments, CustomFields, SI.Video,
@@ -161,13 +160,16 @@ if ($Result != null) {
                 <div class="PrijsEnAfrekenenChild">
                     <?php
                     //korting of geen korting
-                    $SellPrice = $Result['SellPrice'];
-                    if ($Result['korting'] == 0) {
-                    } else {
-                        $SellPrice = $SellPrice * ((100 - $Result['korting']) / 100);
+                    $discount=$Result['korting'];
+                    $retailPrice = $Result['SellPrice'];
+                    $sellPrice= round($Result['SellPrice']*((100-$discount)/100), 2);
+
+                    if ($discount>0){
+                        print("<p class='Advice'> Adviesprijs</p>");
+                        print("<p class='RetailPrice'>". sprintf("€ %0.2f", $retailPrice). "</p>");
                     }
                     ?>
-                    <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $SellPrice); ?></b></p>
+                    <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $sellPrice); ?></b></p>
                     <p> Inclusief BTW </p>
 
                     <div class="VoorraadText"> <?php
@@ -272,7 +274,22 @@ if ($Result != null) {
                         <div class="productFrameRechts" style="width: 100%">
                             <div id="StockItemFrameRight">
                                 <div class="CenterPriceLeftChild">
-                                    <p class="StockItemPriceText">€ <?php echo $product['price']; ?></p>
+                <?php
+                //korting of geen korting
+
+                    $discount=$Result['korting'];
+                    $retailPrice = $Result['SellPrice'];
+                    $sellPrice= round($retailPrice*((100-$discount)/100), 2);
+
+                    if ($discount>0) {
+                        Print("test");
+                        print("<p class='Advice'>Adviesprijs</p>");
+                        print("<p class='RetailPrice'>" . sprintf("€ %0.2f", $retailPrice) . "</p>");
+                    }
+                        ?>
+
+
+                                    <p class="StockItemPriceText">€ <?php echo $sellPrice; ?></p>
                                     <p class="StockItemBTW">Inclusief BTW </p>
                                 </div>
                             </div>
