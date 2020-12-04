@@ -21,25 +21,16 @@
     <div class="MainDivLayout bottomFooter">
         <div class="DivContainter">
             <div class="FooterBottom naastElkaar">
-                <div class="FooterBox1">
-                    <h6>Klantenservice</h6>
-                    <a href="klantenservice.php">Contact opnemen</a><br>
-                    <a href="klantenservice.php">Verzending & bezorging</a><br>
-                    <a href="klantenservice.php">Betaling</a><br>
-                    <a href="klantenservice.php">Retourneren</a><br>
-                    <a href="klantenservice.php">Garantie & reparatie</a><br>
-                    <br>
-                    <a href="klantenservice.php">Alles over onze klantenservice<i class="fas fa-angle-right"></i></a>
-                </div>
                 <div class="FooterBox2">
                     <h6>Over Nerdy Gadgets</h6>
-                    <a href="klantenservice.php">Contact</a><br>
-                    <a href="klantenservice.php">FAQ</a><br>
-                    <a href="klantenservice.php">Openingstijden</a><br>
+                    <a href="klantenservice.php">Contact opnemen</a><br>
+                    <a href="klantenservice.php">Over ons</a><br><br>
+                    <p style="max-width: 300px">U kunt ons telefonisch dagelijks bereiken van 8:00 - 18:00.</p>
                 </div>
                 <div class="FooterBox3">
                     <h6>Contact</h6>
                     <p>Nerdy Gadgets<br>Straatweg 11<br>1111 AB Zwolle</p>
+                    <p>T.0612345678 <br>E. klantenservice.nerdygadgets@gmail.com</p>
                 </div>
                 <div class="FooterBox4">
                     <h6>Volg onze socials</h6>
