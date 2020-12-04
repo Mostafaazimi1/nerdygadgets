@@ -281,6 +281,9 @@ if ($Result != null) {
         <div>
             <?php
             foreach ($sameProducts as $product) {
+                $discount=$product['korting'];
+                $retailPrice = $Result['SellPrice'];
+                $sellPrice= round($Result['SellPrice']*((100-$discount)/100), 2);
                 ?>
                 <a class="ListItem" href="view.php?id=<?php echo $product['id']; ?>">
                     <div class="naastElkaar" id="ProductFrame"
@@ -296,7 +299,7 @@ if ($Result != null) {
                         <div class="productFrameRechts" style="width: 100%">
                             <div id="StockItemFrameRight">
                                 <div class="CenterPriceLeftChild">
-                                    <p class="StockItemPriceText">€ <?php echo $product['price']; ?></p>
+                                    <p class="StockItemPriceText">€ <?php echo $sellPrice; ?></p>
                                     <p class="StockItemBTW">Inclusief BTW </p>
                                 </div>
                             </div>

@@ -99,12 +99,12 @@ function loadProductsByTag($tags, $connection)
 
     $like = substr($like, 0, -3);
 
-    $sql = "SELECT s.StockItemID, s.RecommendedRetailPrice, s.StockItemName, si.ImagePath
+    $sql = "SELECT s.StockItemID, s.RecommendedRetailPrice, s.korting, s.StockItemName, si.ImagePath
             FROM stockitems s
             JOIN stockitemimages si on s.StockItemID = si.StockItemID
             WHERE s.Tags " . $like . "
             ORDER BY RAND() LIMIT 3";
-    
+
     $result = mysqli_query($connection, $sql);
     $items = array();
 
@@ -114,7 +114,8 @@ function loadProductsByTag($tags, $connection)
                 'id' => $row['StockItemID'],
                 'name' => $row['StockItemName'],
                 'price' => $row['RecommendedRetailPrice'],
-                'img' => $row['ImagePath']
+                'img' => $row['ImagePath'],
+                'korting' => $row['korting']
             );
 
             array_push($items, $item);
