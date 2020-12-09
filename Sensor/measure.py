@@ -94,6 +94,11 @@ try:
         # store measurement in database
         try:
             cursor.execute('INSERT INTO coldroomtemperatures (ColdRoomSensorNumber, RecordedWhen, Temperature, ValidFrom, ValidTo) VALUES (%s, %s, %s, %s, %s);', (sensorID, date, temp, date, dateTo))
+            cursor.execute("SELECT @@IDENTITY AS ID;")
+                        lastID = (format(cursor.fetchone()[0]))
+                        print (lastID)
+                        lastID = int(lastID)-1
+                        cursor.execute("Delete FROM coldroomtemperatures WHERE ColdRoomTemperatureID = %s ", (lastID,))
         except mariadb.Error as err:            print("Error: {}".format(err))
 
         else:
