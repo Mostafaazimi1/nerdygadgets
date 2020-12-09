@@ -19,11 +19,10 @@
 //
 //deliverycityid		uit tabel customer naar people!
 include __DIR__ . "/header.php";
-$bevatHoofdletter = preg_match('/[A-Z]/', $_POST["password"]);
 if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"]) {
     if ($_POST["password"] != $_POST["confirmpassword"]) {
         echo("De wachtwoorden moeten overeenkomen!");
-    } elseif ((strlen($_POST["password"]) > 7) AND (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) AND $bevatHoofdletter = 1) {
+    } elseif ((strlen($_POST["password"]) > 7) AND (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) AND preg_match('/[A-Z]/', $_POST["password"])) {
         $Plaats = ucfirst($_POST["Plaats"]);
         //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
         // ANDERS AFBREKEN
