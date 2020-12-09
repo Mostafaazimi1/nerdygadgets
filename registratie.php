@@ -20,10 +20,20 @@
 //deliverycityid		uit tabel customer naar people!
 include __DIR__ . "/header.php";
 if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"]) {
+    $FirstName = $_POST["FirstName"];
+    $LastName = $_POST["LastName"];
+    $email = $_POST["email"];
+    $PhoneNumber = $_POST["PhoneNumber"];
+    $postcode = $_POST["PostCode"];
+    $Plaats = ucfirst($_POST["Plaats"]);
+    $DeliveryCityName = $Plaats;
+    $StreetName = $_POST["StreetName"];
+    $HouseNumber = $_POST["HouseNumber"];
     if ($_POST["password"] != $_POST["confirmpassword"]) {
         echo("De wachtwoorden moeten overeenkomen!");
-    } elseif ((strlen($_POST["password"]) > 7) AND (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) AND preg_match('/[A-Z]/', $_POST["password"]) = 1) {
-        $Plaats = ucfirst($_POST["Plaats"]);
+
+
+    } elseif ((strlen($_POST["password"]) > 7) AND (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) AND preg_match('/[A-Z]/', $_POST["password"])) {
         //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
         // ANDERS AFBREKEN
         $sql = "
@@ -37,15 +47,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
             echo("Sorry, in " . $Plaats . " leveren wij niet, voer alsjeblieft een nieuw adres in.");
             // MOET ERBIJ: GEGEVENS OPSLAAN BIJ FOUT
         } else {
-            $DeliveryCityName = $Plaats;
             $password = $_POST["password"];
-            $email = $_POST["email"];
-            $PhoneNumber = $_POST["PhoneNumber"];
-            $postcode = $_POST["PostCode"];
-            $FirstName = $_POST["FirstName"];
-            $LastName = $_POST["LastName"];
-            $HouseNumber = $_POST["HouseNumber"];
-            $StreetName = $_POST["StreetName"];
             $CurrentDate = date("Y/m/d");
             $FullName = ($FirstName . " " . $LastName);
             $BuyingGroupId = 1;
@@ -144,6 +146,15 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
     }   else {
         print("Het wachtwoord moet minstens 8 karakters bevatten.<br>Daarnaast moet het wachtwoord minimaal 1 speciale teken bevatten.");
     }
+} else {
+    $FirstName = '';
+    $LastName = '';
+    $email = '';
+    $PhoneNumber = '';
+    $postcode = '';
+    $DeliveryCityName = '';
+    $StreetName = '';
+    $HouseNumber = '';
 }
 ?>
 <!DOCTYPE html>
@@ -162,15 +173,15 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
         <label for="text">
             <i class="fas fa-user"></i>
         </label>
-        <input type="text" placeholder="Voornaam" name="FirstName" required><br>
+        <input type="text" placeholder="Voornaam" value='<?php print($FirstName);?>' name="FirstName" required><br>
         <label for="text">
             <i class="fas fa-user"></i>
         </label>
-        <input type="text" placeholder="Achternaam" name="LastName" required><br>
+        <input type="text" placeholder="Achternaam" value='<?php print($LastName);?>' name="LastName" required><br>
         <label for="email">
             <i class="fas fa-envelope"></i>
         </label>
-        <input type="email" placeholder="E-Mail" name="email" required><br>
+        <input type="email" placeholder="E-Mail" value='<?php print($email);?>' name="email" required><br>
         <label for="email">
             <i class="fas fa-key"></i>
         </label>
@@ -182,20 +193,20 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
         <label for="text">
             <i class="fas fa-phone"></i>
         </label>
-        <input type="tel" placeholder="Telefoonnummer" name="PhoneNumber"><br>
+        <input type="tel" placeholder="Telefoonnummer" value='<?php print($PhoneNumber);?>' name="PhoneNumber"><br>
         <label for="text">
             <i class="fas fa-mail-bulk"></i>
         </label>
-        <input type="text" placeholder="Postcode" name="PostCode" required><br>
+        <input type="text" placeholder="Postcode" value='<?php print($postcode);?>' name="PostCode" required><br>
         <label for="text">
             <i class="fas fa-map-marker-alt"></i>
         </label>
-        <input type="text" placeholder="Plaats" name="Plaats" required><br>
+        <input type="text" placeholder="Plaats" value='<?php print($DeliveryCityName);?>' name="Plaats" required><br>
         <label for="text">
             <i class="fas fa-road"></i>
         </label>
-        <input type="text" placeholder="Straatnaam" name="StreetName" class="loginAddress" */ required>
-        <input type="text" placeholder="Huisnummer" name="HouseNumber" class="loginAddress" required><br>
+        <input type="text" class="loginStraat" placeholder="Straatnaam" value='<?php print($StreetName);?>' name="StreetName" class="loginAddress" */ required>
+        <input type="text" class="loginhuisNummer" placeholder="Huisnummer" value='<?php print($HouseNumber);?>' name="HouseNumber" class="loginAddress" required><br>
         <input type="submit" value="Registreer!" name="submit" class="btn brn-block btn-primary">
     </form>
 </div>
