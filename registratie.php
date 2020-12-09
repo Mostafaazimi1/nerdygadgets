@@ -19,10 +19,11 @@
 //
 //deliverycityid		uit tabel customer naar people!
 include __DIR__ . "/header.php";
+$bevatHoofdletter = preg_match('/[A-Z]/', $_POST["password"]);
 if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"]) {
     if ($_POST["password"] != $_POST["confirmpassword"]) {
         echo("De wachtwoorden moeten overeenkomen!");
-    } else {
+    } elseif ((strlen($_POST["password"]) > 7) AND (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) AND $bevatHoofdletter = 1) {
         $Plaats = ucfirst($_POST["Plaats"]);
         //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
         // ANDERS AFBREKEN
@@ -90,7 +91,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
                 $postcode, $unknown, $unknown, $DeliveryCityName, $postcode, $LastEditedBy, $CurrentDate,
                 $ValidTo);
             $execval = $stmt->execute();
-//            echo $execval;
+            echo $execval;
 //            echo "Customer gegevens zijn succesvol toegevoegd aan database!";
             $stmt->close();
             }
@@ -124,8 +125,8 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
             $stmt->bind_param("sssisisiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
                 $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
                 $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
-            $execval = $stmt->execute();
-            //echo $execval;
+            $execval1 = $stmt->execute();
+            echo $execval1;
             //echo "People gegevens zijn succesvol toegevoegd aan database!";
             $stmt->close();
             $_SESSION['messageCount3'] = 1;
@@ -141,6 +142,8 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
             mysqli_stmt_bind_param($Statement, "ii", $CustomerNUM, $CustomerNUM);
             mysqli_stmt_execute($Statement);
         }
+    }   else {
+        print("Het wachtwoord moet minstens 8 karakters bevatten.<br>Daarnaast moet het wachtwoord minimaal 1 speciale teken bevatten.");
     }
 }
 ?>
