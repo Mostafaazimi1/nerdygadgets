@@ -156,6 +156,19 @@ function bestellingAfronden($winkelwagen, $afrekenGegevens)
     if (isset($afrekenGegevens['newAcc'])) {
         //hier query voor maken van die acc
     }
+}
 
+function getTemprature($connection, $sensorNumber)
+{
+    $sql = "SELECT Temperature FROM coldroomtemperatures WHERE ColdRoomSensorNumber = " . $sensorNumber;
 
+    $result = mysqli_query($connection, $sql);
+    $temperature = 0;
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+           $temperature = $row['Temperature'];
+        }
+    }
+
+    return $temperature;
 }

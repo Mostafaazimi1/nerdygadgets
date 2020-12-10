@@ -4,7 +4,7 @@ mysqli_set_charset($Connection, 'latin1');
 include __DIR__ . "/header.php";
 
 $Query = " 
-           SELECT SI.StockItemID, SI.Tags, 
+           SELECT SI.StockItemID, SI.Tags, SI.IsChillerStock, 
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
             CONCAT(QuantityOnHand)AS QuantityOnHand,
@@ -78,7 +78,38 @@ if ($Result != null) {
     $tagsArray = explode(",", $tags);
     $sameProducts = loadProductsByTag($tagsArray, $Connection);
 //?>
-    <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName'];?></h1>
+
+    <?php
+    if ($Result['IsChillerStock']) {
+        ?>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+                integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script>
+            function getTempratuur() {
+                $.ajax({
+                    url: "tempratuur.php",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (response) {
+                        $('#Tempratuur').html(response.temperatuur);
+
+                    },
+                    error: function (xhr) {
+
+                    }
+                });
+            }
+            getTempratuur();
+            window.setInterval(function () {
+                getTempratuur();
+            }, 3000);
+
+        </script>
+        <?php
+    }
+    ?>
+
+    <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName']; ?></h1>
     <div class="naastElkaar reviewUnderH1">
         <div class="SterrenH1">
             <div>
@@ -184,13 +215,13 @@ if ($Result != null) {
                 <div class="PrijsEnAfrekenenChild">
                     <?php
                     //korting of geen korting
-                    $discount=$Result['korting'];
+                    $discount = $Result['korting'];
                     $retailPrice = $Result['SellPrice'];
-                    $sellPrice= round($Result['SellPrice']*((100-$discount)/100), 2);
+                    $sellPrice = round($Result['SellPrice'] * ((100 - $discount) / 100), 2);
 
-                    if ($discount>0){
+                    if ($discount > 0) {
                         print("<p class='Advice'> Adviesprijs</p>");
-                        print("<p class='RetailPrice'>". sprintf("€ %0.2f", $retailPrice). "</p>");
+                        print("<p class='RetailPrice'>" . sprintf("€ %0.2f", $retailPrice) . "</p>");
                     }
                     ?>
                     <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $sellPrice); ?></b></p>
@@ -265,6 +296,16 @@ if ($Result != null) {
                     <td>Artikelnummer</td>
                     <td><?php print $Result["StockItemID"]; ?></td>
                 </tr>
+                <?php
+                if ($Result['IsChillerStock']) {
+                    ?>
+                    <tr>
+                        <td>Tempratuur</td>
+                        <td id="Tempratuur"></td>
+                    </tr>
+                    <?php
+                }
+                ?>
                 </table><?php
             } else { ?>
 
@@ -281,15 +322,16 @@ if ($Result != null) {
         <div>
             <?php
             foreach ($sameProducts as $product) {
-                $discount=$product['korting'];
+                $discount = $product['korting'];
                 $retailPrice = $Result['SellPrice'];
-                $sellPrice= round($Result['SellPrice']*((100-$discount)/100), 2);
+                $sellPrice = round($Result['SellPrice'] * ((100 - $discount) / 100), 2);
                 ?>
                 <a class="ListItem" href="view.php?id=<?php echo $product['id']; ?>">
                     <div class="naastElkaar" id="ProductFrame"
                          style="width: 31%; margin-left: 1%; margin-right: 1%; float:left;">
                         <div class="productFrameLinks naastElkaar" id="geenPadding" style="width: 100%">
-                            <div class="productFrameLinksImage"><img class="ImgFrame" src="Public/StockItemIMG/<?php echo $product['img']; ?>"
+                            <div class="productFrameLinksImage"><img class="ImgFrame"
+                                                                     src="Public/StockItemIMG/<?php echo $product['img']; ?>"
                                                                      style="max-width: 100%; max-height: 100%;">
                             </div>
                             <div class="productFrameLinksInfo" style="margin-left: 5%; width: 65%;">
