@@ -341,7 +341,7 @@ if ($Result != null) {
                         <div class="productFrameRechts" style="width: 100%">
                             <div id="StockItemFrameRight">
                                 <div class="CenterPriceLeftChild">
-                                    <p class="StockItemPriceText">€ <?php echo $sellPrice; ?></p>
+                                    <p class="StockItemPriceText">€ <?php echo number_format((float)$sellPrice, 2, '.', ''); ?></p>
                                     <p class="StockItemBTW">Inclusief BTW </p>
                                 </div>
                             </div>
