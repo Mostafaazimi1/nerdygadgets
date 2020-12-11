@@ -126,6 +126,18 @@ if (!isset($_SESSION['winkelwagen'])) {
                         <li>
                             <a href="categories.php" class="HrefDecorationCategorie">Hele assortiment</a>
                         </li>
+                        <?php
+                        // als je lid bent van de sales groep of servicedesk dan krijg je 2 producten te zien en of servicedesk
+                        if (isset ($_SESSION['login'])) {
+                            $Medewerkerlogin=$_SESSION['login'];
+                            if ($Medewerkerlogin['IsSalesperson']==1){
+                               print("<li><a href='servicedesk.php' class='HrefDecorationCategorie'>Servicedesk</a></li>");
+                               print("<li><a href='sales.php' class='HrefDecorationCategorie'>Overzicht producten</a></li>");
+                            }
+
+                        }
+
+                        ?>
 
                     </ul>
                 </div>

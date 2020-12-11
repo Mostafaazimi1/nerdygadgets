@@ -14,7 +14,7 @@ if(isset($_SESSION["login"])) {
     }
     if(isset($_POST["email"]) && isset($_POST["password"])) {
         //wanneer email en ww gevult zijn wordt dit uitgevoerd
-        $sql = "SELECT PersonID, FullName, PreferredName, IsPermittedToLogon, LogonName, HashedPassword, EmailAddress, CustomerNUM FROM people";
+        $sql = "SELECT PersonID, FullName, PreferredName, IsPermittedToLogon, LogonName, HashedPassword, EmailAddress, CustomerNUM, IsSalesperson FROM people";
         $result = $Connection->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
@@ -53,6 +53,7 @@ if(isset($_SESSION["login"])) {
                             "IsPermittedToLogon" => $row["IsPermittedToLogon"],
                             "LogonName" => $row["LogonName"],
                             "EmailAddress" => $row["EmailAddress"],
+                            "IsSalesperson" => $row["IsSalesperson"],
                         );
                         $sql2 = "SELECT CustomerID, CustomerName, DeliveryMethodID, DeliveryCityID,
                                     PostalCityID, PhoneNumber, DeliveryAddressLine2, DeliveryPostalCode,
