@@ -50,6 +50,7 @@ if (!isset($_SESSION['winkelwagen'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="Public/CSS/swiper.min.css" />
     <link rel="stylesheet" href="Public/CSS/easyzoom.css" />
+    <link rel="stylesheet" href="Public/CSS/Videostyle.css">
     <link rel="stylesheet" href="Public/CSS/main.css" />
 </head>
 <body>
