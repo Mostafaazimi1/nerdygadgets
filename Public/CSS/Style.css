@@ -566,7 +566,7 @@ ul#ul-class-categorie-price li {
     Margin: 0!important;
 }
 .viewMainHeader{
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 .ImageViewHeader{
     width: 50%;
@@ -592,6 +592,7 @@ ul#ul-class-categorie-price li {
     max-height: 400px;
     display: block;
     margin: auto;
+    padding-bottom: 48px
 }
 .naastElkaar{
     display:-ms-flexbox;

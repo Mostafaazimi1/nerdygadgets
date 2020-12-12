@@ -158,16 +158,7 @@ if ($Result != null) {
                                         </a>
                                     </div>
                                 <?php } ?>
-                                <?php
-                                if (isset($Result['Video'])) {
-                                    ?>
-                                    <!--                                                        VIDEO IN CAROUSEL MOET NOG FIXEN-->
-                                    <!--                                                <div class="swiper-slide">-->
-                                    <!--                                                    <div id="CarouselVideoFrame">-->
-                                    <!--                                                        --><?php //print $Result['Video']; ?>
-                                    <!--                                                    </div>-->
-                                <?php }
-                                ?>
+
                             </div>
                             <!-- Add Arrows -->
                             <div class="swiper-button-next"></div>
@@ -181,24 +172,12 @@ if ($Result != null) {
                                         <img src="Public/StockItemIMG/<?php print $Images[$i]['ImagePath'] ?>" alt=""/>
                                     </div>
                                 <?php } ?>
-
-                                <!--VIDEO IN CAROUSEL MOET NOG FIXEN-->
-                                <!--                                        --><?php
-                                //                                        if (isset($Result['Video'])) {
-                                //                                        ?>
-                                <!--                                            <div class="swiper-slide">-->
-                                <!--                                                <img src="Public/Img/online-video.png" alt="" />-->
-                                <!--                                            </div>-->
-                                <!--                                        --><?php //} ?>
                             </div>
                         </div>
                         <!-- SwiperJs and EasyZoom plugins end -->
                     </div>
                 </div>
-                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-                <script src="Public/JS/swiper.min.js"></script>
-                <script src="Public/JS/easyzoom.js"></script>
-                <script src="Public/JS/main.js"></script>
+
             <?php }
             } else {
             ?>
@@ -208,6 +187,31 @@ if ($Result != null) {
 
                 <?php
             }
+            ?>
+            <?php
+            if (isset($Result['Video'])) {
+                ?>
+                <div class="VideoZien">
+                    <div id="container">
+                        <div>
+                            <button id="playme" onclick="revealVideo('video','youtube')"><i class="fas fa-play" style="margin-right: 12px"></i>Bekijk product video</button>
+                        </div>
+                    </div>
+                    <div id="video" class="lightbox" onclick="hideVideo('video','youtube')">
+                        <div class="lightbox-container">
+                            <div class="lightbox-content">
+                                <button onclick="hideVideo('video','youtube')" class="lightbox-close">
+                                    Sluiten | ✕
+                                </button>
+                                <div class="video-container">
+                                    <iframe id="youtube" width="960" height="540" src="<?php print $Result['Video']; ?>?showinfo=0" frameborder="0" allowfullscreen></iframe>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php }
             ?>
         </div>
         <div class="InfoViewHeader">
@@ -446,6 +450,11 @@ if ($Result != null) {
             }
             ?>
         </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="Public/JS/swiper.min.js"></script>
+        <script src="Public/JS/easyzoom.js"></script>
+        <script src="Public/JS/main.js"></script>
+        <script src="Public/JS/VideoPopup.js"></script>
     </div>
     <?php
 } else {

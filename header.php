@@ -50,6 +50,7 @@ if (!isset($_SESSION['winkelwagen'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="Public/CSS/swiper.min.css" />
     <link rel="stylesheet" href="Public/CSS/easyzoom.css" />
+    <link rel="stylesheet" href="Public/CSS/Videostyle.css">
     <link rel="stylesheet" href="Public/CSS/main.css" />
 </head>
 <body>
@@ -133,12 +134,14 @@ if (!isset($_SESSION['winkelwagen'])) {
                             if ($Medewerkerlogin['IsSalesperson']==1){
                                print("<li><a href='servicedesk.php' class='HrefDecorationCategorie'>Servicedesk</a></li>");
                                print("<li><a href='sales.php' class='HrefDecorationCategorie'>Overzicht producten</a></li>");
+                            } else {
+                                print("<li><a href='tickets.php' class='HrefDecorationCategorie'>Tickets</a></li>");
                             }
-
                         }
-
                         ?>
-
+                        <li>
+                            <a href='tickets.php' class='HrefDecorationCategorie'>Tickets</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="ServiceClass">
