@@ -83,8 +83,7 @@ if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
         $sql = "
                     SELECT CityName
                     FROM cities
-                    WHERE CityName = '" . $Plaats . "'
-                    LIMIT 1";
+                    WHERE CityName = '" . $Plaats . "'";
         $result = $Connection->query($sql);
         $aantalresult = mysqli_num_rows($result);
         if ($aantalresult < 1) {
