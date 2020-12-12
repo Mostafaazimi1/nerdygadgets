@@ -177,10 +177,14 @@ ul#ul-class-navigation li {
     font-size: 15px;
     color: #000000;
     margin: 0;
-
     text-decoration: line-through;
 }
 
+.RetailPriceSale{
+    font-size: 15px;
+    color: #000000;
+    margin: 0;
+}
 
 
 .StockItemBTW{
