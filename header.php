@@ -134,12 +134,14 @@ if (!isset($_SESSION['winkelwagen'])) {
                             if ($Medewerkerlogin['IsSalesperson']==1){
                                print("<li><a href='servicedesk.php' class='HrefDecorationCategorie'>Servicedesk</a></li>");
                                print("<li><a href='sales.php' class='HrefDecorationCategorie'>Overzicht producten</a></li>");
+                            } else {
+                                print("<li><a href='tickets.php' class='HrefDecorationCategorie'>Tickets</a></li>");
                             }
-
                         }
-
                         ?>
-
+                        <li>
+                            <a href='tickets.php' class='HrefDecorationCategorie'>Tickets</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="ServiceClass">
