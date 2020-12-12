@@ -36,7 +36,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
     } elseif ((strlen($_POST["password"]) > 7)  AND (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) AND preg_match('/[A-Z]/', $_POST["password"])) {
         //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
         // ANDERS AFBREKEN
-        if(true) {
+        if(PostcodeCheck($postcode)) {
             $sql = "
                     SELECT CityName
                     FROM cities
@@ -144,7 +144,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
                 mysqli_stmt_execute($Statement);
             }
         } else {
-            print("postcode");
+            print("De invoer van de postcode was onjuist, moet zijn als: 1111AA<br>");
         }
     }   else {
         print("Het wachtwoord moet minstens 8 karakters bevatten.<br>Daarnaast moet het wachtwoord minimaal 1 speciale teken en een hoofdletter bevatten.");
