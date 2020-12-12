@@ -1,5 +1,19 @@
 <?php
 include __DIR__ . "/header.php";
+if (isset ($_SESSION['login']) && isset($_POST['edit'])) {
+    $idNr = $_POST['edit'];
+    $editStatus = $_POST['edit_status'];
+
+    $Query = "
+        UPDATE tickets SET status= '$editStatus' WHERE id= '$idNr'";
+    $test = mysqli_query($Connection,$Query);
+
+    if (!$test) {
+        print("...");
+    }else{
+        header("Location: klantenservicedesk.php?updated");
+    }
+}
 
 if (isset ($_SESSION['login'])) {
     $Medewerkerlogin = $_SESSION['login'];
@@ -10,7 +24,6 @@ if (isset ($_SESSION['login'])) {
         <table id="listTickets" class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Ticket ID</th>
                 <th>Naam</th>
                 <th>Subject</th>
                 <th>message</th>
@@ -25,9 +38,7 @@ if (isset ($_SESSION['login'])) {
         <?php
         $Query = "
         SELECT t.id, p.preferredName, t.title, t.message, t.created, t.status
-        FROM tickets t
-        JOIN people p 
-        ON t.personID = p.personID";
+        FROM tickets t JOIN people p ON t.personID = p.personID";
         $result = mysqli_query($Connection, $Query);
 
         while ($row = mysqli_fetch_assoc($result))
@@ -42,11 +53,19 @@ if (isset ($_SESSION['login'])) {
    ?>
 
                  <tr>
-<!--                     <td>--><?php //print($id)?><!--</td>-->
                     <td><?php print($nickName)?></td>
                     <td><?php print($title)?></td>
                     <td><?php print($message)?></td>
                     <td><?php print($created)?></td>
+                    <td><form action="servicedesk.php" action="POST"><input list="edit_status" class="form-control" name="edit_status" placeholder="status" required>
+                        <datalist id="edit_status">
+                            <option value="open">open</option>
+                            <option value="closed">closed</option>
+                            <option value="resolved">resolved</option>
+                        </datalist>
+                            <button class="btn btn-primary" type="submit" name="edit" value="<?php echo ($id) ?>">Edit</button>
+                        </form>
+                    </td>
 
                 <?php
                 if ($status == "open") {
@@ -79,7 +98,6 @@ else{
     //je bent NIET gemachtigd om dit te zien!
     echo "<p style='font-size: 20px; margin-top: 24px;'>Helaas leuk geprobeert, maar U heeft GEEN toegang!</p>";
 }
-
 
 ?>
 
