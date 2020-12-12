@@ -5,6 +5,27 @@ if (isset ($_SESSION['login'])) {
     $Medewerkerlogin = $_SESSION['login'];
     if ($Medewerkerlogin['IsSalesperson'] == 1) {
 
+        $RunQuery=FALSE;
+        if (isset($_POST['Discount_Reset'])) {
+            $UpdateDiscount_ID = ($_POST['Discount_Reset']);
+            $NewDiscount = 0;
+            $RunQuery = TRUE;
+        }
+        if (isset($_POST['Discount_Set'])) {
+            $UpdateDiscount_ID = ($_POST['Discount_Set']);
+            $NewDiscount = ($_POST['Discount_value']);
+            if($NewDiscount>=100){
+                $NewDiscount=0;
+            }
+            $RunQuery = TRUE;
+        }
+        if ($RunQuery == TRUE){
+            $DiscountUpdate = mysqli_prepare($Connection, "UPDATE stockitems SET  Korting=(?) WHERE StockItemID=(?)");
+            mysqli_stmt_bind_param($DiscountUpdate, 'ii',$NewDiscount, $UpdateDiscount_ID );
+            mysqli_stmt_execute($DiscountUpdate);
+            print('<meta http-equiv = "refresh" content = "0; url = ./sales.php" />');
+        }
+
 $SearchString = "";
 $ReturnableResult = null;
 if (isset($_GET['search_string'])) {
@@ -313,7 +334,7 @@ if (isset($amount)) {
                                             value="<?php print $row['StockItemID']; ?>"> RESET
                                     </button>
 
-                                    <input type="number" name="Discount_value" placeholder='%'>
+                                    <input type="number" name="Discount_value" placeholder='%' min="0" max="99">
 
                                     <button type="submit" name="Discount_Set"
                                             value="<?php print $row['StockItemID']; ?>"> Opslaan
@@ -327,21 +348,7 @@ if (isset($amount)) {
                 </div>
         <?php
         }
-        if (isset($_POST['Discount_Reset']) OR ($_POST['Discount_Set'])) {
-            if (isset($_POST['Discount_Reset'])) {
-                $UpdateDiscount_ID = ($_POST['Discount_Reset']);
-                $NewDiscount = 0;
-            }
-            if (isset($_POST['Discount_Set'])) {
-                $UpdateDiscount_ID = ($_POST['Discount_Set']);
-                $NewDiscount = ($_POST['Discount_value']);
-            }
 
-            $DiscountUpdate = mysqli_prepare($Connection, "UPDATE stockitems SET  Korting=(?) WHERE StockItemID=(?)");
-            mysqli_stmt_bind_param($DiscountUpdate, 'ii',$NewDiscount, $UpdateDiscount_ID );
-            mysqli_stmt_execute($DiscountUpdate);
-            print('<meta http-equiv = "refresh" content = "0; url = ./sales.php" />');
-        }
 
         ?>
 
