@@ -52,6 +52,7 @@ if (!isset($_SESSION['winkelwagen'])) {
     <link rel="stylesheet" href="Public/CSS/easyzoom.css" />
     <link rel="stylesheet" href="Public/CSS/Videostyle.css">
     <link rel="stylesheet" href="Public/CSS/main.css" />
+    <link rel="stylesheet" href="Public/CSS/ticket.css" />
 </head>
 <body>
 <header>

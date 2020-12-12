@@ -10,8 +10,6 @@ if (isset ($_SESSION['login']) && isset($_POST['edit'])) {
 
     if (!$test) {
         print("...");
-    }else{
-        header("Location: klantenservicedesk.php?updated");
     }
 }
 
@@ -57,13 +55,13 @@ if (isset ($_SESSION['login'])) {
                     <td><?php print($title)?></td>
                     <td><?php print($message)?></td>
                     <td><?php print($created)?></td>
-                    <td><form action="servicedesk.php" action="POST"><input list="edit_status" class="form-control" name="edit_status" placeholder="status" required>
-                        <datalist id="edit_status">
-                            <option value="open">open</option>
-                            <option value="closed">closed</option>
-                            <option value="resolved">resolved</option>
-                        </datalist>
-                            <button class="btn btn-primary" type="submit" name="edit" value="<?php echo ($id) ?>">Edit</button>
+                    <td><form action="servicedesk.php" method="POST">
+                            <select class="form-control" name="edit_status" required>
+                                <option value="open">open</option>
+                                <option value="closed">closed</option>
+                                <option value="resolved">resolved</option>
+                            </select>
+                            <button class="btn btn-primary" type="submit" name="edit" value="<?php echo ($id)?>">Edit</button>
                         </form>
                     </td>
 
@@ -77,12 +75,12 @@ if (isset ($_SESSION['login'])) {
                 }
                 ?>
 
-
+                     <td><a href="reactie.php?reactie=<?php echo $id; ?>" class="btn btn-primary">Reactie</a></td>
 
         <?php
         }
         ?>
-                     <td></td>
+
                  </tr>
         </tbody>
         </table>
