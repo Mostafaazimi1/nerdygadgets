@@ -75,7 +75,7 @@ if (isset ($_SESSION['login'])) {
                 }
                 ?>
 
-                     <td><a href="reactie.php?reactie=<?php echo $id; ?>" class="btn btn-primary">Reactie</a></td>
+                     <td><a href="viewticket.php?ticket=<?php echo $id; ?>" class="btn btn-primary">Reactie</a></td>
 
         <?php
         }

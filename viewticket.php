@@ -1,8 +1,8 @@
 <?php
 include __DIR__ . "/header.php";
 
-if (isset($_GET['reactie'])) {
-    $id = $_GET['reactie'];
+if (isset($_GET['ticket'])) {
+    $id = $_GET['ticket'];
 }
 
 $Query= " SELECT t.id, p.preferredName, t.title, t.message, t.created, t.status
