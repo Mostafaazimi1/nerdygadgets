@@ -24,12 +24,10 @@ if (isset ($_SESSION['login'])) {
             <tr>
                 <th>Naam</th>
                 <th>Subject</th>
-                <th>message</th>
-                <th>created</th>
                 <th>Status</th>
                 <th>Edit status</th>
-                <th>Comment ticket</th>
-                <th></th>
+                <th>Extra</th>
+                <th>Created</th>
             </tr>
             </thead>
         <tbody>
@@ -53,9 +51,16 @@ if (isset ($_SESSION['login'])) {
                  <tr>
                     <td><?php print($nickName)?></td>
                     <td><?php print($title)?></td>
-                    <td><?php print($message)?></td>
-                    <td><?php print($created)?></td>
-                    <td><form action="servicedesk.php" method="POST">
+                     <?php
+                     if ($status == "open") {
+                         print("<td class='far fa-clock'>$status</td>");
+                     } elseif ($status == "resolved") {
+                         print("<td class='fas fa-check'>$status</td>");
+                     } elseif ($status == "closed") {
+                         print("<td class='fas fa-times'>$status</td>");
+                     }
+                     ?>
+                     <td><form action="servicedesk.php" method="POST">
                             <select class="form-control" name="edit_status" required>
                                 <option value="open">open</option>
                                 <option value="closed">closed</option>
@@ -63,20 +68,9 @@ if (isset ($_SESSION['login'])) {
                             </select>
                             <button class="btn btn-primary" type="submit" name="edit" value="<?php echo ($id)?>">Edit</button>
                         </form>
-                    </td>
-
-                <?php
-                if ($status == "open") {
-                    print("<td class='far fa-clock'>$status</td>");
-                } elseif ($status == "resolved") {
-                    print("<td class='fas fa-check'>$status</td>");
-                } elseif ($status == "closed") {
-                    print("<td class='fas fa-times'>$status</td>");
-                }
-                ?>
-
-                     <td><a href="viewticket.php?ticket=<?php echo $id; ?>" class="btn btn-primary">Reactie</a></td>
-
+                     </td>
+                     <td><a href="viewticket.php?ticket=<?php echo $id; ?>" class="btn btn-primary">Extra</a></td>
+                     <td><?php print($created)?></td>
         <?php
         }
         ?>
