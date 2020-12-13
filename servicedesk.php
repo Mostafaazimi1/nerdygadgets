@@ -48,16 +48,16 @@ if (isset ($_SESSION['login'])) {
 
    ?>
 
-                 <tr>
-                    <td><?php print($nickName)?></td>
-                    <td><?php print($title)?></td>
+                 <tr><a href="viewticket.php?ticket=<?php echo($id);?>">
+                    <td><a href="viewticket.php?ticket=<?php echo($id);?>"><?php print($nickName)?></a></td>
+                     <td><a href="viewticket.php?ticket=<?php echo($id);?>"><?php print($title)?></a></td>
                      <?php
                      if ($status == "open") {
-                         print("<td class='far fa-clock'>$status</td>");
+                         print("<td class='far fa-clock'><a href='viewticket.php?ticket=$id'>$status</td>");
                      } elseif ($status == "resolved") {
-                         print("<td class='fas fa-check'>$status</td>");
+                         print("<td class='fas fa-check'><a href='viewticket.php?ticket=$id'>$status</td>");
                      } elseif ($status == "closed") {
-                         print("<td class='fas fa-times'>$status</td>");
+                         print("<td class='fas fa-times'><a href='viewticket.php?ticket=$id'>$status</td>");
                      }
                      ?>
                      <td><form action="servicedesk.php" method="POST">
@@ -70,12 +70,14 @@ if (isset ($_SESSION['login'])) {
                         </form>
                      </td>
                      <td><a href="viewticket.php?ticket=<?php echo $id; ?>" class="btn btn-primary">Extra</a></td>
-                     <td><?php print($created)?></td>
+                     <td><a href="viewticket.php?ticket=<?php echo($id);?>"><?php print($created)?></td>
+                     </a>
+                 </tr>
         <?php
         }
         ?>
 
-                 </tr>
+
         </tbody>
         </table>
 

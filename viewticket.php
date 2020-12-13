@@ -15,10 +15,6 @@ $Query = " SELECT t.id, p.preferredName, t.title, t.message, t.created, t.status
           WHERE id = '$id'";
 $result = mysqli_query($Connection, $Query);
 
-//$Sql = " SELECT *
-//          FROM message
-//          WHERE id = '$id'";
-//$resultcomments = mysqli_query($Connection, $Sql);
 
 if (isset($_POST['submit'])) {
     $message = $_POST['reactie'];
@@ -40,7 +36,7 @@ if (isset($_POST['submit'])) {
 
 
 ?>
-
+<a href="servicedesk.php" class="btn btn-primary">Ga terug</a>
 <H2>Comment</H2>
 <div class="tickets-list">
     <?php
@@ -56,15 +52,36 @@ if (isset($_POST['submit'])) {
         ?>
 
         <?php print($nickName)?>
-        <span class="con">
-				<span class="title"><?php print ($title)?></span>
-				<span class="msg"><?php print ($message)?></span>
-			</span>
-        <span class="con created"><?php print ($created)?></span>
+        <?php print ($title)?>
+		<?php print ($message)?>
+		<?php print ($created)?><br><br>
 
         <?php
     }
+
+    $sql = " SELECT p.preferredName, p.isSalesperson, m.reactMessage, m.reactDate 
+                FROM message m JOIN people p ON p.personID = m.personID WHERE m.ticketID = '$id' ORDER BY m.reactDate";
+    $result1 = mysqli_query($Connection, $sql);
+
+    while ($row = mysqli_fetch_assoc($result1))
+    {
+        $nickName = $row['preferredName'];
+        $medewerker = $row['isSalesperson'];
+        $reactMessage = $row['reactMessage'];
+        $reactDate = $row['reactDate'];
+
     ?>
+        <span class="con">
+                    <?php if ($medewerker) { print('Medewerker ');}?>
+				<span class="title"><?php print ($nickName)?></span>
+				<span class="msg"><?php print ($reactMessage)?></span>
+			</span>
+        <span class="con created"><?php print ($reactDate)?></span><br>
+
+
+        <?php
+    }
+        ?>
 
     <form action="viewticket.php?ticket=<?php echo $id; ?>" method="post">
         <div class="form-group">
@@ -74,19 +91,8 @@ if (isset($_POST['submit'])) {
         <button class="btn btn-primary" type="submit" name="submit" value="<?php echo ($personID) ?>">Verzend</button>
     </form>
 
-    <?php
-
-//    while ($row = mysqli_fetch_assoc($resultcomments))
-//    {
-//        $nickName = $row['preferredName'];
-//        $title = $row['title'];
-//        $message = $row['message'];
-//        $created = $row['created'];
-        ?>
-
 
     <?php
-//    }
     }
     }else {
     echo "Geen toegang voor niet-ingelogde gebruikers.";
