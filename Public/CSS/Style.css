@@ -970,6 +970,8 @@ ul#ul-class-categorie li {
 .tekst {
     color: #000000;
 }
+
+/**/
 .product__carousel{
     margin: 0 auto 3em!important;
 }
@@ -1016,4 +1018,15 @@ ul#ul-class-categorie li {
 /*.HrefDecoration a span{*/
 /*    display: block;*/
 /*}*/
+
+/*tickets*/
+.ticketlist {
+    width: 60%;
+    padding-right: 100px;
+}
+
+.ticketinfo {
+    padding-left: 100px;
+    width: 40%;
+}
 

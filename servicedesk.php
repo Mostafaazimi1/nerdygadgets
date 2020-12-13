@@ -77,7 +77,6 @@ if (isset ($_SESSION['login'])) {
         }
         ?>
 
-
         </tbody>
         </table>
 
@@ -92,6 +91,6 @@ else{
     //je bent NIET gemachtigd om dit te zien!
     echo "<p style='font-size: 20px; margin-top: 24px;'>Helaas leuk geprobeert, maar U heeft GEEN toegang!</p>";
 }
-
+include __DIR__ . "/footer.php";
 ?>
 

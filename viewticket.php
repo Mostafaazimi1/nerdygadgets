@@ -9,12 +9,10 @@ if (isset($_SESSION["login"])) {
 if (isset($_GET['ticket'])) {
     $id = $_GET['ticket'];
 
-
 $Query = " SELECT t.id, p.preferredName, t.title, t.message, t.created, t.status
           FROM tickets t JOIN people p ON t.personID = p.personID
           WHERE id = '$id'";
 $result = mysqli_query($Connection, $Query);
-
 
 if (isset($_POST['submit'])) {
     $message = $_POST['reactie'];
@@ -33,8 +31,6 @@ if (isset($_POST['submit'])) {
     mysqli_stmt_close($statement);
     mysqli_close($Connection);
 }
-
-
 ?>
 <a href="servicedesk.php" class="btn btn-primary">Ga terug</a>
 <H2>Comment</H2>
@@ -65,7 +61,6 @@ if (isset($_POST['submit'])) {
     ?>
     <h2>reacties</h2>
     <?php
-
     while ($row = mysqli_fetch_assoc($result1))
     {
         $nickName = $row['preferredName'];

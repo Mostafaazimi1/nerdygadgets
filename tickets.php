@@ -2,11 +2,12 @@
 include __DIR__ . "/header.php";
 
 ?>
-        <h1>Ticketing System</h1>
+        <h1>Ticket System</h1>
+    <div class="naastElkaar contactinfo">
+        <div class="ticketlist">
         <table id="listTickets" class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Naam</th>
                 <th>Subject</th>
                 <th>Status</th>
                 <th>Extra</th>
@@ -16,14 +17,13 @@ include __DIR__ . "/header.php";
             <tbody>
             <?php
             $Query = "
-        SELECT t.id, p.preferredName, t.title, t.message, t.created, t.status
+        SELECT t.id, t.title, t.message, t.created, t.status
         FROM tickets t JOIN people p ON t.personID = p.personID";
             $result = mysqli_query($Connection, $Query);
 
             while ($row = mysqli_fetch_assoc($result))
             {
                 $id = $row['id'];
-                $nickName = $row['preferredName'];
                 $title = $row['title'];
                 $message = $row['message'];
                 $created = $row['created'];
@@ -32,7 +32,6 @@ include __DIR__ . "/header.php";
                 ?>
 
                 <tr><a href="viewticket.php?ticket=<?php echo($id);?>">
-                        <td><a href="viewticket.php?ticket=<?php echo($id);?>"><?php print($nickName)?></a></td>
                         <td><a href="viewticket.php?ticket=<?php echo($id);?>"><?php print($title)?></a></td>
                         <?php
                         if ($status == "open") {
@@ -50,10 +49,13 @@ include __DIR__ . "/header.php";
                 <?php
             }
             ?>
-
             </tbody>
         </table>
-
+        </div>
+        <div class="ticketinfo">
+            <a href="klantenservice.php">Klik hier</a> als u een ticket wilt creëeren (Let op! U moet ingelogd zijn om dit te kunnen doen.)
+        </div>
+    </div><br>
 
 <?php
 include __DIR__ . "/footer.php";

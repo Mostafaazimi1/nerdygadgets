@@ -4,12 +4,10 @@ include __DIR__ . "/header.php";
     if (isset($_GET['ticket'])) {
         $id = $_GET['ticket'];
 
-
         $Query = " SELECT t.id, p.preferredName, t.title, t.message, t.created, t.status
           FROM tickets t JOIN people p ON t.personID = p.personID
           WHERE id = '$id'";
         $result = mysqli_query($Connection, $Query);
-
 
         if (isset($_POST['submit'])) {
             $message = $_POST['reactie'];
@@ -28,7 +26,6 @@ include __DIR__ . "/header.php";
             mysqli_stmt_close($statement);
             mysqli_close($Connection);
         }
-
 
         ?>
         <a href="tickets.php" class="btn btn-primary">Ga terug</a>
@@ -60,7 +57,6 @@ include __DIR__ . "/header.php";
         ?>
         <h2>reacties</h2>
         <?php
-
         while ($row = mysqli_fetch_assoc($result1))
         {
             $nickName = $row['preferredName'];
@@ -69,12 +65,11 @@ include __DIR__ . "/header.php";
             $reactDate = $row['reactDate'];
 
             ?>
-            <span class="con">
-                    <?php if ($medewerker) { print('Medewerker ');}?>
-				<span class="title"><?php print ($nickName)?></span>
-				<span class="msg"><?php print ($reactMessage)?></span>
-			</span>
-            <span class="con created"><?php print ($reactDate)?></span><br>
+
+            <?php if ($medewerker) { print('Medewerker ');}?>
+			<?php print ($nickName)?>
+			<?php print ($reactMessage)?>
+			<?php print ($reactDate)?><br>
 
 
             <?php
@@ -92,16 +87,15 @@ include __DIR__ . "/header.php";
             <button class="btn btn-primary" type="submit" name="submit" value="<?php echo ($personID) ?>">Verzend</button>
         </form>
 
-
         <?php
     } else {
     ?>
 
-        <br><a>U kunt alleen commenteren als u ingelogd bent</a>
+        <br><a href="login.php">Klik hier</a> om zich te kunnen aanmelden<br>
+
 <?php
 }
     }
 include __DIR__ . "/footer.php";
-
 
 ?>
