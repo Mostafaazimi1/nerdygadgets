@@ -38,7 +38,6 @@ if (isset($_POST['submit'])) {
 ?>
 <a href="servicedesk.php" class="btn btn-primary">Ga terug</a>
 <H2>Comment</H2>
-<div class="tickets-list">
     <?php
     while ($row = mysqli_fetch_assoc($result))
     {
@@ -60,8 +59,12 @@ if (isset($_POST['submit'])) {
     }
 
     $sql = " SELECT p.preferredName, p.isSalesperson, m.reactMessage, m.reactDate 
-                FROM message m JOIN people p ON p.personID = m.personID WHERE m.ticketID = '$id' ORDER BY m.reactDate";
+                FROM message m JOIN people p ON p.personID = m.personID WHERE m.ticketID = '$id'";
     $result1 = mysqli_query($Connection, $sql);
+
+    ?>
+    <h2>reacties</h2>
+    <?php
 
     while ($row = mysqli_fetch_assoc($result1))
     {
@@ -97,5 +100,5 @@ if (isset($_POST['submit'])) {
     }else {
     echo "Geen toegang voor niet-ingelogde gebruikers.";
     }
-
+include __DIR__ . "/footer.php";
 ?>
