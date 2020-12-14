@@ -19,7 +19,8 @@ include __DIR__ . "/header.php";
             mysqli_stmt_bind_param($statement, 'iis',$ticketID,$personID,$message);
             mysqli_stmt_execute($statement);
             if (mysqli_stmt_affected_rows($statement) == 1) {
-                print("Uw bericht is verzonden!");
+//                print("Uw bericht is verzonden!");
+                header("Location: servicedesk.php");
             } else {
                 print("Uw bericht kon niet worden verzonden");
             }
