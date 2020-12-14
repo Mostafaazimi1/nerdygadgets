@@ -1,23 +1,4 @@
 <?php
-//VRAGEN BIJ REGISTRATIE:
-//voornaam
-//achternaam
-//email
-//wachtwoord
-//telnummer
-//stad
-//huisnummer
-//straatnaam
-//postcode
-//MOET TOEGEVOEGD:
-//current date		maken met variabele
-//customerid		uit tabel customer halen naar people
-//particuliersid		customercategoryid moet in customer (komt uit customercategories)
-//
-//nieuwe customercategoryid aanmaken met nr. 9;
-//INSERT INTO customercategories VALUES (9, 'Private', 1, '2020-01-01', '9999-12-31')
-//
-//deliverycityid		uit tabel customer naar people!
 include __DIR__ . "/header.php";
 if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"]) {
     $FirstName = $_POST["FirstName"];
