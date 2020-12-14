@@ -32,7 +32,6 @@ print("<a href='servicedesk.php' class='btn btn-primary'>Ga terug</a><H2>Comment
 $Query2 = " SELECT t.id, p.preferredName, t.title, t.message, t.created, t.status
       FROM tickets t JOIN people p ON t.personID = p.personID
       WHERE id = ".$id;
-print($Query2);
 $result2 = $Connection->query($Query2);
 if ($result2->num_rows > 0) {
     while ($row = $result2->fetch_assoc()) {
