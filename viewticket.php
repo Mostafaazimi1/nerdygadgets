@@ -9,11 +9,6 @@ if (isset($_SESSION["login"])) {
 if (isset($_GET['ticket'])) {
     $id = $_GET['ticket'];
 
-$Query = " SELECT t.id, p.preferredName, t.title, t.message, t.created, t.status
-          FROM tickets t JOIN people p ON t.personID = p.personID
-          WHERE id = '$id'";
-$result = mysqli_query($Connection, $Query);
-
 if (isset($_POST['submit'])) {
     $message = $_POST['reactie'];
     $personID = $_POST['submit'];
@@ -31,12 +26,16 @@ if (isset($_POST['submit'])) {
     mysqli_stmt_close($statement);
     mysqli_close($Connection);
 }
-?>
-<a href="servicedesk.php" class="btn btn-primary">Ga terug</a>
-<H2>Comment</H2>
-    <?php
-    while ($row = mysqli_fetch_assoc($result))
-    {
+
+print("<a href='servicedesk.php' class='btn btn-primary'>Ga terug</a><H2>Comment</H2>");
+
+$Query2 = " SELECT t.id, p.preferredName, t.title, t.message, t.created, t.status
+      FROM tickets t JOIN people p ON t.personID = p.personID
+      WHERE id = ".$id;
+print($Query2);
+$result2 = $Connection->query($Query2);
+if ($result2->num_rows > 0) {
+    while ($row = $result2->fetch_assoc()) {
         $id = $row['id'];
         $nickName = $row['preferredName'];
         $title = $row['title'];
@@ -44,42 +43,32 @@ if (isset($_POST['submit'])) {
         $created = $row['created'];
         $status = $row['status'];
 
-        ?>
-
-        <?php print($nickName)?>
-        <?php print ($title)?>
-		<?php print ($message)?>
-		<?php print ($created)?><br><br>
-
-        <?php
+        print($nickName);
+        print ($title);
+        print ($message);
+        print ($created . "<br><br>");
     }
+} else{
+    print("return 0 rows");
+}
 
-    $sql = " SELECT p.preferredName, p.isSalesperson, m.reactMessage, m.reactDate 
-                FROM message m JOIN people p ON p.personID = m.personID WHERE m.ticketID = '$id'";
-    $result1 = mysqli_query($Connection, $sql);
+$sql = " SELECT p.preferredName, p.isSalesperson, m.reactMessage, m.reactDate 
+            FROM message m JOIN people p ON p.personID = m.personID WHERE m.ticketID = '$id'";
+$result3 = $Connection->query($sql);
+print("<h2>reacties</h2>");
 
-    ?>
-    <h2>reacties</h2>
-    <?php
-    while ($row = mysqli_fetch_assoc($result1))
-    {
-        $nickName = $row['preferredName'];
-        $medewerker = $row['isSalesperson'];
-        $reactMessage = $row['reactMessage'];
-        $reactDate = $row['reactDate'];
+while ($row = $result3->fetch_assoc()) {
+    $nickName = $row['preferredName'];
+    $medewerker = $row['isSalesperson'];
+    $reactMessage = $row['reactMessage'];
+    $reactDate = $row['reactDate'];
 
-    ?>
-        <span class="con">
-                    <?php if ($medewerker) { print('Medewerker ');}?>
-				<span class="title"><?php print ($nickName)?></span>
-				<span class="msg"><?php print ($reactMessage)?></span>
-			</span>
-        <span class="con created"><?php print ($reactDate)?></span><br>
-
-
-        <?php
-    }
-        ?>
+     if ($medewerker) { print('Medewerker ');}
+     print ($nickName . " ");
+     print ($reactMessage);
+     print ($reactDate . "<br>");
+}
+?>
 
     <form action="viewticket.php?ticket=<?php echo $id; ?>" method="post">
         <div class="form-group">
@@ -88,7 +77,6 @@ if (isset($_POST['submit'])) {
         </div>
         <button class="btn btn-primary" type="submit" name="submit" value="<?php echo ($personID) ?>">Verzend</button>
     </form>
-
 
     <?php
     }
