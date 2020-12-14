@@ -71,7 +71,7 @@ if (!$products) {
             <table>
                 <tr>
                     <td>Subtotaal</td>
-                    <td class="td-geld table-rechts">€<?php echo $allTotal; ?></td>
+                    <td class="td-geld table-rechts">€<?php echo number_format($allTotal, 2); ?></td>
                 </tr>
                 <tr>
                     <td>Verzendkosten</td>
@@ -89,9 +89,9 @@ if (!$products) {
                 <tr>
                     <td>Totaalprijs</td>
                     <td class="td-geld table-rechts"> <?php if ($allTotal < 25) {
-                            echo "€" . ($allTotal + 6.25);
+                            echo "€" . number_format(($allTotal + 6.25), 2);
                         } else {
-                            echo "€" . $allTotal;
+                            echo "€" . number_format($allTotal, 2);
                         } ?></td>
                 </tr>
             </table>

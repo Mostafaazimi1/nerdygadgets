@@ -6,8 +6,11 @@ if (isset($_POST["action"])) {
 
     $productID = $_POST["addcart"];
     $aantal = $_POST["aantal"];
+    $maxaantal = $_POST["max-aantal"];
 
-    $total = addItem($productID, $aantal);
+    if($aantal >= 1){
+        $total = addItem($productID, $aantal, $maxaantal);
+    }
 
     header("Location: view.php?id=" . $productID . "&amount=". $total ."&succes=true");
     die();

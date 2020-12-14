@@ -1,5 +1,5 @@
 <?php
-function addItem($id, $aantal)
+function addItem($id, $aantal, $max)
 {
     if (isset($_SESSION['winkelwagen'])) {
         $item = array(
@@ -13,7 +13,11 @@ function addItem($id, $aantal)
             if ($winkelwagenItem['id'] == $id) {
                 $amount = $_SESSION['winkelwagen'][$key]['aantal'];
                 $amount = $amount + $aantal;
-                $_SESSION['winkelwagen'][$key]['aantal'] = $amount;
+                if($amount <= $max){
+                    $_SESSION['winkelwagen'][$key]['aantal'] = $amount;
+                    break;
+                }
+
                 $found = TRUE;
                 $newTotal = $amount;
                 break;
