@@ -74,32 +74,39 @@ if ($SearchString != "") {
 
 // worden ze omgevormd tot script enkel gebaseerd op klank
 // $searchValues = array_map(function ($val) {return metaphone($val);}, $searchValues);
-    $searchValues = array_map(function ($val) {
-        if (is_numeric($val)) {
-            return $val;
-        } else {
-            return metaphone($val);
-        }
-    }, $searchValues);
-
-
-    $queryBuildResult = "";
-    if (count($searchValues) > 0) {
-        $queryBuildResult .= "WHERE ";
-        for ($i = 0; $i < count($searchValues); $i++) {
-            if ($i != 0) {
-                $queryBuildResult .= " OR ";
-            }
-
-            if (!is_numeric($searchValues[$i])) {
-                $queryBuildResult .= "SI.SearchDetails_soundslike LIKE '%$searchValues[$i]%'";
+        $searchValues = array_map(function ($val) {
+            if (is_numeric($val)) {
+                return $val;
             } else {
-                $queryBuildResult .= "SI.StockItemID = '$searchValues[$i]'";
+                return metaphone($val);
+            }
+        }, $searchValues);
+
+
+        $queryBuildResult = "";
+        if (count($searchValues) > 0) {
+            $queryBuildResult .= "WHERE ";
+            for ($i = 0; $i < count($searchValues); $i++) {
+                if ($i != 0) {
+                    $queryBuildResult .= " OR ";
+                }
+
+                if (!is_numeric($searchValues[$i]) AND (strlen($searchValues[$i]) > 3)) {
+                    $queryBuildResult .= "SI.SearchDetails_soundslike LIKE '%$searchValues[$i]%' OR SI.SearchDetails LIKE '%$exploded[$i]%'";
+                }
+                elseif (!is_numeric($searchValues[$i]) AND (strlen($searchValues[$i]) < 4) AND ($i < 1) AND count($exploded) == 2) {
+                    $next = $exploded[$i + 1];
+                    $queryBuildResult .= "SI.SearchDetails LIKE '%$exploded[$i] $next%'";
+                }
+                elseif (!is_numeric($searchValues[$i]) AND (strlen($searchValues[$i]) < 4)) {
+                    $queryBuildResult .= "SI.SearchDetails LIKE '%$exploded[$i]%'";
+                }
+                elseif (is_numeric($searchValues[$i])) {
+                    $queryBuildResult .= "SI.StockItemID = '$searchValues[$i]'";
+                }
             }
         }
     }
-}
-
 $Offset = $PageNumber * $ProductsOnPage;
 
 $ShowStockLevel = 1000;
