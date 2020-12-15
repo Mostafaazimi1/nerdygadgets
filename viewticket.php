@@ -23,62 +23,61 @@ if (isset($_GET['ticket'])) {
         mysqli_stmt_bind_param($statement, 'iis',$ticketID,$personID,$message);
         mysqli_stmt_execute($statement);
         if (mysqli_stmt_affected_rows($statement) == 1) {
-            print("Uw bericht is verzonden!");
+            print("Uw bericht is verzonden!<br>");
         } else {
-            print("Uw bericht kon niet worden verzonden");
+            print("Uw bericht kon niet worden verzonden<br>");
         }
         mysqli_stmt_close($statement);
         mysqli_close($Connection);
-    }
-    ?>
-    <a href="tickets.php" class="btn btn-primary">Ga terug</a>
-    <H2>Comment</H2>
-    <?php
-    while ($row = mysqli_fetch_assoc($result)) {
-        $id = $row['id'];
-        $nickName = $row['preferredName'];
-        $title = $row['title'];
-        $message = $row['message'];
-        $created = $row['created'];
-        $status = $row['status'];
+}
+?>
+<a href="tickets.php" class="btn btn-primary">Ga terug</a>
+<H2>Comment</H2>
+<?php
+while ($row = mysqli_fetch_assoc($result)) {
+    $id = $row['id'];
+    $nickName = $row['preferredName'];
+    $title = $row['title'];
+    $message = $row['message'];
+    $created = $row['created'];
+    $status = $row['status'];
 
-        print($nickName . " ");
-        print ($title . " ");
-        print ($message . " ");
-        print ($created . "<br><br>");
-    }
-
-    print("<h2>reacties</h2>");
-
+    print ($title . " " . $nickName . " " . $created . " status: " . $status . "<br>" . $message);
+}?>
+<h2>reacties</h2>
+<table>
+<tbody>
+<?php
     while ($row = mysqli_fetch_assoc($result2)) {
         $nickName = $row['preferredName'];
         $medewerker = $row['isSalesperson'];
         $reactMessage = $row['reactMessage'];
         $reactDate = $row['reactDate'];
-
-        if ($medewerker) { print('Medewerker ');}
-        print ($nickName . " ");
-        print ($reactMessage . " ");
-        print ($reactDate . "<br>");
-
-    }
-    if (isset($_SESSION["login"])) {
-        $gegevens = $_SESSION['login'];
-        $personID = $gegevens['PersonID'];
-        ?>
-
-        <form action="viewtickets.php?ticket=<?php echo $id; ?>" method="post">
-            <div class="form-group">
-                <label>Reactie</label>
-                <textarea class="form-control" rows="3" type="text" name="reactie" required></textarea>
-            </div>
-            <button class="btn btn-primary" type="submit" name="submit" value="<?php echo ($personID) ?>">Verzend</button>
-        </form>
-
-        <?php
-    } else {
-        print("<br><a href='login.php'>Klik hier</a> om zich te kunnen aanmelden<br>");
-    }
+?>
+<tr>
+    <td><?php if ($medewerker) { print('Medewerker ');} print ($nickName . "  " . $reactDate . "<br>" . $reactMessage); ?></td>
+</tr>
+<?php
+}
+?>
+</tbody>
+</table>
+<?php
+if (isset($_SESSION["login"])) {
+$gegevens = $_SESSION['login'];
+$personID = $gegevens['PersonID'];
+?>
+<form action="viewticket.php?ticket=<?php echo $id; ?>" method="post">
+    <div class="form-group">
+        <label>Reactie</label>
+        <textarea class="form-control" rows="3" type="text" name="reactie" required></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit" name="submit" value="<?php echo ($personID) ?>">Verzend</button>
+</form>
+<?php
+} else {
+print("<br><a href='login.php'>Klik hier</a> om zich te kunnen aanmelden<br>");
+}
 }
 include __DIR__ . "/footer.php";
 ?>
