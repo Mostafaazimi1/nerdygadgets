@@ -42,8 +42,8 @@ include __DIR__ . "/header.php";
                             print("<td class='fas fa-times'><a href='viewticket.php?ticket=$id'>$status</td>");
                         }
                         ?>
-                        <td><a href="viewtickets.php?ticket=<?php echo $id; ?>" class="btn btn-primary">Extra</a></td>
-                        <td><a href="viewtickets.php?ticket=<?php echo($id);?>"><?php print($created)?></td>
+                        <td><a href="viewticket.php?ticket=<?php echo $id; ?>" class="btn btn-primary">Extra</a></td>
+                        <td><a href="viewticket.php?ticket=<?php echo($id);?>"><?php print($created)?></td>
                     </a>
                 </tr>
                 <?php

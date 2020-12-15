@@ -14,12 +14,11 @@ if (isset($_POST["submit"]) && isset($_SESSION["login"])) {
     $tekst = $_POST["tekst"];
     $personID = $_POST["submit"];
 
-    //code ticket system
+    //code insert into ticket system
     $sql = "INSERT INTO tickets (personID, title, message) VALUES (?,?,?);";
     $statement = mysqli_prepare($Connection, $sql);
     mysqli_stmt_bind_param($statement, 'iss',$personID,$onderwerp,$tekst);
     mysqli_stmt_execute($statement);
-
 
     if (mysqli_stmt_affected_rows($statement) == 1) {
         print("Uw bericht is verzonden!<br><a href='tickets.php'><i class='fas fa-ticket-alt'></i>Tickets</a>");
