@@ -250,6 +250,7 @@ if ($Result != null) {
                             <input type="hidden" name="action" value="submit"/>
                             Aantal<br><input type="number" name="aantal" min="0" value="1"
                                              max="<?php echo $Result['aantal']; ?>" style="margin-bottom: 12px;">
+                            <input hidden name="max-aantal" value="<?php echo $Result['aantal']; ?>">
                             <button class="bestelling-btn" type="submit" name="addcart"
                                     value="<?php print $Result['StockItemID'] ?>"><i class="fas fa-shopping-cart"
                                                                                      style="color:#FFFFFF; padding-right: 7px;"
