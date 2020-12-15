@@ -147,6 +147,7 @@ if ($CategoryID == "") {
 } else {
 
     if ($queryBuildResult != "") {
+        $queryBuildResult = str_replace("WHERE ", "", $queryBuildResult);
         $queryBuildResult .= " AND ";
     }
 
@@ -167,7 +168,6 @@ if ($CategoryID == "") {
                 GROUP BY StockItemID
                 ORDER BY " . $Sort . " 
                 LIMIT ? OFFSET ?";
-
     $Statement = mysqli_prepare($Connection, $Query);
     mysqli_stmt_bind_param($Statement, "iiiii", $ShowStockLevel, $OutOfStock, $CategoryID, $ProductsOnPage, $Offset);
     mysqli_stmt_execute($Statement);
