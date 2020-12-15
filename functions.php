@@ -15,12 +15,10 @@ function addItem($id, $aantal, $max)
                 $amount = $amount + $aantal;
                 if($amount <= $max){
                     $_SESSION['winkelwagen'][$key]['aantal'] = $amount;
+                    $found = TRUE;
+                    $newTotal = $amount;
                     break;
                 }
-
-                $found = TRUE;
-                $newTotal = $amount;
-                break;
             }
         }
 
