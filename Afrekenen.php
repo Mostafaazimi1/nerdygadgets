@@ -10,7 +10,16 @@ $wrongPass=false;
 
 
 //Start variable
-if (!isset($_POST['Afreken_submit'])) {
+if (isset($_POST['Afreken_submit'])) {
+    $FirstName=$_POST['FirstName'];
+    $LastName=$_POST['LastName'];
+    $postcode=$_POST['postcode'];
+    $HouseNumber=$_POST['HouseNumber'];
+    $StreetName=$_POST['StreetName'];
+    $Plaats=$_POST['Plaats'];
+    $email=$_POST['email'];
+    $PhoneNumber=$_POST['PhoneNumber'];
+} else {
     $FirstName = "";
     $LastName = "";
     $postcode = "";
@@ -60,18 +69,23 @@ if (isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
 if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
     if (isset($_POST['account_aanmaken'])) {
         if (($_POST["password"]) == ($_POST["confirmpassword"])) {
-            $createAccount = TRUE;
-            $wrongPass = FALSE;
+            if ((strlen($_POST["password"]) > 7)  AND (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) AND preg_match('/[A-Z]/', $_POST["password"])) {
+                $createAccount = TRUE;
+                $wrongPass = FALSE;
+            } else {
+                $addAccount = TRUE;
+                print("Het wachtwoord moet minstens 8 karakters bevatten.<br>Daarnaast moet het wachtwoord minimaal 1 speciale teken en een hoofdletter bevatten.");
+            }
         } else {
             $wrongPass=TRUE;
-            $FirstName=$_POST['FirstName'];
-            $LastName=$_POST['LastName'];
-            $postcode=$_POST['postcode'];
-            $HouseNumber=$_POST['HouseNumber'];
-            $StreetName=$_POST['StreetName'];
-            $Plaats=$_POST['Plaats'];
-            $email=$_POST['email'];
-            $PhoneNumber=$_POST['PhoneNumber'];
+//            $FirstName=$_POST['FirstName'];
+//            $LastName=$_POST['LastName'];
+//            $postcode=$_POST['postcode'];
+//            $HouseNumber=$_POST['HouseNumber'];
+//            $StreetName=$_POST['StreetName'];
+//            $Plaats=$_POST['Plaats'];
+//            $email=$_POST['email'];
+//            $PhoneNumber=$_POST['PhoneNumber'];
         }
     }
     elseif(!isset($_POST['account_aanmaken'])){
@@ -232,7 +246,7 @@ if($complete){
                         </tr>
                         <?php if(!isset($_SESSION["login"])) {
                             echo "<tr>";
-                            echo "<td><input type='checkbox' name='account_aanmaken' value='ja'"; if ($wrongPass){echo("checked");}echo("></td>");
+                            echo "<td><input type='checkbox' name='account_aanmaken' value='ja' "; if(isset($addAccount)) {print("checked");} if ($wrongPass){echo("checked");}echo("></td>");
                             echo "<td>account aanmaken</td>";
                             echo "</tr>";
                             echo "<tr>";
