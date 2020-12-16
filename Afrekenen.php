@@ -19,6 +19,23 @@ if (isset($_POST['Afreken_submit'])) {
     $Plaats=$_POST['Plaats'];
     $email=$_POST['email'];
     $PhoneNumber=$_POST['PhoneNumber'];
+    $FullName = ($FirstName . " " . $LastName);
+    $validNameControle = FALSE;
+    if (!$validNameControle) {
+        $sql = "
+                SELECT FullName
+                FROM people
+                WHERE FullName = '" . $FullName . "'";
+        $result = $Connection->query($sql);
+        $aantalresult = mysqli_num_rows($result);
+        if ($aantalresult < 1) {
+            $validName = TRUE;
+        } else {
+            echo("Sorry, de naam " . $FullName . " is al in gebruik.<br>");
+            $validName = FALSE;
+        }
+        $validNameControle = TRUE;
+    }
 } else {
     $FirstName = "";
     $LastName = "";
@@ -66,7 +83,7 @@ if (isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
 
 if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
     if(PostcodeCheck($_POST['postcode'])) {
-        if (isset($_POST['account_aanmaken'])) {
+        if (isset($_POST['account_aanmaken']) AND $validName) {
             if (($_POST["password"]) == ($_POST["confirmpassword"])) {
                 if ((strlen($_POST["password"]) > 7) and (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) and preg_match('/[A-Z]/', $_POST["password"])) {
                     $createAccount = TRUE;
