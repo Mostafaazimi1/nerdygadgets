@@ -7,6 +7,7 @@ $complete=false;
 $createAccount=false;
 $createGuest=false;
 $wrongPass=false;
+$addAccount = FALSE;
 
 
 //Start variable
@@ -72,19 +73,11 @@ if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
                     $createAccount = TRUE;
                     $wrongPass = FALSE;
                 } else {
+                    $createAccount = FALSE;
                     $addAccount = TRUE;
-                    print("Het wachtwoord moet minstens 8 karakters bevatten.<br>Daarnaast moet het wachtwoord minimaal 1 speciale teken en een hoofdletter bevatten.");
                 }
             } else {
                 $wrongPass = TRUE;
-//            $FirstName=$_POST['FirstName'];
-//            $LastName=$_POST['LastName'];
-//            $postcode=$_POST['postcode'];
-//            $HouseNumber=$_POST['HouseNumber'];
-//            $StreetName=$_POST['StreetName'];
-//            $Plaats=$_POST['Plaats'];
-//            $email=$_POST['email'];
-//            $PhoneNumber=$_POST['PhoneNumber'];
             }
         } elseif (!isset($_POST['account_aanmaken'])) {
             $createGuest = TRUE;
@@ -109,6 +102,7 @@ if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
                 // Check if email meets email criteria
                 $email = $_POST["email"];
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
                     $DeliveryCityName = $Plaats;
                     $PhoneNumber = $_POST["PhoneNumber"];
                     $postcode = $_POST["postcode"];
@@ -181,6 +175,8 @@ if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
             } else {
                 echo("Sorry, in " . $Plaats . " leveren wij niet, voer alsjeblieft een nieuw adres in.");
             }
+        } else {
+            print("Het wachtwoord moet minstens 8 karakters bevatten.<br>Daarnaast moet het wachtwoord minimaal 1 speciale teken en een hoofdletter bevatten.");
         }
     } else {
         print("Sorry, het ingevoerde postcode is niet juist. Voer bijvoorbeeld 1111AA in.");
@@ -250,20 +246,43 @@ if($complete){
                         </tr>
                         <?php if(!isset($_SESSION["login"])) {
                             echo "<tr>";
-                            echo "<td><input type='checkbox' name='account_aanmaken' value='ja' "; if(isset($addAccount)) {print("checked");} if ($wrongPass){echo("checked");}echo("></td>");
+                            echo "<td><input type='checkbox' id='account_aanmaken' name='account_aanmaken' value='ja' onclick='showpasswordfields()' "; if($addAccount) {print("checked");} if ($wrongPass){echo("checked");}echo("></td>");
                             echo "<td>account aanmaken</td>";
                             echo "</tr>";
                             echo "<tr>";
                             if ($wrongPass){
                                 echo "<tr>";
-                                echo "<td>Wachtwoorden komen NIET overeen!</td>";
+                                echo "<td style='color:red;'>Wachtwoorden komen NIET overeen!</td>";
                                 echo "</tr>";
                             }
-                            echo "<td><input type='password' placeholder='Wachtwoord' name='password' autocomplete='new-password'></td>";
-                            echo "<td><input type='password' placeholder='Bevestig wachtwoord' name='confirmpassword' autocomplete='new-password'></td>";
+//                            "; if($wrongPass || $addAccount){echo '<script type="text/javascript">','document.getElementById("passfield1").style.display = "block";','</script>';} echo "
+                            $passhidden = "style='display: none;'";
+                            if($wrongPass || $addAccount) {
+                                $passhidden = "style='display: block;'";
+                            }
+                            echo "<td><input type='password' id='passfield1' placeholder='Wachtwoord' name='password' autocomplete='new-password' ".$passhidden."></td>";
+                            echo "<td><input type='password' id='passfield2' placeholder='Bevestig wachtwoord' name='confirmpassword' autocomplete='new-password' ".$passhidden."></td>";
                             echo "</tr>";
                         }
                         ?>
+                        <script>
+                            function showpasswordfields() {
+                                var checkBox = document.getElementById("account_aanmaken");
+                                var text1 = document.getElementById("passfield1");
+                                var text2 = document.getElementById("passfield2");
+                                var wrongPass = "<?=$wrongPass?>";
+                                var addAccount = "<?=$addAccount?>";
+                                //|| wrongPass == true || addAccount == true
+                                if (checkBox.checked ){
+                                    text1.style.display = "block";
+                                    text2.style.display = "block";
+                                    window.scrollBy(0, 70);
+                                } else {
+                                    text1.style.display = "none";
+                                    text2.style.display = "none";
+                                }
+                            }
+                        </script>
                     </div>
                 </table>
 
