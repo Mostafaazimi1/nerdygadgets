@@ -24,15 +24,15 @@ if (isset($_POST['Afreken_submit'])) {
     $validNameControle = FALSE;
     if (!$validNameControle) {
         $sql = "
-                SELECT FullName
+                SELECT FullName, EmailAddress
                 FROM people
-                WHERE FullName = '" . $FullName . "'";
+                WHERE FullName = '" . $FullName . "' AND EmailAddress = '".$email."'";
         $result = $Connection->query($sql);
         $aantalresult = mysqli_num_rows($result);
         if ($aantalresult < 1) {
             $validName = TRUE;
         } else {
-            echo("Sorry, de naam " . $FullName . " is al in gebruik.<br>");
+            echo("Sorry, de naam " . $FullName . " in combinatie met ".$email." is al in gebruik.<br>");
             $validName = FALSE;
         }
         $validNameControle = TRUE;
@@ -316,7 +316,7 @@ if($complete){
                 <table>
                     <tr>
                         <td>Subtotaal</td>
-                        <td class="td-geld table-rechts">€<?php echo (round($allTotal,2)); ?></td>
+                        <td class="td-geld table-rechts">€<?php echo number_format(round($allTotal,2), 2); ?></td>
                     </tr>
                     <tr>
                         <td>Verzendkosten</td>
@@ -337,7 +337,7 @@ if($complete){
                             <?php if ($allTotal < 25) {
                                 echo "€" . ($allTotal + 6.25);
                             } else {
-                                echo "€" . round($allTotal,2);
+                                echo "€" . number_format(round($allTotal,2), 2);
                             } ?>
                         </td>
                     </tr>

@@ -14,15 +14,15 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
     $validNameControle = FALSE;
     if (!$validNameControle) {
         $sql = "
-                SELECT FullName
+                SELECT FullName, EmailAddress
                 FROM people
-                WHERE FullName = '" . $FullName . "'";
+                WHERE FullName = '" . $FullName . "' AND EmailAddress = '".$email."'";
         $result = $Connection->query($sql);
         $aantalresult = mysqli_num_rows($result);
         if ($aantalresult < 1) {
             $validName = TRUE;
         } else {
-            echo("Sorry, de naam " . $FullName . " is al in gebruik.<br>");
+            echo("Sorry, de naam " . $FullName . " in combinatie met ".$email." is al in gebruik.<br>");
             $validName = FALSE;
         }
         $validNameControle = TRUE;
