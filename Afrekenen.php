@@ -107,7 +107,7 @@ if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
             $createGuest = TRUE;
         }
 
-        if ($createAccount == TRUE or $createGuest == TRUE) {
+        if ($createAccount or $createGuest) {
             $Plaats = ucfirst($_POST["Plaats"]);
             $sql = "
                     SELECT CityName
@@ -115,85 +115,88 @@ if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
                     WHERE CityName = '" . $Plaats . "'";
             $result = $Connection->query($sql);
             $aantalresult = mysqli_num_rows($result);
-            if ($aantalresult < 1) {
-                echo("Sorry, in " . $Plaats . " leveren wij niet, voer alsjeblieft een nieuw adres in.");
-            } else {
-                if ($createAccount == true) {
+            if (!$aantalresult < 1) {
+                if ($createAccount) {
                     $password = $_POST["password"];
                     $IsPermittedToLogon = 1;
                 } else {
                     $password = "NOT SET";
                     $IsPermittedToLogon = 0;
-                    echo("pass NOT SET");
-
                 }
-                $DeliveryCityName = $Plaats;
+                // Check if email meets email criteria
                 $email = $_POST["email"];
-                $PhoneNumber = $_POST["PhoneNumber"];
-                $postcode = $_POST["postcode"];
-                $FirstName = $_POST["FirstName"];
-                $LastName = $_POST["LastName"];
-                $HouseNumber = $_POST["HouseNumber"];
-                $StreetName = $_POST["StreetName"];
-                $CurrentDate = date("Y/m/d");
-                $FullName = ($FirstName . " " . $LastName);
-                $BuyingGroupId = 1;
-                $PrimaryContactPersonId = 9;
-                $AlternateContactPersonId = 9;
-                $CustomerCategoryId = 1;
-                $CreditLimit = 0.00;
-                $StandardDiscountPercentage = 0.000;
-                $zero = 0;
-                $seven = 7;
-                $three = 3;
-                $NULL = NULL;
-                $unknown = "unknown";
-                $address = ($HouseNumber . " " . $StreetName);
-                $ValidTo = "9999-12-31";
-                $BillToCustomerId = 1;
-                $DeliveryCityId = 1;
-                $LastEditedBy = 1;
-                $IsExternalLogonProvider = 1;
-                $IsSystemUser = 0;
-                $IsEmployee = 0;
-                $IsSalesPerson = 0;
-                $empty = "";
-                //Als verbinding gesloten is, wordt de SQL query voorbereid.
-                // GEGEVENS IN CUSTOMERS                    faxnumber = string
-                $stmt = $Connection->prepare(
-                    "INSERT INTO customers (CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID,
+                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $DeliveryCityName = $Plaats;
+                    $PhoneNumber = $_POST["PhoneNumber"];
+                    $postcode = $_POST["postcode"];
+                    $FirstName = $_POST["FirstName"];
+                    $LastName = $_POST["LastName"];
+                    $HouseNumber = $_POST["HouseNumber"];
+                    $StreetName = $_POST["StreetName"];
+                    $CurrentDate = date("Y/m/d");
+                    $FullName = ($FirstName . " " . $LastName);
+                    $BuyingGroupId = 1;
+                    $PrimaryContactPersonId = 9;
+                    $AlternateContactPersonId = 9;
+                    $CustomerCategoryId = 1;
+                    $CreditLimit = 0.00;
+                    $StandardDiscountPercentage = 0.000;
+                    $zero = 0;
+                    $seven = 7;
+                    $three = 3;
+                    $NULL = NULL;
+                    $unknown = "unknown";
+                    $address = ($HouseNumber . " " . $StreetName);
+                    $ValidTo = "9999-12-31";
+                    $BillToCustomerId = 1;
+                    $DeliveryCityId = 1;
+                    $LastEditedBy = 1;
+                    $IsExternalLogonProvider = 1;
+                    $IsSystemUser = 0;
+                    $IsEmployee = 0;
+                    $IsSalesPerson = 0;
+                    $empty = "";
+                    //Als verbinding gesloten is, wordt de SQL query voorbereid.
+                    // GEGEVENS IN CUSTOMERS                    faxnumber = string
+                    $stmt = $Connection->prepare(
+                        "INSERT INTO customers (CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID,
                                 AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit,
                                 AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays,
                                 PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1,
                                 DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation, PostalAddressLine1, PostalAddressLine2,
                                 PostalPostalCode, LastEditedBy, ValidFrom, ValidTo)
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("siiiiiiiidsdiiissssssssssssiss", $FullName, $BillToCustomerId, $CustomerCategoryId, $BuyingGroupId, $PrimaryContactPersonId,
-                    $AlternateContactPersonId, $three, $DeliveryCityId, $DeliveryCityId, $CreditLimit, $CurrentDate, $StandardDiscountPercentage, $zero, $zero, $seven,
-                    $PhoneNumber, $zero, $NULL, $NULL, $zero, $unknown, $address,
-                    $postcode, $unknown, $unknown, $DeliveryCityName, $postcode, $LastEditedBy, $CurrentDate,
-                    $ValidTo);
-                $execval = $stmt->execute();
-                $stmt->close();
+                    $stmt->bind_param("siiiiiiiidsdiiissssssssssssiss", $FullName, $BillToCustomerId, $CustomerCategoryId, $BuyingGroupId, $PrimaryContactPersonId,
+                        $AlternateContactPersonId, $three, $DeliveryCityId, $DeliveryCityId, $CreditLimit, $CurrentDate, $StandardDiscountPercentage, $zero, $zero, $seven,
+                        $PhoneNumber, $zero, $NULL, $NULL, $zero, $unknown, $address,
+                        $postcode, $unknown, $unknown, $DeliveryCityName, $postcode, $LastEditedBy, $CurrentDate,
+                        $ValidTo);
+                    $execval = $stmt->execute();
+                    $stmt->close();
 
-                $sql = "SELECT CustomerID FROM customers WHERE CustomerName = ('$FullName') AND DeliveryPostalCode =
+                    $sql = "SELECT CustomerID FROM customers WHERE CustomerName = ('$FullName') AND DeliveryPostalCode =
                     ('$postcode') AND DeliveryAddressLine2 = ('$address')";
-                $result = $Connection->query($sql);
-                $row = mysqli_fetch_array($result);
-                $CustomerNUM = reset($row);
+                    $result = $Connection->query($sql);
+                    $row = mysqli_fetch_array($result);
+                    $CustomerNUM = reset($row);
 
-                // GEGEVENS IN PEOPLE image(Photo) = blob
-                $stmt1 = $Connection->prepare("insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
+                    // GEGEVENS IN PEOPLE image(Photo) = blob
+                    $stmt1 = $Connection->prepare("insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
                             IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson,
                             UserPreferences, PhoneNumber, FaxNumber, EmailAddress, Photo, CustomFields,
                             OtherLanguages, LastEditedBy, ValidFrom, ValidTo, CustomerNUM)
                             values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt1->bind_param("sssisisiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
-                    $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
-                    $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
-                $execval = $stmt1->execute();
-                $stmt1->close();
-                $complete = TRUE;
+                    $stmt1->bind_param("sssisisiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
+                        $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
+                        $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
+                    $execval = $stmt1->execute();
+                    $stmt1->close();
+                    $complete = TRUE;
+                } else {
+                    print("Sorry, het ingevoerde email adres is niet juist. Voer bijvoorbeeld joe@jansen.nl in.");
+                }
+            } else {
+                echo("Sorry, in " . $Plaats . " leveren wij niet, voer alsjeblieft een nieuw adres in.");
             }
         }
     } else {
@@ -252,7 +255,7 @@ if($complete){
                             <th>E-mailadress</th>
                         </tr>
                         <tr>
-                            <td><input type="text" id="Email" name="email" placeholder="voorbeeld@voorbeeld.nl"
+                            <td><input type="email" id="Email" name="email" placeholder="voorbeeld@voorbeeld.nl"
                                        value="<?php echo($email); ?>" required></td>
                         </tr>
                         <tr>
