@@ -3,10 +3,10 @@ include __DIR__ . "/header.php";
 
 $winkelwagen = $_SESSION['winkelwagen'];
 $products = loadProducts($winkelwagen, $Connection);
-$complete=false;
-$createAccount=false;
-$createGuest=false;
-$wrongPass=false;
+$complete = false;
+$createAccount = false;
+$createGuest = false;
+$wrongPass = false;
 
 
 //Start variable
@@ -15,7 +15,7 @@ if (!isset($_POST['Afreken_submit'])) {
     $LastName = "";
     $postcode = "";
     $HouseNumber = "";
-    $StreetName ="";
+    $StreetName = "";
     $Plaats = "";
     $email = "";
     $PhoneNumber = "";
@@ -52,30 +52,28 @@ if (isset($_POST['Afreken_submit'])) {
 }
 
 
-
-if (isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
-    $complete=TRUE;
+if (isset($_SESSION["login"]) and isset($_POST['Afreken_submit'])) {
+    $complete = TRUE;
 }
 
-if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
+if (!isset($_SESSION["login"]) and isset($_POST['Afreken_submit'])) {
     if (isset($_POST['account_aanmaken'])) {
         if (($_POST["password"]) == ($_POST["confirmpassword"])) {
             $createAccount = TRUE;
             $wrongPass = FALSE;
         } else {
-            $wrongPass=TRUE;
-            $FirstName=$_POST['FirstName'];
-            $LastName=$_POST['LastName'];
-            $postcode=$_POST['postcode'];
-            $HouseNumber=$_POST['HouseNumber'];
-            $StreetName=$_POST['StreetName'];
-            $Plaats=$_POST['Plaats'];
-            $email=$_POST['email'];
-            $PhoneNumber=$_POST['PhoneNumber'];
+            $wrongPass = TRUE;
+            $FirstName = $_POST['FirstName'];
+            $LastName = $_POST['LastName'];
+            $postcode = $_POST['postcode'];
+            $HouseNumber = $_POST['HouseNumber'];
+            $StreetName = $_POST['StreetName'];
+            $Plaats = $_POST['Plaats'];
+            $email = $_POST['email'];
+            $PhoneNumber = $_POST['PhoneNumber'];
         }
-    }
-    elseif(!isset($_POST['account_aanmaken'])){
-        $createGuest=TRUE;
+    } elseif (!isset($_POST['account_aanmaken'])) {
+        $createGuest = TRUE;
     }
 
     if ($createAccount == TRUE or $createGuest == TRUE) {
@@ -132,21 +130,34 @@ if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
         $empty = "";
         //Als verbinding gesloten is, wordt de SQL query voorbereid.
         // GEGEVENS IN CUSTOMERS                    faxnumber = string
-        $stmt = $Connection->prepare(
-            "INSERT INTO customers (CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID,
+        //     $stmt = $Connection->prepare(
+        //       "INSERT INTO customers (CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID,
+        //                         AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit,
+        //                       AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays,
+        //                     PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1,
+        //                   DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation, PostalAddressLine1, PostalAddressLine2,
+        //                 PostalPostalCode, LastEditedBy, ValidFrom, ValidTo)
+        //               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        // $stmt->bind_param("siiiiiiiidsdiiissssssssssssiss", $FullName, $BillToCustomerId, $CustomerCategoryId, $BuyingGroupId, $PrimaryContactPersonId,
+        //   $AlternateContactPersonId, $three, $DeliveryCityId, $DeliveryCityId, $CreditLimit, $CurrentDate, $StandardDiscountPercentage, $zero, $zero, $seven,
+        // $PhoneNumber, $zero, $NULL, $NULL, $zero, $unknown, $address,
+        //  $postcode, $unknown, $unknown, $DeliveryCityName, $postcode, $LastEditedBy, $CurrentDate,
+        // $ValidTo);
+
+        $sql1 = "INSERT INTO customers (CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID,
                                 AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit,
                                 AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays,
                                 PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1,
                                 DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation, PostalAddressLine1, PostalAddressLine2,
                                 PostalPostalCode, LastEditedBy, ValidFrom, ValidTo)
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("siiiiiiiidsdiiissssssssssssiss", $FullName, $BillToCustomerId, $CustomerCategoryId, $BuyingGroupId, $PrimaryContactPersonId,
-            $AlternateContactPersonId, $three, $DeliveryCityId, $DeliveryCityId, $CreditLimit, $CurrentDate, $StandardDiscountPercentage, $zero, $zero, $seven,
-            $PhoneNumber, $zero, $NULL, $NULL, $zero, $unknown, $address,
-            $postcode, $unknown, $unknown, $DeliveryCityName, $postcode, $LastEditedBy, $CurrentDate,
-            $ValidTo);
-        $execval = $stmt->execute();
-        $stmt->close();
+                                VALUES ('" . $FullName . "', " . $BillToCustomerId . ", " . $CustomerCategoryId . ", " . $BuyingGroupId . ", " . $PrimaryContactPersonId . ", 
+                                " . $AlternateContactPersonId . ", " . $three . ", " . $DeliveryCityId . "," . $DeliveryCityId . ", " . $CreditLimit . ", '" . $CurrentDate . "', 
+                                '" . $StandardDiscountPercentage . "', '" . $zero . "', " . $zero . ", " . $seven . ", " . $PhoneNumber . ", '" . $zero . "', 
+                                '" . $NULL . "', '" . $NULL . "', '" . $zero . "', '" . $unknown . "', '" . $address . "', '" . $postcode . "', '" . $unknown . "', '" . $unknown . "', 
+                                '" . $DeliveryCityName . "', '" . $postcode . "', " . $LastEditedBy . ", '" . $CurrentDate . "', '" . $ValidTo . "');";
+
+        // $execval = $stmt->execute();
+        // $stmt->close();
 
         $sql = "SELECT CustomerID FROM customers WHERE CustomerName = ('$FullName') AND DeliveryPostalCode =
                     ('$postcode') AND DeliveryAddressLine2 = ('$address')";
@@ -155,24 +166,39 @@ if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
         $CustomerNUM = reset($row);
 
         // GEGEVENS IN PEOPLE image(Photo) = blob
-        $stmt1 = $Connection->prepare("insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
+        //  $stmt1 = $Connection->prepare("insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
+        //                     IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson,
+        //                   UserPreferences, PhoneNumber, FaxNumber, EmailAddress, Photo, CustomFields,
+        //                 OtherLanguages, LastEditedBy, ValidFrom, ValidTo, CustomerNUM)
+        //               values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        //   $stmt1->bind_param("sssisisiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
+        //       $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
+        //     $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
+
+        $sql2 = "insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
                             IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson,
                             UserPreferences, PhoneNumber, FaxNumber, EmailAddress, Photo, CustomFields,
                             OtherLanguages, LastEditedBy, ValidFrom, ValidTo, CustomerNUM)
-                            values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt1->bind_param("sssisisiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
-            $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
-            $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
-        $execval = $stmt1->execute();
-        $stmt1->close();
-        $complete=TRUE;
+                            values('" . $FullName . "', '" . $FirstName . "', '" . $FullName . "', " . $IsPermittedToLogon . ",'" . $email . "', " . $IsExternalLogonProvider . ", '" . $password . "', 
+                            " . $IsSystemUser . ", " . $IsEmployee . ", " . $IsSalesPerson . ", '" . $empty . "', '" . $PhoneNumber . "', '" . $empty . "', '" . $email . "', '" . $empty . "', 
+                            '" . $empty . "', '" . $empty . "', " . $LastEditedBy . ", '" . $CurrentDate . "', '" . $ValidTo . "', '" . $CustomerNUM . "');";
+
+        //   $execval = $stmt1->execute();
+        //   $stmt1->close();
+
+        $sql = 'SET AUTOCOMMIT = 0
+        ' . $sql1 . '
+        ' . $sql2 . '
+         COMMIT;';
+
+        mysqli_query($Connection, $sql);
+        $complete = TRUE;
     }
 }
 
 
-
 //$complete will be set true when $_sesion[login]isset OR Guest / new Customer is created
-if($complete){
+if ($complete) {
     echo('<meta http-equiv = "refresh" content = "0; url = ./overzicht.php" />');
 }
 ?>
@@ -230,13 +256,17 @@ if($complete){
                             <td><input type="text" id="telefoonnummer" name="PhoneNumber" placeholder="06 12345678"
                                        value="<?php echo($PhoneNumber); ?>" required></td>
                         </tr>
-                        <?php if(!isset($_SESSION["login"])) {
+                        <?php if (!isset($_SESSION["login"])) {
                             echo "<tr>";
-                            echo "<td><input type='checkbox' name='account_aanmaken' value='ja'"; if ($wrongPass){echo("checked");}echo("></td>");
+                            echo "<td><input type='checkbox' name='account_aanmaken' value='ja'";
+                            if ($wrongPass) {
+                                echo("checked");
+                            }
+                            echo("></td>");
                             echo "<td>account aanmaken</td>";
                             echo "</tr>";
                             echo "<tr>";
-                            if ($wrongPass){
+                            if ($wrongPass) {
                                 echo "<tr>";
                                 echo "<td>Wachtwoorden komen NIET overeen!</td>";
                                 echo "</tr>";
@@ -253,7 +283,7 @@ if($complete){
             <?php
             $allTotal = 0;
             foreach ($products as $product) {
-                $total = (($product['price']*$product['kortingc'] )* $product['aantal']);
+                $total = (($product['price'] * $product['kortingc']) * $product['aantal']);
                 $allTotal += $total;
             }
             ?>
@@ -262,7 +292,7 @@ if($complete){
                 <table>
                     <tr>
                         <td>Subtotaal</td>
-                        <td class="td-geld table-rechts">€<?php echo (round($allTotal,2)); ?></td>
+                        <td class="td-geld table-rechts">€<?php echo(round($allTotal, 2)); ?></td>
                     </tr>
                     <tr>
                         <td>Verzendkosten</td>
@@ -283,7 +313,7 @@ if($complete){
                             <?php if ($allTotal < 25) {
                                 echo "€" . ($allTotal + 6.25);
                             } else {
-                                echo "€" . round($allTotal,2);
+                                echo "€" . round($allTotal, 2);
                             } ?>
                         </td>
                     </tr>
