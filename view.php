@@ -109,7 +109,6 @@ if ($Result != null) {
     }
     ?>
 
-
     <h1 class="StockItemNameViewSize StockItemName"><?php print $Result['StockItemName']; ?></h1>
     <div class="naastElkaar reviewUnderH1">
         <div class="SterrenH1">
@@ -138,23 +137,12 @@ if ($Result != null) {
         <div class="ImageViewHeader">
             <?php
             if (isset($Images)) {
-                if ($Images[0]['ImagePath'] == "") {
-                    ?>
-                    <div id="ProductImage"><img src="<?php print "Public/StockGroupIMG/" . $Result['BackupImagePath'] ?>"></div>
-                    <?php
-                }
-
                 // print Single
-            elseif (count($Images) == 1) {
-//                if (array_column($Images, 'ImagePath') == "") {?>
-<!--                    <div id="ProductImage"><img src="--><?php //print "Public/StockGroupIMG/" . $Result['BackupImagePath'] ?><!--"></div>-->
-<!--              --><?php //print_r($Images);
-//                }
-//                ?>
+            if (count($Images) == 1) {
+                ?>
                 <div id="ProductImage">
                     <img src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
                 </div>
-
             <?php
             } else if (count($Images) >= 2) { ?>
                 <div class="product__carousel">
@@ -169,6 +157,7 @@ if ($Result != null) {
                                             <img src="Public/StockItemIMG/<?php print $Images[$i]['ImagePath'] ?>">
                                         </a>
                                     </div>
+                                <?php } ?>
 
                             </div>
                             <!-- Add Arrows -->
@@ -189,24 +178,16 @@ if ($Result != null) {
                     </div>
                 </div>
 
-            <?php }?>
-
-                <?php
-            } else{
+            <?php }
+            } else {
             ?>
                 <div id="ProductImage">
-<!--                    <img src="Public/StockGroupIMG/--><?php //print $Result['BackupImagePath']; ?><!--">-->
-                    <img src="Public/StockGroupIMG/Chocolate.jpg">
+                    <img src="Public/StockGroupIMG/<?php print $Result['BackupImagePath']; ?>">
                 </div>
 
                 <?php
             }
-            }
             ?>
-
-
-
-
             <?php
             if (isset($Result['Video'])) {
                 ?>

@@ -189,7 +189,6 @@ if (isset($amount)) {
     $AmountOfPages = ceil($amount["count(*)"] / $ProductsOnPage);
 }
 
-
 //push push push
 
 
@@ -254,20 +253,12 @@ if (isset($amount)) {
             <a class="ListItem" href='view.php?id=<?php print $row['StockItemID']; ?>'>
                 <div class="naastElkaar" id="ProductFrame">
                     <div class="productFrameLinks naastElkaar" id="geenPadding">
-                        <div class="productFrameLinksImage">
-                        <?php
-                            if (isset($row['ImagePath'])) {
-                                if ($row['ImagePath'] == "") {
-                                    ?>
-                                    <img class="ImgFrame" src="<?php print "Public/StockGroupIMG/" . $row['BackupImagePath'] ?>">
-                                    <?php
-                                } else {
-                                    print("<img class= 'ImgFrame' src= 'Public/StockItemIMG/" . $row['ImagePath'] . "'>");
-                                }
-                            }
-                                ?>
-
-
+                        <div class="productFrameLinksImage"><?php
+                            if (isset($row['ImagePath'])) { ?>
+                                <img class="ImgFrame" src="<?php print "Public/StockItemIMG/" . $row['ImagePath']; ?>">
+                            <?php } else if (isset($row['BackupImagePath'])) { ?>
+                                <img class="ImgFrame" src="<?php print "Public/StockGroupIMG/" . $row['BackupImagePath'] ?>">
+                            <?php } ?>
                         </div>
                         <div class="productFrameLinksInfo">
                             <div>
