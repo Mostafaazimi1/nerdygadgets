@@ -139,11 +139,17 @@ if ($Result != null) {
             if (isset($Images)) {
                 // print Single
             if (count($Images) == 1) {
+                if ($Images[0]['ImagePath'] == "") {
+                    ?>
+                    <div id="ProductImage"><img src="<?php print "Public/StockGroupIMG/" . $Result['BackupImagePath'] ?>"></div>
+                    <?php
+                } else {
                 ?>
                 <div id="ProductImage">
                     <img src="Public/StockItemIMG/<?php print $Images[0]['ImagePath']; ?>">
                 </div>
             <?php
+                }
             } else if (count($Images) >= 2) { ?>
                 <div class="product__carousel">
                     <div class="gallery-parent">

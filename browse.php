@@ -254,11 +254,16 @@ if (isset($amount)) {
                 <div class="naastElkaar" id="ProductFrame">
                     <div class="productFrameLinks naastElkaar" id="geenPadding">
                         <div class="productFrameLinksImage"><?php
-                            if (isset($row['ImagePath'])) { ?>
-                                <img class="ImgFrame" src="<?php print "Public/StockItemIMG/" . $row['ImagePath']; ?>">
-                            <?php } else if (isset($row['BackupImagePath'])) { ?>
-                                <img class="ImgFrame" src="<?php print "Public/StockGroupIMG/" . $row['BackupImagePath'] ?>">
-                            <?php } ?>
+                            if (isset($row['ImagePath'])) {
+                                if($row['ImagePath'] == "") {
+                                    print('<img class="ImgFrame" src="Public/StockGroupIMG/'.$row['BackupImagePath'].'">');
+
+                                } else {
+                                    ?><img class="ImgFrame" src="<?php print "Public/StockItemIMG/" . $row['ImagePath']; ?>"><?php
+                                }?>
+                            <?php } else if (isset($row['BackupImagePath'])) {
+                                print('<img class="ImgFrame" src="Public/StockGroupIMG/'.$row['BackupImagePath'].'">');
+                             } ?>
                         </div>
                         <div class="productFrameLinksInfo">
                             <div>
