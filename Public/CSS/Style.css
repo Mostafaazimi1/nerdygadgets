@@ -1085,7 +1085,8 @@ ul#ul-class-categorie li {
     width: 50%;
 }
 .ProductIndexImage img{
-    width: 100%;
+    width: 80%;
+    text-align: center;
     padding-left: 50px;
 }
 .ButtonIndex {
