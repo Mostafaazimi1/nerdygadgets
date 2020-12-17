@@ -70,27 +70,4 @@ h2 {
   transform: translate(-50%, -50%);
   max-width: 100%;
 }
-.TemperatuurDiv{
-  background: url("https://image.shutterstock.com/image-photo/blue-ice-texture-background-260nw-459117925.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 20px;
-  border-radius: 5px;
-  border: 2px solid #e6e6e6;
-  display: inline-block;
-  color: #000000;
-  font-weight: 400;
-  margin-bottom: 36px;
-  width: 200px;
-}
-.TemperatuurDiv .TemperatuurTekst{
-  font-weight: bold;
-  font-size: 24px;
-  display: inline;
-}
-.TemperatuurDiv .TempTekst{
 
-}
-.TemperatuurDiv p{
-  margin: 0;
-}
