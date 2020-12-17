@@ -13,7 +13,7 @@ function addItem($id, $aantal, $max)
             if ($winkelwagenItem['id'] == $id) {
                 $amount = $_SESSION['winkelwagen'][$key]['aantal'];
                 $amount = $amount + $aantal;
-                if ($amount <= $max) {
+                if($amount <= $max){
                     $_SESSION['winkelwagen'][$key]['aantal'] = $amount;
                     $found = TRUE;
                     $newTotal = $amount;
@@ -23,10 +23,8 @@ function addItem($id, $aantal, $max)
         }
 
         if (!$found) {
-            if ($aantal <= $max && $aantal > 0) {
-                array_push($_SESSION['winkelwagen'], $item);
-                $newTotal = $aantal;
-            }
+            array_push($_SESSION['winkelwagen'], $item);
+            $newTotal = $aantal;
         }
     }
 
@@ -170,19 +168,18 @@ function getTemprature($connection, $sensorNumber)
     $temperature = 0;
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $temperature = $row['Temperature'];
+           $temperature = $row['Temperature'];
         }
     }
 
     return $temperature;
 }
-
 function PostcodeCheck($postcode)
 {
-    $remove = str_replace(" ", "", $postcode);
+    $remove = str_replace(" ","", $postcode);
     $upper = strtoupper($remove);
 
-    if (preg_match("/^\b[1-9]\d{3}\s*[A-Z]{2}\b$/", $upper)) {
+    if( preg_match("/^\b[1-9]\d{3}\s*[A-Z]{2}\b$/",  $upper)) {
         return TRUE;
     } else {
         return FALSE;
