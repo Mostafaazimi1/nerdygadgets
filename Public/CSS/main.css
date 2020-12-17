@@ -70,3 +70,23 @@ h2 {
   transform: translate(-50%, -50%);
   max-width: 100%;
 }
+.TemperatuurDiv{
+  background-color: #007bff;
+  padding: 20px;
+  display: inline-block;
+  color: #FFFFFF;
+  font-weight: 400;
+  margin-bottom: 36px;
+  width: 200px;
+}
+.TemperatuurDiv .TemperatuurTekst{
+  font-weight: bold;
+  font-size: 24px;
+  display: inline;
+}
+.TemperatuurDiv .TempTekst{
+
+}
+.TemperatuurDiv p{
+  margin: 0;
+}

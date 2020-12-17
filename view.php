@@ -244,6 +244,16 @@ if ($Result != null) {
                         }
                         ?>
                     </div>
+                    <?php
+                    if ($Result['IsChillerStock']) {
+                        ?>
+                        <div class="TemperatuurDiv">
+                            <p class="TempTekst">Temperatuur</p>
+                            <p id="Tempratuur" class="TemperatuurTekst"></p><p class="TemperatuurTekst"> °C</p>
+                        </div>
+                        <?php
+                    }
+                    ?>
                     <?php if ($Result['aantal'] > 0) { ?>
                         <br>
                         <form action="add.php" method="post">
@@ -301,16 +311,7 @@ if ($Result != null) {
                     <td>Artikelnummer</td>
                     <td><?php print $Result["StockItemID"]; ?></td>
                 </tr>
-                <?php
-                if ($Result['IsChillerStock']) {
-                    ?>
-                    <tr>
-                        <td>Tempratuur</td>
-                        <td id="Tempratuur"></td>
-                    </tr>
-                    <?php
-                }
-                ?>
+
                 </table><?php
             } else { ?>
 
