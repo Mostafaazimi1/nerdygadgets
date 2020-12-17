@@ -17,7 +17,7 @@ $StockGroups = mysqli_fetch_all($Result, MYSQLI_ASSOC);
 
 ?>
 <div id="Wrap">
-    <?php if (isset($StockGroups)) {
+<?php if (isset($StockGroups)) {
         $i = 0;
         foreach ($StockGroups as $StockGroup) {
             if ($i < 6) {
