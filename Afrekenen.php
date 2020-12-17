@@ -112,7 +112,7 @@ if (!isset($_SESSION["login"]) AND isset($_POST['Afreken_submit'])) {
                         $password = $_POST["password"];
                         $IsPermittedToLogon = 1;
                     } else {
-                        $password = "NOT SET";
+                        $password = "NOT SET @abcdefg";
                         $IsPermittedToLogon = 0;
                     }
                     // Check if email meets email criteria
