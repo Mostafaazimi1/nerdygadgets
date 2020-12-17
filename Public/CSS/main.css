@@ -71,8 +71,10 @@ h2 {
   max-width: 100%;
 }
 .TemperatuurDiv{
-  background-color: #80beff;
+  background: linear-gradient(90deg, rgba(0,123,255,1) 0%, rgba(128,190,255,1) 100%);
   padding: 20px;
+  border-radius: 5px;
+  border: 2px solid #e6e6e6;
   display: inline-block;
   color: #FFFFFF;
   font-weight: 400;
