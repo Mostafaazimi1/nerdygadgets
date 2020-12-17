@@ -20,22 +20,44 @@ if(isset($_SESSION['messageCount3'])) {
     }
 }
 ?>
-<div class="IndexStyle">
-    <div class="col-11">
-        <div class="TextPrice">
-            <a href="view.php?id=93">
-                <div class="TextMain">
-                    "The Gu" red shirt XML tag t-shirt (Black) M
-                </div>
-<!--            <ul id="ul-class-price">-->
-                <ul>
-                    <li class="HomePagePrice">€30.95</li>
-                </ul>
-
-        </div>
-        </a>
-        <div class="HomePageStockItemPicture"></div>
+<div class="naastElkaar SingleProductIndex">
+    <div class="ProductIndexInfo">
+        <h1><span style="color: #007bff">"The Gu"</span> red shirt XML tag t-shirt (Black) M</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <h4>€ 30.95</h4>
+        <a class="ButtonIndex" href="view.php?id=93">Meer informatie</a>
     </div>
+    <div class="ProductIndexImage">
+        <img src="Public/ProductIMGHighRes/580b57fbd9996e24bc43bf55.png">
+    </div>
+</div>
+<div class="naastElkaar IndexCategorie">
+    <h3 class="H3Index">Bladeren door onze categorieën</h3>
+    <div class="CategorieCon">
+        <img src="Public/StockGroupIMG/Chocolate.jpg">
+        <a class="CategorieButton" href="browse.php?category_id=1">Novelty Items</a>
+    </div>
+    <div class="CategorieCon">
+        <img src="Public/StockGroupIMG/Clothing.jpg">
+        <a class="CategorieButton" href="browse.php?category_id=2">Clothing</a>
+    </div>
+    <div class="CategorieCon">
+        <img src="Public/StockGroupIMG/T-shirts.jpg">
+        <a class="CategorieButton" href="browse.php?category_id=4">T-shirt</a>
+    </div>
+    <div class="CategorieCon">
+        <img src="Public/StockGroupIMG/ComputingNovelties.jpg">
+        <a class="CategorieButton" href="browse.php?category_id=6">Computing Novelties</a>
+    </div>
+    <div class="CategorieCon">
+        <img src="Public/StockGroupIMG/USBNovelties.jpg">
+        <a class="CategorieButton" href="browse.php?category_id=7">USB Novelties</a>
+    </div>
+    <div class="CategorieCon">
+        <img src="Public/StockGroupIMG/Toys.jpg">
+        <a class="CategorieButton" href="browse.php?category_id=9">Toys</a>
+    </div>
+
 </div>
 <?php
 include __DIR__ . "/footer.php";

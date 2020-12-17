@@ -30,7 +30,7 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
     if ($validName) {
         if ($_POST["password"] != $_POST["confirmpassword"]) {
             echo("De wachtwoorden moeten overeenkomen!");
-        } elseif ((strlen($_POST["password"]) > 7) and (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) and preg_match('/[A-Z]/', $_POST["password"])) {
+        } elseif ((strlen($_POST["password"]) > 7) and (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $_POST["password"])) and preg_match('/[A-Z]/', $_POST["password"])) {
             //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
             // ANDERS AFBREKEN
             if (PostcodeCheck($postcode)) {

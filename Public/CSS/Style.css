@@ -851,6 +851,7 @@ ul#ul-class-categorie li {
 }
 .productSpecs table tr th, table tr td {
     padding: 5px 0;
+    padding-right: 20px;
     color: #737373;
 }
 .productSpecs table td:first-child {
@@ -1028,4 +1029,105 @@ ul#ul-class-categorie li {
 .ticketinfo {
     padding-left: 100px;
     width: 40%;
+}
+
+/* Temperatuur meter */
+.TemperatuurDiv{
+    background: url("https://image.shutterstock.com/image-photo/blue-ice-texture-background-260nw-459117925.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid #e6e6e6;
+    display: inline-block;
+    color: #000000;
+    font-weight: 400;
+    margin-bottom: 36px;
+    width: 200px;
+}
+.TemperatuurDiv .TemperatuurTekst{
+    font-weight: bold;
+    font-size: 24px;
+    display: inline;
+}
+.TemperatuurDiv .TempTekst{
+
+}
+.TemperatuurDiv p{
+    margin: 0;
+}
+
+/* Homepage CSS */
+.SingleProductIndex{
+    width: 100%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.ProductIndexInfo{
+    width: 50%;
+}
+.ProductIndexInfo h1{
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+.ProductIndexInfo p{
+    font-size: 18px;
+    color: #474747;
+}
+.ProductIndexInfo h4{
+    font-size: 24px;
+    color: #007bff;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+.ProductIndexImage{
+    width: 50%;
+}
+.ProductIndexImage img{
+    width: 80%;
+    text-align: center;
+    padding-left: 50px;
+}
+.ButtonIndex {
+    background: #007bff;
+    font-weight: 600;
+    border: none;
+    color: #FFFFFF;
+    padding: 19px 28px;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 4px;
+    margin: 0;
+    transition: 0.4s;
+}
+.ButtonIndex:hover{
+    color: #FFFFFF;
+    background: #288ef3;
+}
+.IndexCategorie{
+    width: 100%;
+    margin-bottom: 100px;
+}
+.CategorieCon{
+    width: 15.5%;
+    padding: 8px;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    margin-right: 12px;
+    text-align: center;
+}
+.CategorieCon img{
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 6px;
+    max-height: 112px;
+}
+.CategorieButton{
+    margin: 0;
+}
+.H3Index {
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 12px;
 }
