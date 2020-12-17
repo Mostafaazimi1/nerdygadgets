@@ -1056,3 +1056,77 @@ ul#ul-class-categorie li {
 .TemperatuurDiv p{
     margin: 0;
 }
+
+/* Homepage CSS */
+.SingleProductIndex{
+    width: 100%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.ProductIndexInfo{
+    width: 50%;
+}
+.ProductIndexInfo h1{
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+.ProductIndexInfo p{
+    font-size: 18px;
+    color: #474747;
+}
+.ProductIndexInfo h4{
+    font-size: 24px;
+    color: #007bff;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+.ProductIndexImage{
+    width: 50%;
+}
+.ProductIndexImage img{
+    width: 100%;
+    padding-left: 50px;
+}
+.ButtonIndex {
+    background: #007bff;
+    font-weight: 600;
+    border: none;
+    color: #FFFFFF;
+    padding: 19px 28px;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 4px;
+    margin: 0;
+    transition: 0.4s;
+}
+.ButtonIndex:hover{
+    color: #FFFFFF;
+    background: #288ef3;
+}
+.IndexCategorie{
+    width: 100%;
+    margin-bottom: 100px;
+}
+.CategorieCon{
+    width: 15.5%;
+    padding: 8px;
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    margin-right: 12px;
+    text-align: center;
+}
+.CategorieCon img{
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 6px;
+    max-height: 112px;
+}
+.CategorieButton{
+    margin: 0;
+}
+.H3Index {
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
