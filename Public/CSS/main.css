@@ -72,6 +72,8 @@ h2 {
 }
 .TemperatuurDiv{
   background: url("https://image.shutterstock.com/image-photo/blue-ice-texture-background-260nw-459117925.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: 20px;
   border-radius: 5px;
   border: 2px solid #e6e6e6;
