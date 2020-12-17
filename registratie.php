@@ -10,125 +10,141 @@ if (isset($_POST["submit"]) AND $_POST["password"] == $_POST["confirmpassword"])
     $DeliveryCityName = $Plaats;
     $StreetName = $_POST["StreetName"];
     $HouseNumber = $_POST["HouseNumber"];
-    if ($_POST["password"] != $_POST["confirmpassword"]) {
-        echo("De wachtwoorden moeten overeenkomen!");
-
-
-    } elseif ((strlen($_POST["password"]) > 7)  AND (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) AND preg_match('/[A-Z]/', $_POST["password"])) {
-        //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
-        // ANDERS AFBREKEN
-        if(PostcodeCheck($postcode)) {
-            $sql = "
+    $FullName = ($FirstName . " " . $LastName);
+    $validNameControle = FALSE;
+    if (!$validNameControle) {
+        $sql = "
+                SELECT FullName, EmailAddress
+                FROM people
+                WHERE FullName = '" . $FullName . "' AND EmailAddress = '".$email."'";
+        $result = $Connection->query($sql);
+        $aantalresult = mysqli_num_rows($result);
+        if ($aantalresult < 1) {
+            $validName = TRUE;
+        } else {
+            echo("Sorry, de naam " . $FullName . " in combinatie met ".$email." is al in gebruik.<br>");
+            $validName = FALSE;
+        }
+        $validNameControle = TRUE;
+    }
+    if ($validName) {
+        if ($_POST["password"] != $_POST["confirmpassword"]) {
+            echo("De wachtwoorden moeten overeenkomen!");
+        } elseif ((strlen($_POST["password"]) > 7) and (preg_match('/[^a-zA-Z]+/', $_POST["password"], $matches)) and preg_match('/[A-Z]/', $_POST["password"])) {
+            //KOMT $plaats VOOR IN COLUMN CITYNAME VAN TABEL CITIES ZO JA RETURN COLUMN VALUE VAN CITYID EN GEEF DEZE AAN $DeliveryCityId
+            // ANDERS AFBREKEN
+            if (PostcodeCheck($postcode)) {
+                $sql = "
                     SELECT CityName
                     FROM cities
                     WHERE CityName = '" . $Plaats . "'";
-            $result = $Connection->query($sql);
-            $aantalresult = mysqli_num_rows($result);
-            if ($aantalresult < 1) {
-                echo("Sorry, in " . $Plaats . " leveren wij niet, voer alsjeblieft een nieuw adres in.");
-                // MOET ERBIJ: GEGEVENS OPSLAAN BIJ FOUT
-            } else {
-                $password = $_POST["password"];
-                $CurrentDate = date("Y/m/d");
-                $FullName = ($FirstName . " " . $LastName);
-                $BuyingGroupId = 1;
-                $PrimaryContactPersonId = 9;
-                $AlternateContactPersonId = 9;
-                $CustomerCategoryId = 1;
-                $CreditLimit = 0.00;
-                $StandardDiscountPercentage = 0.000;
-                $zero = 0;
-                $seven = 7;
-                $three = 3;
-                $NULL = NULL;
-                $unknown = "unknown";
-                $address = ($HouseNumber . " " . $StreetName);
-                $ValidTo = "9999-12-31";
-                $BillToCustomerId = 1;
-                $DeliveryCityId = 1;
-                $LastEditedBy = 1;
-                $IsPermittedToLogon = 1;
-                $IsExternalLogonProvider = 1;
-                $IsSystemUser = 0;
-                $IsEmployee = 0;
-                $IsSalesPerson = 0;
-                $empty = "";
-                //Als verbinding gesloten is, wordt de SQL query voorbereid.
-                if ($Connection->connect_error) {
-                    echo "$Connection->connect_error";
-                    die("Connection Failed : " . $Connection->connect_error);
+                $result = $Connection->query($sql);
+                $aantalresult = mysqli_num_rows($result);
+                if ($aantalresult < 1) {
+                    echo("Sorry, in " . $Plaats . " leveren wij niet, voer alsjeblieft een nieuw adres in.");
+                    // MOET ERBIJ: GEGEVENS OPSLAAN BIJ FOUT
                 } else {
-                    // GEGEVENS IN CUSTOMERS                    faxnumber = string
-                    $stmt = $Connection->prepare(
-                        "INSERT INTO customers (CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID,
+                    $password = $_POST["password"];
+                    $CurrentDate = date("Y/m/d");
+                    $BuyingGroupId = 1;
+                    $PrimaryContactPersonId = 9;
+                    $AlternateContactPersonId = 9;
+                    $CustomerCategoryId = 1;
+                    $CreditLimit = 0.00;
+                    $StandardDiscountPercentage = 0.000;
+                    $zero = 0;
+                    $seven = 7;
+                    $three = 3;
+                    $NULL = NULL;
+                    $unknown = "unknown";
+                    $address = ($HouseNumber . " " . $StreetName);
+                    $ValidTo = "9999-12-31";
+                    $BillToCustomerId = 1;
+                    $DeliveryCityId = 1;
+                    $LastEditedBy = 1;
+                    $IsPermittedToLogon = 1;
+                    $IsExternalLogonProvider = 1;
+                    $IsSystemUser = 0;
+                    $IsEmployee = 0;
+                    $IsSalesPerson = 0;
+                    $empty = "";
+                    //Als verbinding gesloten is, wordt de SQL query voorbereid.
+                    if ($Connection->connect_error) {
+                        echo "$Connection->connect_error";
+                        die("Connection Failed : " . $Connection->connect_error);
+                    } else {
+                        // GEGEVENS IN CUSTOMERS                    faxnumber = string
+                        $stmt = $Connection->prepare(
+                            "INSERT INTO customers (CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID,
                                                 AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit,
                                                 AccountOpenedDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays,
                                                 PhoneNumber, FaxNumber, DeliveryRun, RunPosition, WebsiteURL, DeliveryAddressLine1,
                                                 DeliveryAddressLine2, DeliveryPostalCode, DeliveryLocation, PostalAddressLine1, PostalAddressLine2,
                                                 PostalPostalCode, LastEditedBy, ValidFrom, ValidTo)
                                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("siiiiiiiidsdiiissssssssssssiss", $FullName, $BillToCustomerId, $CustomerCategoryId, $BuyingGroupId, $PrimaryContactPersonId,
-                        $AlternateContactPersonId, $three, $DeliveryCityId, $DeliveryCityId, $CreditLimit, $CurrentDate, $StandardDiscountPercentage, $zero, $zero, $seven,
-                        $PhoneNumber, $zero, $NULL, $NULL, $zero, $unknown, $address,
-                        $postcode, $unknown, $unknown, $DeliveryCityName, $postcode, $LastEditedBy, $CurrentDate,
-                        $ValidTo);
-                    $execval = $stmt->execute();
-                    echo $execval;
+                        $stmt->bind_param("siiiiiiiidsdiiissssssssssssiss", $FullName, $BillToCustomerId, $CustomerCategoryId, $BuyingGroupId, $PrimaryContactPersonId,
+                            $AlternateContactPersonId, $three, $DeliveryCityId, $DeliveryCityId, $CreditLimit, $CurrentDate, $StandardDiscountPercentage, $zero, $zero, $seven,
+                            $PhoneNumber, $zero, $NULL, $NULL, $zero, $unknown, $address,
+                            $postcode, $unknown, $unknown, $DeliveryCityName, $postcode, $LastEditedBy, $CurrentDate,
+                            $ValidTo);
+                        $execval = $stmt->execute();
+                        echo $execval;
 //            echo "Customer gegevens zijn succesvol toegevoegd aan database!";
-                    $stmt->close();
+                        $stmt->close();
+                    }
                 }
-            }
 
-            // VRAAG VALUE VAN CUSTOMERID UIT CUSTOMERS EN GEEF DEZE EIGEN VARIABELEN -zodat je ze in people tabel kan inserten!
-            if ($Connection->connect_error) {
-                echo "$Connection->connect_error";
-                die("Connection Failed : " . $Connection->connect_error);
-            } else {
-                $sql = "SELECT CustomerID FROM customers
+                // VRAAG VALUE VAN CUSTOMERID UIT CUSTOMERS EN GEEF DEZE EIGEN VARIABELEN -zodat je ze in people tabel kan inserten!
+                if ($Connection->connect_error) {
+                    echo "$Connection->connect_error";
+                    die("Connection Failed : " . $Connection->connect_error);
+                } else {
+                    $sql = "SELECT CustomerID FROM customers
             WHERE CustomerName = ('$FullName') AND DeliveryPostalCode = ('$postcode') AND DeliveryAddressLine2 = ('$address')";
-                $result = $Connection->query($sql);
-                $row = mysqli_fetch_array($result);
-                $CustomerNUM = reset($row);
-            }
+                    $result = $Connection->query($sql);
+                    $row = mysqli_fetch_array($result);
+                    $CustomerNUM = reset($row);
+                }
 
 
 //      Als verbinding gesloten is, wordt de SQL query voorbereid.
-            if ($Connection->connect_error) {
-                echo "$Connection->connect_error";
-                die("Connection Failed : " . $Connection->connect_error);
-            } else {
-                // GEGEVENS IN PEOPLE                 image(Photo) = blob
-                $stmt = $Connection->prepare(
-                    "insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
+                if ($Connection->connect_error) {
+                    echo "$Connection->connect_error";
+                    die("Connection Failed : " . $Connection->connect_error);
+                } else {
+                    // GEGEVENS IN PEOPLE                 image(Photo) = blob
+                    $stmt = $Connection->prepare(
+                        "insert into people(FullName, PreferredName, SearchName, IsPermittedToLogon, LogonName,
                                             IsExternalLogonProvider, HashedPassword, IsSystemUser, IsEmployee, IsSalesPerson,
                                             UserPreferences, PhoneNumber, FaxNumber, EmailAddress, Photo, CustomFields,
                                             OtherLanguages, LastEditedBy, ValidFrom, ValidTo, CustomerNUM)
                                             values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("sssisisiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
-                    $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
-                    $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
-                $execval1 = $stmt->execute();
-                echo $execval1;
-                //echo "People gegevens zijn succesvol toegevoegd aan database!";
-                $stmt->close();
-                $_SESSION['messageCount3'] = 1;
-                print('<meta http-equiv = "refresh" content = "0; url = ./" />');
-            }
-            // UPDATEN BILLTOCUSTOMERID IN TABLE customers
-            if ($Connection->connect_error) {
-                echo "$Connection->connect_error";
-                die("Connection Failed : " . $Connection->connect_error);
+                    $stmt->bind_param("sssisisiiissssbssisss", $FullName, $FirstName, $FullName, $IsPermittedToLogon, $email,
+                        $IsExternalLogonProvider, $password, $IsSystemUser, $IsEmployee, $IsSalesPerson, $empty,
+                        $PhoneNumber, $empty, $email, $empty, $empty, $empty, $LastEditedBy, $CurrentDate, $ValidTo, $CustomerNUM);
+                    $execval1 = $stmt->execute();
+                    echo $execval1;
+                    //echo "People gegevens zijn succesvol toegevoegd aan database!";
+                    $stmt->close();
+                    $_SESSION['messageCount3'] = 1;
+                    print('<meta http-equiv = "refresh" content = "0; url = ./" />');
+                }
+                // UPDATEN BILLTOCUSTOMERID IN TABLE customers
+                if ($Connection->connect_error) {
+                    echo "$Connection->connect_error";
+                    die("Connection Failed : " . $Connection->connect_error);
+                } else {
+                    $query = "UPDATE customers SET BillToCustomerID = ? WHERE CustomerID = ?";
+                    $Statement = mysqli_prepare($Connection, $query);
+                    mysqli_stmt_bind_param($Statement, "ii", $CustomerNUM, $CustomerNUM);
+                    mysqli_stmt_execute($Statement);
+                }
             } else {
-                $query = "UPDATE customers SET BillToCustomerID = ? WHERE CustomerID = ?";
-                $Statement = mysqli_prepare($Connection, $query);
-                mysqli_stmt_bind_param($Statement, "ii", $CustomerNUM, $CustomerNUM);
-                mysqli_stmt_execute($Statement);
+                print("De invoer van de postcode was onjuist, moet zijn als: 1111AA<br>");
             }
         } else {
-            print("De invoer van de postcode was onjuist, moet zijn als: 1111AA<br>");
+            print("Het wachtwoord moet minstens 8 karakters bevatten.<br>Daarnaast moet het wachtwoord minimaal 1 speciale teken en een hoofdletter bevatten.");
         }
-    }   else {
-        print("Het wachtwoord moet minstens 8 karakters bevatten.<br>Daarnaast moet het wachtwoord minimaal 1 speciale teken en een hoofdletter bevatten.");
     }
 } else {
     $FirstName = '';

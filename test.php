@@ -1,13 +1,14 @@
 <?php
-function PostcodeCheck($postcode)
-{
-    $remove = str_replace(" ","", $postcode);
-    $upper = strtoupper($remove);
-
-    if( preg_match("/^\b[1-9]\d{3}\s*[A-Z]{2}\b$/",  $upper)) {
-        return TRUE;
-    } else {
-        return FALSE;
-    }
+include __DIR__ . "/header.php";
+$FullName = "kaasje kaas";
+$sql = "
+                SELECT FullName
+                FROM people
+                WHERE FullName = '" . $FullName . "'";
+$result = $Connection->query($sql);
+$aantalresult = mysqli_num_rows($result);
+if ($aantalresult < 1) {
+    $validName = TRUE;
+} else {
+    echo("Sorry, de naam " . $FullName . " is al in gebruik.<br>");
 }
-PostcodeCheck("9074 AES");
