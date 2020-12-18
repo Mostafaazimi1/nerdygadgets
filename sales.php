@@ -296,17 +296,18 @@ if (isset($amount)) {
             $discount=($row['korting']);
 
             ?>
-
-
                 <div class="naastElkaar" id="ProductFrame">
                     <div class="productFrameLinks naastElkaar" id="geenPadding">
-                        <div class="productFrameLinksImage"><?php
-                            if (isset($row['ImagePath'])) { ?>
-                            <a href='view.php?id=<?php print $row['StockItemID']; ?>'>
-                                <img class="ImgFrame" src="<?php print "Public/StockItemIMG/" . $row['ImagePath']; ?>"></a>
-                            <?php } else if (isset($row['BackupImagePath'])) { ?>
-                            <a href='view.php?id=<?php print $row['StockItemID']; ?>'>
-                                <img class="ImgFrame" src="<?php print "Public/StockGroupIMG/" . $row['BackupImagePath'] ?>"></a>
+                        <div class="productFrameLinksImage">
+                            <?php if (isset($row['ImagePath'])) {
+                                if ($row['ImagePath'] == "") {?>
+                                    <img class="ImgFrame" src="<?php print "Public/StockGroupIMG/" . $row['BackupImagePath'] ?>">
+                                <?php } else {
+                                    print("<img class= 'ImgFrame' src= 'Public/StockItemIMG/" . $row['ImagePath'] . "'>");
+                                }
+                            }  else if (isset($row['BackupImagePath'])) { ?>
+                                <a href='view.php?id=<?php print $row['StockItemID']; ?>'>
+                                    <img class="ImgFrame" src="<?php print "Public/StockGroupIMG/" . $row['BackupImagePath'] ?>"></a>
                             <?php } ?>
                         </div>
                         <div class="productFrameLinksInfo">
