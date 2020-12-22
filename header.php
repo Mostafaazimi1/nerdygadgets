@@ -1,13 +1,7 @@
 <?php
-
-if (!isset ($_SESSION['login'])){
-    include "connect.php";
-} else {
-    include "test.php";
-}
-
 include "functions.php";
 session_start();
+include "connect.php";
 
 if (!isset($_SESSION['winkelwagen'])) {
     $_SESSION['winkelwagen'] = array();

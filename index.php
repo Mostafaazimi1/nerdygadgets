@@ -4,6 +4,8 @@ if(isset($_SESSION['login']) && isset($_SESSION['messageCount'])) {
     if(($_SESSION['messageCount'] == 1)) {
         $_SESSION['messageCount'] = 0;
         print("<h4>U bent successvol ingelogd.</h4>");
+        mysqli_close($Connection);
+        exit();
     }
 }
 if(isset($_SESSION['messageCount2'])) {
