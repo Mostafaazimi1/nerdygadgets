@@ -1,5 +1,11 @@
 <?php
-include "connect.php";
+
+if (!isset ($_SESSION['login'])){
+    include "connect.php";
+} else {
+    include "test.php";
+}
+
 include "functions.php";
 session_start();
 

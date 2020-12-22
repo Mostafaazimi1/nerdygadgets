@@ -1,10 +1,5 @@
 <?php
-//if (isset ($_SESSION['login']) == 0) {
-//    $host = "localhost";
-//    $user = "Bezoeker";
-//    $password = "YO4vQRA3a8Kda4jb";
-//    $database = "nerdygadgets";
-//} elseif (isset ($_SESSION['login'])){
+//if (isset ($_SESSION['login']) == true){
 //    $Medewerkerlogin = $_SESSION['login'];
 //    if ($Medewerkerlogin['IsSalesperson'] == 1){
 //        $host = "localhost";
@@ -17,12 +12,28 @@
 //        $password = "I3U7rpDAlwT7DGKh3eH";
 //        $database = "nerdygadgets";
 //    }
+//} else {
+//    $host = "localhost";
+//    $user = "Bezoeker";
+//    $password = "YO4vQRA3a8Kda4jb";
+//    $database = "nerdygadgets";
 //}
+//
+//$host = "localhost";
+//$user = "Bezoeker";
+//$password = "YO4vQRA3a8Kda4jb";
+//$database = "nerdygadgets";
 
 $host = "localhost";
-$user = "root";
-$password = "";
+$user = "geregistreerd";
+$password = "I3U7rpDAlwT7DGKh3eH";
 $database = "nerdygadgets";
+
+
+//$host = "localhost";
+//$user = "root";
+//$password = "";
+//$database = "nerdygadgets";
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Set MySQLi to throw exceptions
 try {
@@ -36,3 +47,4 @@ if (!$DatabaseAvailable) {
     ?><h2>Website wordt op dit moment onderhouden.</h2><?php
     die();
 }
+
