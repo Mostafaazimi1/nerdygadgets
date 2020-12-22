@@ -19,15 +19,15 @@
 //    $database = "nerdygadgets";
 //}
 //
-//$host = "localhost";
-//$user = "Bezoeker";
-//$password = "YO4vQRA3a8Kda4jb";
-//$database = "nerdygadgets";
-
 $host = "localhost";
-$user = "geregistreerd";
-$password = "I3U7rpDAlwT7DGKh3eH";
+$user = "Bezoeker";
+$password = "YO4vQRA3a8Kda4jb";
 $database = "nerdygadgets";
+//
+//$host = "localhost";
+//$user = "geregistreerd";
+//$password = "I3U7rpDAlwT7DGKh3eH";
+//$database = "nerdygadgets";
 
 
 //$host = "localhost";

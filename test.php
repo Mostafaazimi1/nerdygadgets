@@ -20,9 +20,15 @@ if ($Medewerkerlogin['IsSalesperson'] == 1){
     $user = "medewerker";
     $password = "WO869N0a3ImlyC3Jsga";
     $database = "nerdygadgets";
+
 } elseif ($Medewerkerlogin['IsSalesperson'] == 0){
+//    $host = "localhost";
+//    $user = "geregistreerd";
+//    $password = "I3U7rpDAlwT7DGKh3eH";
+//    $database = "nerdygadgets";
+
     $host = "localhost";
-    $user = "geregistreerd";
+    $user = "geregistreerde_gebruiker";
     $password = "I3U7rpDAlwT7DGKh3eH";
     $database = "nerdygadgets";
 }
