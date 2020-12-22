@@ -48,6 +48,7 @@ if (!$products) {
                     $total = (($product['price']*$product['kortingc'] )* $product['aantal']);
                     $allTotal += $total;
                     echo "<tr>";
+                    // if statement voor winkewagen categoriepicture
                     echo "<td><img src='Public/StockItemIMG/" . $product['img'] . "' style='max-width: 100px'></td>";
                     echo "<td><p>" . $product['name'] . "</p></td>";
                     echo "<td><p>€" . $product['price'] . "</p></td>";

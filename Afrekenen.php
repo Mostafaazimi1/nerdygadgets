@@ -258,7 +258,7 @@ if($complete){
                             <th>Telefoonnummer</th>
                         </tr>
                         <tr>
-                            <td><input type="text" id="telefoonnummer" name="PhoneNumber" placeholder="06 12345678"
+                            <td><input type="tel" id="telefoonnummer" name="PhoneNumber" placeholder="06 12345678"
                                        value="<?php echo($PhoneNumber); ?>" required></td>
                         </tr>
                         <?php if(!isset($_SESSION["login"])) {
