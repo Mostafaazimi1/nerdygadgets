@@ -32,7 +32,9 @@ if (isset($_GET['ticket'])) {
 }
 ?>
 <a href="tickets.php" class="btn btn-primary">Ga terug</a>
-<H2>Comment</H2>
+<H2 class="tekst">Comment</H2>
+<div class="naastElkaar contactinfo">
+    <div class="eenticket">
 <?php
 while ($row = mysqli_fetch_assoc($result)) {
     $id = $row['id'];
@@ -44,7 +46,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     print ($title . " " . $nickName . " " . $created . " status: " . $status . "<br>" . $message);
 }?>
-<h2>reacties</h2>
+<h2 class="tekst">Reacties</h2>
 <table>
 <tbody>
 <?php
@@ -74,10 +76,22 @@ $personID = $gegevens['PersonID'];
     </div>
     <button class="btn btn-primary" type="submit" name="submit" value="<?php echo ($personID) ?>">Verzend</button>
 </form>
+    </div>
+    <div class="ticketinfo2">
+        <a href="klantenservice.php">Klik hier</a> als u een ticket wilt creëeren
+    </div>
 <?php
 } else {
-print("<br><a href='login.php'>Klik hier</a> om zich te kunnen aanmelden<br>");
-}
+print("<br><a href='login.php'>Klik hier</a> om te kunnen aanmelden<br>");
+?>
+    </div>
+    <div class="ticketinfo2">
+        <a href="klantenservice.php">Klik hier</a> als u een ticket wilt creëeren (Let op! U moet ingelogd zijn om dit te kunnen doen.)
+    </div>
+<?php
+}?>
+</div><br>
+<?php
 }
 include __DIR__ . "/footer.php";
 ?>

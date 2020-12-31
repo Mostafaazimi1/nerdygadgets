@@ -1031,6 +1031,16 @@ ul#ul-class-categorie li {
     width: 40%;
 }
 
+.eenticket {
+    width: 70%;
+    padding-right: 100px;
+}
+
+.ticketinfo2 {
+    padding-left: 100px;
+    width: 30%;
+}
+
 /* Temperatuur meter */
 .TemperatuurDiv{
     background: url("https://image.shutterstock.com/image-photo/blue-ice-texture-background-260nw-459117925.jpg");
@@ -1131,3 +1141,4 @@ ul#ul-class-categorie li {
     font-size: 20px;
     margin-bottom: 12px;
 }
+
