@@ -32,7 +32,6 @@ if (isset($_GET['ticket'])) {
 }
 ?>
 <a href="tickets.php" class="btn btn-primary">Ga terug</a>
-<H2 class="tekst">Comment</H2>
 <div class="naastElkaar contactinfo">
     <div class="eenticket">
 <?php
@@ -44,7 +43,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     $created = $row['created'];
     $status = $row['status'];
 
-    print ($title . " " . $nickName . " " . $created . " status: " . $status . "<br>" . $message);
+    print ("<h2 class='tekst'>" . $title . "</h2>" . " " . $nickName . " " . $created . " status: " . $status . "<br>" . $message);
 }?>
 <h2 class="tekst">Reacties</h2>
 <table>

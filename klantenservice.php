@@ -23,7 +23,7 @@ if (isset($_POST["submit"]) && isset($_SESSION["login"])) {
     if (mysqli_stmt_affected_rows($statement) == 1) {
         print("Uw bericht is verzonden!<br><a href='tickets.php'><i class='fas fa-ticket-alt'></i>Tickets</a>");
     } else {
-        print("Uw bericht kon niet worden verzonden");
+        print("Uw bericht kan niet worden verzonden");
     }
     mysqli_stmt_close($statement);
     mysqli_close($Connection);
@@ -38,7 +38,7 @@ if (isset($_POST["submit"]) && isset($_SESSION["login"])) {
         <div class="contactform">
             <form action="klantenservice.php" method="post">
                 <div class="form-group">
-                    <label>Onderwerp</label>
+                    <label>Titel</label>
                     <input type="text" name="onderwerp" placeholder="algemene informatie" required>
                 </div>
                 <div class="form-group">

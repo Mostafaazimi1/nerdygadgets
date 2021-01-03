@@ -26,7 +26,7 @@ if (isset ($_SESSION['login'])) {
                 <th>Subject</th>
                 <th>Status</th>
                 <th>Edit status</th>
-                <th>Extra</th>
+                <th>Bekijk ticket</th>
                 <th>Created</th>
             </tr>
             </thead>
@@ -69,7 +69,7 @@ if (isset ($_SESSION['login'])) {
                             <button class="btn btn-primary" type="submit" name="edit" value="<?php echo ($id)?>">Edit</button>
                         </form>
                      </td>
-                     <td><a href="viewticket.php?ticket=<?php echo $id; ?>" class="btn btn-primary">Extra</a></td>
+                     <td><a href="viewticket.php?ticket=<?php echo $id; ?>" class="btn btn-primary">Inhoud ticket</a></td>
                      <td><a href="viewticket.php?ticket=<?php echo($id);?>"><?php print($created)?></td>
                      </a>
                  </tr>
