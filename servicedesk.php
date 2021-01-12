@@ -84,12 +84,12 @@ if (isset ($_SESSION['login'])) {
     }
     else{
         //je bent NIET gemachtigd om dit te zien!
-        echo "<p style='font-size: 20px; margin-top: 24px;'>Helaas leuk geprobeert, maar U heeft GEEN toegang!</p>";
+        echo "<p style='font-size: 20px; margin-top: 24px;'>Helaas leuk geprobeerd, maar U heeft GEEN toegang!</p>";
     }
 }
 else{
     //je bent NIET gemachtigd om dit te zien!
-    echo "<p style='font-size: 20px; margin-top: 24px;'>Helaas leuk geprobeert, maar U heeft GEEN toegang!</p>";
+    echo "<p style='font-size: 20px; margin-top: 24px;'>Helaas leuk geprobeerd, maar U heeft GEEN toegang!</p>";
 }
 include __DIR__ . "/footer.php";
 ?>
